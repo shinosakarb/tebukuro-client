@@ -1,0 +1,10 @@
+node_modules
+
+/vendor/bundle
+.DS_Store
+
+# dotenv
+.env.*
+
+# Ignore RubyMine settings
+.idea
