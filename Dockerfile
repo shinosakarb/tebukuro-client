@@ -1,8 +1,8 @@
 FROM node:7-alpine
 
-RUN mkdir /front_app
-WORKDIR /front_app
-ADD package.json /front_app/package.json
-ADD yarn.lock /front_app/yarn.lock
+RUN mkdir /client
+WORKDIR /client
+ADD package.json /client/package.json
+ADD yarn.lock /client/yarn.lock
 RUN yarn install
-ADD . /front_app
+ADD . /client
