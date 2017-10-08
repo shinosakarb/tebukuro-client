@@ -10,7 +10,7 @@
     "start:prod": "next start",
     "start": "next -p 4000",
     "test": "jest",
-    "build": "next build"
+    "build": "next build && next export"
   },
   "dependencies": {
     "immutable": "^3.8.2",
