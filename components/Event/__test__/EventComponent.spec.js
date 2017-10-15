@@ -1,17 +1,12 @@
 import { shallow }   from 'enzyme'
 import shallowToJson from 'enzyme-to-json'
 import Event         from '../index.js'
-
-const event = {
-  id:            1,
-  name:          'event1',
-  description:   'This is the first event.',
-}
+import Params        from '../../../factories/Event'
 
 describe('Event Component', () => {
   it('renders self.', () => {
     const component = shallow(
-      <Event event={ event } />
+      <Event event={ Params.event1 } />
     )
     const tree = shallowToJson(component)
 
