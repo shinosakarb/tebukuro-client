@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Event container should render self and subcomponents 1`] = `
+<div>
+  This is the Event container.
+</div>
+`;
