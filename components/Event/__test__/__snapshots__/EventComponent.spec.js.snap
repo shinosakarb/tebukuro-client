@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Event Component renders self. 1`] = `
+<div>
+  <p>
+    name: 
+    event1
+  </p>
+  <p>
+    description: 
+    This is the first event.
+  </p>
+</div>
+`;
