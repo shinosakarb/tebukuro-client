@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Event container should render self and subcomponents 1`] = `
+<EventComponent
+  event={
+    Object {
+      "description": "This is the first event.",
+      "id": 1,
+      "name": "event1",
+    }
+  }
+/>
+`;
