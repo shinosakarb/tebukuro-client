@@ -1,12 +1,15 @@
-import React, { Component } from 'react'
-import { connect }          from 'react-redux'
+import React from 'react'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
+import EventComponent from '../../components/Event'
 
-export class Event extends Component {
-  render() {
-    return (
-      <div>This is the Event container.</div>
-     )
-  }
-}
+export const Event = props => (
+  <div>
+    This is the Event container.
+    <EventComponent event={props.event} />
+  </div>
+)
+
+Event.propTypes = { event: PropTypes.instanceOf(Object).isRequired }
 
 export default connect(null)(Event)
