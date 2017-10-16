@@ -8,35 +8,35 @@ export default class Base {
   }
 
   onSuccess(response) {
-    return response.body
+    return response.data
   }
 
   onFailure(error) {
-    return error.response.body
+    return Promise.reject(error.response.data)
   }
 
   all(params) {
     const url = this.endpoints.all
-    this.client.get(url, params).then(this.onSuccess, this.onFailure)
+    return this.client.get(url, params).then(this.onSuccess, this.onFailure)
   }
 
   find(params) {
-    const url = pathToRegexp.compile(this.endpoints.find, params)
-    this.client.get(url).then(this.onSuccess, this.onFailure)
+    const url = pathToRegexp.compile(this.endpoints.find)(params)
+    return this.client.get(url).then(this.onSuccess, this.onFailure)
   }
 
   create(params) {
-    const url = pathToRegexp.compile(this.endpoints.create, params)
-    this.client.post(url, params).then(this.onSuccess, this.onFailure)
+    const url = pathToRegexp.compile(this.endpoints.create)(params)
+    return this.client.post(url, params).then(this.onSuccess, this.onFailure)
   }
 
   update(params) {
-    const url = pathToRegexp.compile(this.endpoints.update, params)
-    this.client.post(url, params).then(this.onSuccess, this.onFailure)
+    const url = pathToRegexp.compile(this.endpoints.update)(params)
+    return this.client.post(url, params).then(this.onSuccess, this.onFailure)
   }
 
   delete(params) {
-    const url = pathToRegexp.compile(this.endpoints.delete, params)
-    this.client.delete(url).then(this.onSuccess, this.onFailure)
+    const url = pathToRegexp.compile(this.endpoints.delete)(params)
+    return this.client.delete(url).then(this.onSuccess, this.onFailure)
   }
 }
