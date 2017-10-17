@@ -1,12 +1,11 @@
-import PropTypes from 'prop-types'
+// @flow
+import React from 'react'
 
-const Event = props => (
+const Event = (props: {event: EventProps}) => (
   <div>
     <p>name: {props.event.name}</p>
     <p>description: {props.event.description}</p>
   </div>
 )
-
-Event.propTypes = { event: PropTypes.instanceOf(Object).isRequired }
 
 export default Event
