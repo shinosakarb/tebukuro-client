@@ -1,7 +1,17 @@
 module.exports = {
   "parser": "babel-eslint",
-  "extends": "airbnb",
-  "plugins": ["flowtype"],
+  "extends": [ 
+    "airbnb",
+    "plugin:flowtype/recommended"
+  ],
+  "plugins": [
+    "flowtype"
+  ],
+  "settings": {
+    "flowtype": {
+      "onlyFilesWithFlowAnnotation": true,
+    },
+  },
   "rules": {
     "semi": "off",
     "react/react-in-jsx-scope": "off",

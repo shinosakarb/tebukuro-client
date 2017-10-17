@@ -2,9 +2,6 @@
   "env": {
     "development": {
       "presets": "next/babel",
-      "plugins": [
-        "transform-flow-strip-types"
-      ]
     },
     "production": {
       "presets": "next/babel"
@@ -13,10 +10,10 @@
       "presets": [
         ["env", { "modules": "commonjs" }],
         "next/babel"
-      ],
-      "plugins": [
-        "transform-flow-strip-types"
       ]
     }
-  }
+  },
+  "plugins": [
+    "transform-flow-strip-types"
+  ]
 }
