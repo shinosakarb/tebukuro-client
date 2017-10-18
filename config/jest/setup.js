@@ -1,6 +1,6 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
+/* eslint-disable import/no-extraneous-dependencies */
 import { configure } from 'enzyme'
-// eslint-disable-next-line import/no-extraneous-dependencies
 import Adapter from 'enzyme-adapter-react-16'
+/* eslint-disable import/no-extraneous-dependencies */
 
 configure({ adapter: new Adapter() })
