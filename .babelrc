@@ -12,5 +12,8 @@
         "next/babel"
       ]
     }
-  }
+  },
+  "plugins": [
+    "transform-flow-strip-types"
+  ]
 }

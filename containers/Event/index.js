@@ -1,15 +1,14 @@
+// @flow
 import React from 'react'
 import { connect } from 'react-redux'
-import PropTypes from 'prop-types'
+import type { EventProps } from '../../types/Event'
 import EventComponent from '../../components/Event'
 
-export const Event = props => (
+export const Event = (props: {event: EventProps}) => (
   <div>
     This is the Event container.
     <EventComponent event={props.event} />
   </div>
 )
-
-Event.propTypes = { event: PropTypes.instanceOf(Object).isRequired }
 
 export default connect(null)(Event)
