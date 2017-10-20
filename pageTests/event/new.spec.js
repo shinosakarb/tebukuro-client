@@ -1,6 +1,6 @@
 import { shallow } from 'enzyme'
 import shallowToJson from 'enzyme-to-json'
-import EventFormPage from '../pages/eventForm'
+import EventFormPage from '../../pages/event/new'
 
 describe('Event page', () => {
   it('renders the event page.', () => {
