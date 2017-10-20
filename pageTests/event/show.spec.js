@@ -1,8 +1,8 @@
 import { shallow } from 'enzyme'
 import shallowToJson from 'enzyme-to-json'
-import EventPage from '../pages/event'
+import EventPage from '../../pages/event/show'
 
-jest.mock('../containers/Event', () => 'Event Container')
+jest.mock('../../containers/Event', () => 'Event Container')
 
 const URIQuery = { query: { id: 1 } }
 

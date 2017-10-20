@@ -1,7 +1,7 @@
 // @flow
 import React from 'react'
-import EventContainer from '../containers/Event'
-import type { EventId } from '../types/Event'
+import EventContainer from '../../containers/Event'
+import type { EventId } from '../../types/Event'
 
 export default (props: {url: {query: EventId}}) => (
   <div>
