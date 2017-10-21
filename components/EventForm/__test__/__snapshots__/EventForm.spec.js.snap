@@ -9,17 +9,24 @@ exports[`EventForm render event form component 1`] = `
     onSubmit={[Function]}
   >
     <div>
-      <label>
+      <label
+        htmlFor="name"
+      >
         name
         <input
+          id="name"
           type="text"
         />
       </label>
     </div>
     <div>
-      <label>
+      <label
+        htmlFor="description"
+      >
         description
-        <textarea />
+        <textarea
+          id="description"
+        />
       </label>
     </div>
     <div>

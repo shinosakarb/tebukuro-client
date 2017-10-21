@@ -1,35 +1,44 @@
+// @flow
 import React, { Component } from 'react'
 
-export default class EventForm extends Component {
-  constructor(props){
+type Props = { onSubmit: Function }
+
+export default class EventForm extends Component<Props> {
+  constructor(props: Props) {
     super(props)
     this.onSubmitHandler = this.onSubmitHandler.bind(this)
   }
 
-  onSubmitHandler(e) {
+  onSubmitHandler(e: SyntheticEvent<>) {
     e.preventDefault()
-    const params = {
-      name: this.name.value,
-      description: this.description.value
+    if (this.name && this.description) {
+      const params = {
+        name: this.name.value,
+        description: this.description.value,
+      }
+      this.props.onSubmit(params)
     }
-    this.props.onSubmit(params)
   }
 
-  render(){
+  onSubmitHandler: Function
+  name: ?HTMLInputElement
+  description: ?HTMLTextAreaElement
+
+  render() {
     return (
       <div>
         <h3>Event registration form</h3>
-        <form onSubmit={ this.onSubmitHandler }>
+        <form onSubmit={this.onSubmitHandler}>
           <div>
-            <label>
+            <label htmlFor="name">
               name
-              <input type="text" ref={(input) => { this.name = input }} />
+              <input type="text" id="name" ref={(input) => { this.name = input }} />
             </label>
           </div>
           <div>
-            <label>
+            <label htmlFor="description">
               description
-              <textarea ref={(input) => { this.description = input }}/>
+              <textarea id="description" ref={(input) => { this.description = input }} />
             </label>
           </div>
           <div>
