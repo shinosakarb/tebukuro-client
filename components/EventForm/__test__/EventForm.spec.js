@@ -6,7 +6,7 @@ import Params from '../../../factories/Event'
 
 const inputValues = {
   name: Params.event1.name,
-  description: Params.event1.description
+  description: Params.event1.description,
 }
 
 describe('EventForm', () => {
