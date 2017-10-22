@@ -10,12 +10,10 @@ type State = {
 export default class EventForm extends Component<Props, State> {
   constructor(props: Props) {
     super(props)
-    this.onChangeHandler = this.onChangeHandler.bind(this)
-    this.onSubmitHandler = this.onSubmitHandler.bind(this)
     this.state = { name: '', description: '' }
   }
 
-  onChangeHandler(e: SyntheticInputEvent<>) {
+  onChangeHandler = (e: SyntheticInputEvent<>) => {
     e.preventDefault()
     this.setState({
       ...this.state,
@@ -23,13 +21,10 @@ export default class EventForm extends Component<Props, State> {
     })
   }
 
-  onSubmitHandler(e: SyntheticEvent<>) {
+  onSubmitHandler = (e: SyntheticEvent<>) => {
     e.preventDefault()
     this.props.onSubmit(this.state)
   }
-
-  onSubmitHandler: Function
-  onChangeHandler: Function
 
   render() {
     return (
