@@ -30,8 +30,6 @@ export default class EventForm extends Component<Props, State> {
 
   onSubmitHandler: Function
   onChangeHandler: Function
-  name: ?HTMLInputElement
-  description: ?HTMLTextAreaElement
 
   render() {
     return (
