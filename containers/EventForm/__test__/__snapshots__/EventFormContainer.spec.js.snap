@@ -2,6 +2,11 @@
 
 exports[`Event container should render self and subcomponents 1`] = `
 <div>
-  This is the EventForm Container.
+  <div>
+    This is the EventForm Container.
+  </div>
+  <EventForm
+    onSubmit={[Function]}
+  />
 </div>
 `;

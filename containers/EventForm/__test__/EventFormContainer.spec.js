@@ -5,7 +5,7 @@ import { EventForm } from '../index'
 
 describe('Event container', () => {
   it('should render self and subcomponents', () => {
-    const wrapper = shallow(<EventForm />)
+    const wrapper = shallow(<EventForm onSubmit={jest.fn()} />)
     const tree = ToJson(wrapper)
 
     expect(tree).toMatchSnapshot()
