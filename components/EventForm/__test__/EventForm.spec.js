@@ -2,36 +2,40 @@ import React from 'react'
 import { mount, shallow } from 'enzyme'
 import shallowToJson from 'enzyme-to-json'
 import EventForm from '../index'
-
-const onSubmit = jest.fn()
+import Params from '../../../factories/Event'
 
 const inputValues = {
-  name: 'event1',
-  description: 'This is the first event.',
+  name: Params.event1.name,
+  description: Params.event1.description
 }
 
 describe('EventForm', () => {
   it('render event form component', () => {
-    const wrapper = shallow(<EventForm onSubmit={onSubmit} />)
+    const wrapper = shallow(<EventForm onSubmit={jest.fn()} />)
     const tree = shallowToJson(wrapper)
 
     expect(tree).toMatchSnapshot()
   })
 
   describe('when submit', () => {
-    it('should call onSubmit function with correct argument.', () => {
+    describe('with correct argument', () => {
+      const onSubmit = jest.fn()
       const wrapper = mount(<EventForm onSubmit={onSubmit} />)
 
-      const nameInput = wrapper.find('[type="text"]')
-      const descriptionInput = wrapper.find('textarea')
+      const nameElement = wrapper.find('[type="text"]')
+      const descriptionElement = wrapper.find('textarea')
 
-      nameInput.instance().value = inputValues.name
-      descriptionInput.instance().value = inputValues.description
-
+      nameElement.instance().value = inputValues.name
+      descriptionElement.instance().value = inputValues.description
       wrapper.find('[type="submit"]').simulate('submit')
 
-      expect(onSubmit).toHaveBeenCalledTimes(1)
-      expect(onSubmit).toBeCalledWith(inputValues)
+      it('should call onSubmit once.', () => {
+        expect(onSubmit).toHaveBeenCalledTimes(1)
+      })
+
+      it('should call onSubmit with correct argument.', () => {
+        expect(onSubmit).toBeCalledWith(inputValues)
+      })
     })
   })
 })
