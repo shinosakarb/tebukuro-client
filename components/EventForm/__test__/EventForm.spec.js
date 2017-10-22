@@ -25,8 +25,14 @@ describe('EventForm', () => {
       const nameElement = wrapper.find('[type="text"]')
       const descriptionElement = wrapper.find('textarea')
 
-      nameElement.instance().value = inputValues.name
-      descriptionElement.instance().value = inputValues.description
+      nameElement.simulate(
+        'change',
+        { target: { id: 'name', value: inputValues.name } },
+      )
+      descriptionElement.simulate(
+        'change',
+        { target: { id: 'description', value: inputValues.description } },
+      )
       wrapper.find('[type="submit"]').simulate('submit')
 
       it('should call onSubmit once.', () => {

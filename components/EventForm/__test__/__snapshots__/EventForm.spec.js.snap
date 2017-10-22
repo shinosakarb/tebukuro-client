@@ -15,7 +15,9 @@ exports[`EventForm render event form component 1`] = `
         name
         <input
           id="name"
+          onChange={[Function]}
           type="text"
+          value=""
         />
       </label>
     </div>
@@ -26,6 +28,8 @@ exports[`EventForm render event form component 1`] = `
         description
         <textarea
           id="description"
+          onChange={[Function]}
+          value=""
         />
       </label>
     </div>
