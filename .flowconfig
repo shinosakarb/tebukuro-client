@@ -10,3 +10,4 @@
 
 [options]
 emoji=true
+suppress_comment= \\(.\\|\n\\)*\\flow-disable-nextline
