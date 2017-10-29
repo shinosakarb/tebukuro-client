@@ -1,16 +1,7 @@
 import configureStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
-import Router from 'next/router'
 import * as Actions from '../event'
 import ActionsType from '../../constants/Actions'
-
-// Creating Nextjs Router instance manually for test.
-class MockedRouter {
-  constructor() { this.pathname = null }
-  replace(pathname) { this.pathname = pathname }
-}
-
-Router.router = new MockedRouter()
 
 const middlewares = [thunk]
 const mockStore = configureStore(middlewares)
@@ -40,8 +31,8 @@ describe('EventAction', () => {
       it('returns create action with instance of Error.', async () => {
         expect.assertions(2)
         const action = await store.dispatch(Actions.createEvent(false))
-        action.payload.catch(err => expect(err).toBeInstanceOf(Error))
         expect(action.type).toBe(ActionsType.Event.createEvent)
+        action.payload.catch(err => expect(err).toBeInstanceOf(Error))
       })
     })
   })
