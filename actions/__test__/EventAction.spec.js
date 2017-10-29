@@ -2,7 +2,7 @@ import configureStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 import Router from 'next/router'
 import * as Actions from '../event'
-import ActionsType from '../../../constants/Actions'
+import ActionsType from '../../constants/Actions'
 
 // Creating Nextjs Router instance manually for test.
 class MockedRouter {
@@ -18,7 +18,7 @@ let store = Object.create(null)
 
 // TODO: Refactor this mocked function after API implemented.
 // Mocking EventAPI with virtual mode, because API is not implemanted yet.
-jest.mock('../../../api/Event', () => ({
+jest.mock('../../api/Event', () => ({
   create: success => (success ? Promise.resolve({ id: 1 }) : Promise.reject(new Error())),
 }), { virtual: true })
 
@@ -30,15 +30,9 @@ describe('EventAction', () => {
 
     describe('when successes to create the Event', () => {
       it('returns create action with event data.', async () => {
-        expect.assertions(2)
         const action = await store.dispatch(Actions.createEvent(true))
         expect(action.type).toBe(ActionsType.Event.createEvent)
-        expect(action.payload).toEqual({ id: 1 })
-      })
-      it('replace pathname of Nextjs Router to event show page.', async () => {
-        expect.assertions(1)
-        await store.dispatch(Actions.createEvent(true))
-        expect(Router.router.pathname).toEqual('/event/1')
+        action.payload.then(json => expect(json).toEqual({ id: 1 }))
       })
     })
 
@@ -46,8 +40,8 @@ describe('EventAction', () => {
       it('returns create action with instance of Error.', async () => {
         expect.assertions(2)
         const action = await store.dispatch(Actions.createEvent(false))
+        action.payload.catch(err => expect(err).toBeInstanceOf(Error))
         expect(action.type).toBe(ActionsType.Event.createEvent)
-        expect(action.payload).toBeInstanceOf(Error)
       })
     })
   })

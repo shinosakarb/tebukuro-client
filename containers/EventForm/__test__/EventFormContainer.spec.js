@@ -3,9 +3,11 @@ import { shallow } from 'enzyme'
 import ToJson from 'enzyme-to-json'
 import { EventForm } from '../index'
 
-jest.mock('../../../actions/Event/event')
-//TODO: Remove virtual mode after API implemented.
-jest.mock('../../../api/Event', () => {}, { virtual: true })
+jest.mock('../../../actions/event')
+// TODO: Remove virtual mode after API implemented.
+jest.mock('../../../api/Event', () => ({
+  create: jest.fn(),
+}), { virtual: true })
 
 const props = {
   createEvent: jest.fn(),
