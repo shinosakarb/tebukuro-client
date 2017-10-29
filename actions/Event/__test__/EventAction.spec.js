@@ -1,7 +1,7 @@
 import configureStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 import Router from 'next/router'
-import * as Actions from '../index'
+import * as Actions from '../event'
 import ActionsType from '../../../constants/Actions'
 
 // Creating Nextjs Router instance manually for test.
