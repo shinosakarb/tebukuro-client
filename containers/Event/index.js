@@ -2,11 +2,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { fetchEvent } from '../../actions/event'
-import type { EventId, EventProps } from '../../types/Event'
+import type { EventProps } from '../../types/Event'
 import EventComponent from '../../components/Event'
 
 type Props = {
-  eventId: EventId,
+  eventId: number,
   event: EventProps,
   fetchEvent: Function
 }
