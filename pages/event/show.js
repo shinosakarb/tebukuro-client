@@ -1,11 +1,15 @@
 // @flow
 import React from 'react'
-import EventContainer from '../../containers/Event'
+import withRedux from 'next-redux-wrapper'
+import initStore from '../../store'
+import Event from '../../containers/Event'
 import type { EventId } from '../../types/Event'
 
-export default (props: {url: {query: EventId}}) => (
+const EventPage = (props: {url: {query: EventId}}) => (
   <div>
     <h3>This is the event page!</h3>
-    <EventContainer eventId={props.url.query.id} />
+    <Event eventId={props.url.query.id} />
   </div>
 )
+
+export default withRedux(initStore)(EventPage)
