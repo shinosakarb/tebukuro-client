@@ -11,7 +11,7 @@ describe('Event Reducer', () => {
     })
   })
 
-  describe('when dispached CREATE_EVENT action', () => {
+  describe('when CREATE_EVENT action', () => {
     const createEvent = createAction(Actions.Event.createEvent)
     const errorMessage = 'ERROR!'
 
@@ -25,6 +25,25 @@ describe('Event Reducer', () => {
     describe('with failure event create', () => {
       it('should return error message', () => {
         const eventState = EventReducer(null, createEvent(new Error(errorMessage)))
+        expect(eventState).toEqual({ errors: errorMessage })
+      })
+    })
+  })
+
+  describe('when FETCH_EVENT action', () => {
+    const fetchEvent = createAction(Actions.Event.fetchEvent)
+    const errorMessage = 'ERROR!'
+
+    describe('with success event fetch', () => {
+      it('should return fetched event', () => {
+        const eventState = EventReducer(null, fetchEvent(EventParams.event1))
+        expect(eventState).toEqual(EventParams.event1)
+      })
+    })
+
+    describe('with failure event fetch', () => {
+      it('should return error message', () => {
+        const eventState = EventReducer(null, fetchEvent(new Error(errorMessage)))
         expect(eventState).toEqual({ errors: errorMessage })
       })
     })

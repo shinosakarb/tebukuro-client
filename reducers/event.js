@@ -11,6 +11,13 @@ const eventReducerMap = {
       { errors: action.payload.message }
     ),
   },
+
+  [Actions.Event.fetchEvent]: {
+    next: (state, action) => action.payload,
+    throw: (state, action) => (
+      { errors: action.payload.message }
+    ),
+  },
 }
 
 export default handleActions(eventReducerMap, eventInitialState)
