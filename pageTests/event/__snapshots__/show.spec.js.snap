@@ -5,8 +5,5 @@ exports[`Event page renders the event page. 1`] = `
   <h3>
     This is the event page!
   </h3>
-  <Event Container
-    eventId={1}
-  />
 </div>
 `;

@@ -18,3 +18,5 @@ export const createEvent = (params: EventProps) => (dispatch: Dispatch, getState
        Router.replace(`/event/${id}`)
     })
 }
+
+export const fetchEvent = createAction(ActionsType.Event.fetchEvent, EventAPI.find)
