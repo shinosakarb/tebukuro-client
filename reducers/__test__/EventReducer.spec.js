@@ -3,7 +3,6 @@ import EventReducer, { eventInitialState } from '../event'
 import Actions from '../../constants/Actions'
 import EventParams from '../../factories/Event'
 
-
 describe('Event Reducer', () => {
   describe('when initial state', () => {
     it('should return the initial state', () => {
@@ -13,7 +12,7 @@ describe('Event Reducer', () => {
 
   describe('when CREATE_EVENT action', () => {
     const createEvent = createAction(Actions.Event.createEvent)
-    const errorMessage = 'ERROR!'
+    const errorMessages = ['ERROR1', 'ERROR2']
 
     describe('with success event create', () => {
       it('should return created event', () => {
@@ -22,17 +21,18 @@ describe('Event Reducer', () => {
       })
     })
 
+    // TODO: Fix error object to API Error object after API implemented.
     describe('with failure event create', () => {
       it('should return error message', () => {
-        const eventState = EventReducer(null, createEvent(new Error(errorMessage)))
-        expect(eventState).toEqual({ errors: errorMessage })
+        const eventState = EventReducer(null, createEvent(new Error(errorMessages)))
+        expect(eventState.errors).toEqual(errorMessages.toString())
       })
     })
   })
 
   describe('when FETCH_EVENT action', () => {
     const fetchEvent = createAction(Actions.Event.fetchEvent)
-    const errorMessage = 'ERROR!'
+    const errorMessages = ['ERROR1', 'ERROR2']
 
     describe('with success event fetch', () => {
       it('should return fetched event', () => {
@@ -41,10 +41,11 @@ describe('Event Reducer', () => {
       })
     })
 
+    // TODO: Fix error object to API Error object after API implemented.
     describe('with failure event fetch', () => {
       it('should return error message', () => {
-        const eventState = EventReducer(null, fetchEvent(new Error(errorMessage)))
-        expect(eventState).toEqual({ errors: errorMessage })
+        const eventState = EventReducer(null, fetchEvent(new Error(errorMessages)))
+        expect(eventState.errors).toEqual(errorMessages.toString())
       })
     })
   })
