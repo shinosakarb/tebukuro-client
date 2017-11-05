@@ -4,8 +4,8 @@ module.exports = {
   },
   "extends": [
     "airbnb",
-  "plugin:flowtype/recommended",
-  "plugin:jest/recommended"
+    "plugin:flowtype/recommended",
+    "plugin:jest/recommended"
   ],
   "parser": "babel-eslint",
   "plugins": [
@@ -20,7 +20,10 @@ module.exports = {
   },
   "settings": {
     "flowtype": {
-      "onlyFilesWithFlowAnnotation": true,
+      "onlyFilesWithFlowAnnotation": true
     },
-  }
+  },
+  "globals": {
+    "window": true
+  },
 };
