@@ -1,13 +1,20 @@
 import { shallow } from 'enzyme'
 import shallowToJson from 'enzyme-to-json'
-import { EventForm } from '../../pages/event/new'
+import { NewEvent } from '../../pages/event/new'
 
-jest.mock('../../containers/EventForm', () => 'Event Container')
+jest.mock('../../components/EventForm', () => 'EventFormComponent')
+jest.mock('../../actions/event', () => ({
+  createEvent: () => {},
+}))
 
-describe('Event page', () => {
-  it('renders the event page.', () => {
-    const component = shallow(<EventForm />)
-    const tree = shallowToJson(component)
+const testProps = {
+  createEvent: jest.fn(),
+}
+
+describe('NewEvent', () => {
+  it('renders the new event page.', () => {
+    const page = shallow(<NewEvent {...testProps} />)
+    const tree = shallowToJson(page)
 
     expect(tree).toMatchSnapshot()
   })

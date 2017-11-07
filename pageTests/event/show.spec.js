@@ -1,17 +1,35 @@
-import { shallow } from 'enzyme'
+import { shallow, mount } from 'enzyme'
 import shallowToJson from 'enzyme-to-json'
-import { Event } from '../../pages/event/show'
+import { ShowEvent } from '../../pages/event/show'
+import Params from '../../factories/Event'
 
-jest.mock('../../containers/Event', () => 'Event Container')
+jest.mock('../../components/Event', () => 'EventComponent')
+jest.mock('../../actions/event', () => ({
+  fetchEvent: () => {},
+}))
 
-const URIQuery = { query: { id: 1 } }
+const testProps = {
+  url: { query: { id: Params.event1.id } },
+  event: Params.event1,
+  fetchEvent: jest.fn(),
+}
 
+describe('ShowEvent', () => {
+  beforeEach(() => {
+    testProps.fetchEvent.mockReset()
+  })
 
-describe('Event page', () => {
   it('renders the event page.', () => {
-    const component = shallow(<Event url={URIQuery} />)
-    const tree = shallowToJson(component)
+    const page = shallow(<ShowEvent {...testProps} />)
+    const tree = shallowToJson(page)
 
     expect(tree).toMatchSnapshot()
+  })
+
+  it('should call fetchEvent once with correct eventId', () => {
+    mount(<ShowEvent {...testProps} />)
+
+    expect(testProps.fetchEvent).toHaveBeenCalledTimes(1)
+    expect(testProps.fetchEvent).toBeCalledWith(Params.event1.id)
   })
 })

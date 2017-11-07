@@ -12,6 +12,7 @@ import type { EventProps } from '../types/Event'
 
 const create = createAction(ActionsType.Event.createEvent, EventAPI.create)
 
+// TODO: Return reject in thunk.
 export const createEvent = (params: EventProps) => (dispatch: Dispatch, getState: Function) => {
     return dispatch(create(params)).then(res => {
        const id = getState().event.id

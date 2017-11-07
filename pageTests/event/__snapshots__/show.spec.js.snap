@@ -1,9 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Event page renders the event page. 1`] = `
+exports[`ShowEvent renders the event page. 1`] = `
 <div>
   <h3>
     This is the event page!
   </h3>
+  <EventComponent
+    event={
+      Object {
+        "description": "This is the first event.",
+        "id": 1,
+        "name": "event1",
+      }
+    }
+  />
 </div>
 `;
