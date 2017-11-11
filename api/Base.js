@@ -1,7 +1,6 @@
 // @flow
 import pathToRegexp from 'path-to-regexp'
 import client from './client'
-import ApiResponseError from './ApiResponseError'
 
 export default class Base {
   endpoints: Object
@@ -28,13 +27,11 @@ export default class Base {
     return response.data
   }
 
-  onFailure(error: Object): Promise<string[]> {
+  onFailure(error: Object): Promise<Error> {
     const errorMessages = error.response.status === 404 ?
       ['Not Found'] : this.createErrorMessages(error.response.data)
 
-    const apiResponseError = new ApiResponseError(errorMessages)
-
-    return Promise.reject(apiResponseError)
+    return Promise.reject(new Error(errorMessages))
   }
 
   all(params: Object) {
