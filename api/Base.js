@@ -27,16 +27,18 @@ export default class Base {
     return response.data
   }
 
-  onFailure(error: Object): Promise<Error> {
+  onFailure: (error: Object) => Promise<Error> = (error) => {
     const errors = error.response.status === 404 ?
       ['Not Found'] : this.createErrorMessages(error.response.data)
 
-    return Promise.reject(new Error({ errors }))
+    /* eslint-disable prefer-promise-reject-errors */
+    return Promise.reject({ errors })
+    /* eslint-enable */
   }
 
-  all(params: Object) {
+  all() {
     const url = this.endpoints.all
-    return this.client.get(url, params).then(this.onSuccess, this.onFailure)
+    return this.client.get(url).then(this.onSuccess, this.onFailure)
   }
 
   find(params: number) {
