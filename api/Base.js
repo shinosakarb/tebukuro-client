@@ -28,10 +28,10 @@ export default class Base {
   }
 
   onFailure(error: Object): Promise<Error> {
-    const errorMessages = error.response.status === 404 ?
+    const errors = error.response.status === 404 ?
       ['Not Found'] : this.createErrorMessages(error.response.data)
 
-    return Promise.reject(new Error(errorMessages))
+    return Promise.reject(new Error({ errors }))
   }
 
   all(params: Object) {
