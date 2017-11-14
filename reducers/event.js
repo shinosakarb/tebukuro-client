@@ -8,14 +8,14 @@ const eventReducerMap = {
   [Actions.Event.createEvent]: {
     next: (state, action) => action.payload,
     throw: (state, action) => (
-      { errors: action.payload.message }
+      { errors: action.payload.errors }
     ),
   },
 
   [Actions.Event.fetchEvent]: {
     next: (state, action) => action.payload,
     throw: (state, action) => (
-      { errors: action.payload.message }
+      { errors: action.payload.errors }
     ),
   },
 }

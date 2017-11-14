@@ -4,4 +4,7 @@ export default {
     name: 'event1',
     description: 'This is the first event.',
   },
+  errorEvent: {
+    errors: ['nameを入力してください', 'nameは１０文字以内です'],
+  },
 }

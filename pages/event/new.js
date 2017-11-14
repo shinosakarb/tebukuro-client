@@ -6,20 +6,31 @@ import { createEvent } from '../../actions/event'
 import EventFormComponent from '../../components/EventForm'
 
 type EventFormProps = {
-  createEvent: Function
+  createEvent: Function,
+  errors: ?string[]
 }
 
 export const NewEvent = (props: EventFormProps) => (
   <div>
     <h3>This is the event form page!</h3>
+    { props.errors &&
+      <ul>
+        { props.errors.map(error =>
+          <li>{ error }</li>)}
+      </ul>
+    }
     <EventFormComponent onSubmit={props.createEvent} />
   </div>
 )
 
 const mapDispatchToProps = { createEvent }
+const mapStateToProps = state => (
+  { errors: state.event.errors }
+)
 
 const connectProps = {
   createStore,
+  mapStateToProps,
   mapDispatchToProps,
 }
 

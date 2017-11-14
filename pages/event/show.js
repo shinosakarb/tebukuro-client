@@ -1,6 +1,7 @@
 // @flow
 import React, { Component } from 'react'
 import withRedux from 'next-redux-wrapper'
+import Error from 'next/error'
 import createStore from '../../store'
 import { fetchEvent } from '../../actions/event'
 import type { EventId, EventProps } from '../../types/Event'
@@ -9,7 +10,7 @@ import EventComponent from '../../components/Event'
 type Props = {
   url: { query: EventId },
   event: EventProps,
-  fetchEvent: Function
+  fetchEvent: Function,
 }
 
 export class ShowEvent extends Component<Props> {
@@ -19,6 +20,10 @@ export class ShowEvent extends Component<Props> {
   }
 
   render() {
+    if (this.props.event.errors) {
+      return <Error statusCode="404" />
+    }
+
     return (
       <div>
         <h3>This is the event page!</h3>

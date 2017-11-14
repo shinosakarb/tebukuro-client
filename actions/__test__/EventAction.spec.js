@@ -26,16 +26,16 @@ class MockedRouter {
   }
 }
 
-// TODO: Refactor this mocked function after API implemented.
-jest.mock('../../api/Event', () => ({
-  create: success => (
-    success ? Promise.resolve({ id: 1 }) : Promise.reject(new Error())
-  ),
-  find: success => (
-    success ? Promise.resolve({ id: 1 }) : Promise.reject(new Error())
-  ),
-  // Mocking EventAPI with virtual mode, because API is not implemanted yet.
-}), { virtual: true })
+jest.mock('../../api/index', () => ({
+  event: {
+    create: success => (
+      success ? Promise.resolve({ id: 1 }) : Promise.reject(new Error())
+    ),
+    find: success => (
+      success ? Promise.resolve({ id: 1 }) : Promise.reject(new Error())
+    ),
+  },
+}))
 
 describe('EventAction', () => {
   beforeEach(() => {

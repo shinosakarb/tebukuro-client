@@ -1,21 +1,38 @@
 import { shallow } from 'enzyme'
 import shallowToJson from 'enzyme-to-json'
 import { NewEvent } from '../../pages/event/new'
+import Params from '../../factories/Event'
 
 jest.mock('../../components/EventForm', () => 'EventFormComponent')
 jest.mock('../../actions/event', () => ({
   createEvent: () => {},
 }))
 
-const testProps = {
-  createEvent: jest.fn(),
-}
-
 describe('NewEvent', () => {
-  it('renders the new event page.', () => {
-    const page = shallow(<NewEvent {...testProps} />)
-    const tree = shallowToJson(page)
+  describe('on first page load', () => {
+    it('renders the new event page without error messages.', () => {
+      const testProps = {
+        createEvent: jest.fn(),
+        errors: null,
+      }
 
-    expect(tree).toMatchSnapshot()
+      const page = shallow(<NewEvent {...testProps} />)
+      const tree = shallowToJson(page)
+
+      expect(tree).toMatchSnapshot()
+    })
+  })
+  describe('on submit invalid inputs', () => {
+    it('renders the new event page without error messages.', () => {
+      const testProps = {
+        createEvent: jest.fn(),
+        errors: Params.errorEvent.errors,
+      }
+
+      const page = shallow(<NewEvent {...testProps} />)
+      const tree = shallowToJson(page)
+
+      expect(tree).toMatchSnapshot()
+    })
   })
 })

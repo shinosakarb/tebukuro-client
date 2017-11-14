@@ -2,6 +2,13 @@ import { createAction } from 'redux-actions'
 import EventReducer, { eventInitialState } from '../event'
 import Actions from '../../constants/Actions'
 import EventParams from '../../factories/Event'
+import ApiResponseError from '../../api/ApiResponseError'
+
+const error = {
+  response: { data: { name: ['を入力して下さい', 'は１０文字以下です'] } },
+}
+
+const errorMessages = ['nameを入力して下さい', 'nameは１０文字以下です']
 
 describe('Event Reducer', () => {
   describe('when initial state', () => {
@@ -12,7 +19,6 @@ describe('Event Reducer', () => {
 
   describe('when CREATE_EVENT action', () => {
     const createEvent = createAction(Actions.Event.createEvent)
-    const errorMessages = ['ERROR1', 'ERROR2']
 
     describe('with success event create', () => {
       it('should return created event', () => {
@@ -21,18 +27,16 @@ describe('Event Reducer', () => {
       })
     })
 
-    // TODO: Fix error object to API Error object after API implemented.
     describe('with failure event create', () => {
       it('should return error message', () => {
-        const eventState = EventReducer(null, createEvent(new Error(errorMessages)))
-        expect(eventState.errors).toEqual(errorMessages.toString())
+        const eventState = EventReducer(null, createEvent(new ApiResponseError(error)))
+        expect(eventState.errors).toEqual(errorMessages)
       })
     })
   })
 
   describe('when FETCH_EVENT action', () => {
     const fetchEvent = createAction(Actions.Event.fetchEvent)
-    const errorMessages = ['ERROR1', 'ERROR2']
 
     describe('with success event fetch', () => {
       it('should return fetched event', () => {
@@ -41,11 +45,10 @@ describe('Event Reducer', () => {
       })
     })
 
-    // TODO: Fix error object to API Error object after API implemented.
     describe('with failure event fetch', () => {
       it('should return error message', () => {
-        const eventState = EventReducer(null, fetchEvent(new Error(errorMessages)))
-        expect(eventState.errors).toEqual(errorMessages.toString())
+        const eventState = EventReducer(null, fetchEvent(new ApiResponseError(error)))
+        expect(eventState.errors).toEqual(errorMessages)
       })
     })
   })

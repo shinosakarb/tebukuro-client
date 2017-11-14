@@ -26,6 +26,14 @@ describe('ShowEvent', () => {
     expect(tree).toMatchSnapshot()
   })
 
+  it('renders the page not found error page.', () => {
+    const errorTestProps = { ...testProps, event: Params.errorEvent }
+    const page = shallow(<ShowEvent {...errorTestProps} />)
+    const tree = shallowToJson(page)
+
+    expect(tree).toMatchSnapshot()
+  })
+
   it('should call fetchEvent once with correct eventId', () => {
     mount(<ShowEvent {...testProps} />)
 
