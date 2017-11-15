@@ -10,12 +10,21 @@ const mockStore = configureStore(middlewares)
 let store = Object.create(null)
 
 // Create a mocked router for Nextjs Router instance.
-class MockedRouter {
-  constructor() { this.pathname = null }
-  replace(pathname) { this.pathname = pathname }
-}
+const newEventPath = '/event/new'
+const showEventPath = '/event/show?id=1'
+const showEventAsPath = '/event/1'
 
-Router.router = new MockedRouter()
+class MockedRouter {
+  constructor(path) {
+    this.path = path
+    this.asPath = null
+  }
+
+  replace(path, asPath) {
+    this.path = path
+    this.asPath = asPath
+  }
+}
 
 // TODO: Refactor this mocked function after API implemented.
 jest.mock('../../api/Event', () => ({
@@ -34,6 +43,10 @@ describe('EventAction', () => {
   })
 
   describe('createEvent', () => {
+    beforeEach(() => {
+      Router.router = new MockedRouter(newEventPath)
+    })
+
     describe('when successes to create the Event', () => {
       it('returns create action with event data.', () => {
         expect.assertions(2)
@@ -46,10 +59,11 @@ describe('EventAction', () => {
       })
 
       it('replace Nextjs routing to event show page.', () => {
-        expect.assertions(1)
+        expect.assertions(2)
         return store.dispatch(Actions.createEvent(true))
           .then(() => {
-            expect(Router.router.pathname).toEqual('/event/1')
+            expect(Router.router.path).toEqual(showEventPath)
+            expect(Router.router.asPath).toEqual(showEventAsPath)
           })
       })
     })
@@ -62,6 +76,15 @@ describe('EventAction', () => {
             const action = store.getActions()[0]
             expect(action.type).toBe(ActionsType.Event.createEvent)
             expect(action.payload).toBeInstanceOf(Error)
+          })
+      })
+
+      it('keep Nextjs routing path.', () => {
+        expect.assertions(2)
+        return store.dispatch(Actions.createEvent(false))
+          .then(() => {
+            expect(Router.router.path).toEqual(newEventPath)
+            expect(Router.router.asPath).toEqual(null)
           })
       })
     })

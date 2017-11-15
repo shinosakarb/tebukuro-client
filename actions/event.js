@@ -13,9 +13,9 @@ import type { EventProps } from '../types/Event'
 const create = createAction(ActionsType.Event.createEvent, EventAPI.create)
 
 export const createEvent = (params: EventProps) => (dispatch: Dispatch, getState: Function) => {
-    return dispatch(create(params)).then(json => {
+    return dispatch(create(params)).then(res => {
        const id = getState().event.id
-       Router.replace(`/event/${id}`)
+       !res.error && Router.replace(`/event/show?id=${id}`, `/event/${id}`)
     })
 }
 
