@@ -2,7 +2,7 @@ module.exports = {
   "env": {
     "jest": true
   },
-  "extends": [ 
+  "extends": [
     "airbnb",
   "plugin:flowtype/recommended",
   "plugin:jest/recommended"
@@ -14,8 +14,9 @@ module.exports = {
   ],
   "rules": {
     "semi": "off",
+    "class-methods-use-this": "off",
     "react/react-in-jsx-scope": "off",
-    "react/jsx-filename-extension": ["error", { "extensions": [".js", ".jsx"] }]
+    "react/jsx-filename-extension": ["error", { "extensions": [".js", ".jsx"] }],
   },
   "settings": {
     "flowtype": {
