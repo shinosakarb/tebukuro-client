@@ -5,6 +5,7 @@ export type EventId = {
 }
 
 export type EventProps = {
+  id: ?number,
   name: string,
   description: string,
   errors: ?string[]

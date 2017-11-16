@@ -6,6 +6,7 @@ import createStore from '../../store'
 import { fetchEvent } from '../../actions/event'
 import type { EventId, EventProps } from '../../types/Event'
 import EventComponent from '../../components/Event'
+import ParticipantFormComponent from '../../components/ParticipantForm'
 
 type Props = {
   url: { query: EventId },
@@ -28,6 +29,7 @@ export class ShowEvent extends Component<Props> {
       <div>
         <h3>This is the event page!</h3>
         <EventComponent event={this.props.event} />
+        <ParticipantFormComponent onSubmit={() => {}} eventId={this.props.event.id} />
       </div>
     )
   }
