@@ -6,5 +6,6 @@ export type EventId = {
 
 export type EventProps = {
   name: string,
-  description: string
+  description: string,
+  errors: ?string[]
 }
