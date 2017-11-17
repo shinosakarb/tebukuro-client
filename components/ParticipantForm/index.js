@@ -20,7 +20,6 @@ export default class ParticipantForm extends Component<Props, State> {
   }
 
   onChangeHandler = (e: SyntheticInputEvent<>) => {
-    e.preventDefault()
     this.setState({
       ...this.state,
       [e.target.id]: e.target.value,
@@ -32,6 +31,7 @@ export default class ParticipantForm extends Component<Props, State> {
     this.props.onSubmit(this.state)
   }
 
+  // TODO: Extract component and fields as common components
   render() {
     return (
       <div>
