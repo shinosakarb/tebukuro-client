@@ -4,7 +4,9 @@ export default {
     eventId: 1,
     name: 'participant1',
   },
-  errorParticipant: {
-    errors: ['nameを入力してください', 'nameは１０文字以内です'],
+  participant2: {
+    id: 2,
+    eventId: 1,
+    name: 'participant2',
   },
 }
