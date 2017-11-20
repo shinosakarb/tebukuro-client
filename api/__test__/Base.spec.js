@@ -3,10 +3,12 @@ import client from '../client'
 import Base from '../Base'
 import * as endpoints from '../../constants/endpoints'
 import eventParams from '../../factories/Event'
+import '../../env-config'
 
 const base = new Base(endpoints.event)
 
-const baseUrl = endpoints.event.all
+// Removing extra '/' from endpoint
+const baseUrl = process.env.BASE_URL + endpoints.event.all.substring(1)
 const detailUrl = `${baseUrl}/1`
 
 const events = [eventParams.event1, eventParams.event2]

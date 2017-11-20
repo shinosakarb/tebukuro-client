@@ -20,27 +20,27 @@ export default class Base {
     return Promise.reject(new ApiResponseError(error))
   }
 
-  all() {
+  all = () => {
     const url = this.endpoints.all
     return this.client.get(url).then(this.onSuccess, this.onFailure)
   }
 
-  find(params: number) {
+  find = (params: number) => {
     const url = pathToRegexp.compile(this.endpoints.find)(params)
     return this.client.get(url).then(this.onSuccess, this.onFailure)
   }
 
-  create(params: Object) {
+  create = (params: Object) => {
     const url = pathToRegexp.compile(this.endpoints.create)(params)
     return this.client.post(url, params).then(this.onSuccess, this.onFailure)
   }
 
-  update(params: Object) {
+  update = (params: Object) => {
     const url = pathToRegexp.compile(this.endpoints.update)(params)
     return this.client.post(url, params).then(this.onSuccess, this.onFailure)
   }
 
-  delete(params: number) {
+  delete = (params: number) => {
     const url = pathToRegexp.compile(this.endpoints.delete)(params)
     return this.client.delete(url).then(this.onSuccess, this.onFailure)
   }
