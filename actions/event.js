@@ -3,7 +3,7 @@ import { createAction } from 'redux-actions'
 import Router from 'next/router'
 import type { Dispatch } from 'redux'
 import ActionsType from '../constants/Actions'
-import { event } from '../api'
+import { event, participant } from '../api'
 import type { EventProps } from '../types/Event'
 
 const create = createAction(ActionsType.Event.createEvent, event.create)
@@ -17,3 +17,4 @@ export const createEvent = (params: EventProps) => (dispatch: Dispatch, getState
 )
 
 export const fetchEvent = createAction(ActionsType.Event.fetchEvent, event.find)
+export const joinEvent = createAction(ActionsType.Event.joinEvent, participant.create)
