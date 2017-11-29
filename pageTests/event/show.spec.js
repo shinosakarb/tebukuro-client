@@ -12,6 +12,7 @@ const testProps = {
   url: { query: { id: Params.event1.id } },
   event: Params.event1,
   fetchEvent: jest.fn(),
+  joinEvent: jest.fn(),
 }
 
 describe('ShowEvent', () => {
@@ -26,8 +27,16 @@ describe('ShowEvent', () => {
     expect(tree).toMatchSnapshot()
   })
 
-  it('renders the page not found error page.', () => {
+  it('renders the page with error messages.', () => {
     const errorTestProps = { ...testProps, event: Params.errorEvent }
+    const page = shallow(<ShowEvent {...errorTestProps} />)
+    const tree = shallowToJson(page)
+
+    expect(tree).toMatchSnapshot()
+  })
+
+  it('renders the page not found error page.', () => {
+    const errorTestProps = { ...testProps, event: { errors: ['Not Found'] } }
     const page = shallow(<ShowEvent {...errorTestProps} />)
     const tree = shallowToJson(page)
 
