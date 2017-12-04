@@ -4,8 +4,6 @@ import client from './client'
 import ApiResponseError from './ApiResponseError'
 import ConvertCase from '../utils/ConvertCase'
 
-const toSnakeCase = (params: Object) => ConvertCase.snakeKeysOf(params)
-
 export default class Base {
   endpoints: Object
   client: Object
@@ -35,12 +33,14 @@ export default class Base {
 
   create = (params: Object) => {
     const url = pathToRegexp.compile(this.endpoints.create)(params)
-    return this.client.post(url, toSnakeCase(params)).then(this.onSuccess, this.onFailure)
+    return this.client
+      .post(url, ConvertCase.snakeKeysOf(params)).then(this.onSuccess, this.onFailure)
   }
 
   update = (params: Object) => {
     const url = pathToRegexp.compile(this.endpoints.update)(params)
-    return this.client.post(url, toSnakeCase(params)).then(this.onSuccess, this.onFailure)
+    return this.client
+      .post(url, ConvertCase.snakeKeysOf(params)).then(this.onSuccess, this.onFailure)
   }
 
   delete = (params: number) => {
