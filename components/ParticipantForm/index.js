@@ -1,16 +1,22 @@
 // @flow
 import React, { Component } from 'react'
 
-type Props = { onSubmit: Function }
+type Props = {
+  onSubmit: Function,
+  eventId: ?number,
+}
 type State = {
   name: string,
-  description: string
+  eventId: ?number,
 }
 
-export default class EventForm extends Component<Props, State> {
+export default class ParticipantForm extends Component<Props, State> {
   constructor(props: Props) {
     super(props)
-    this.state = { name: '', description: '' }
+    this.state = {
+      name: '',
+      eventId: props.eventId,
+    }
   }
 
   onChangeHandler = (e: SyntheticInputEvent<>) => {
@@ -29,18 +35,12 @@ export default class EventForm extends Component<Props, State> {
   render() {
     return (
       <div>
-        <h3>Event registration form</h3>
+        <h3>Event participation form</h3>
         <form onSubmit={this.onSubmitHandler}>
           <div>
             <label htmlFor="name">
               name
               <input type="text" id="name" value={this.state.name} onChange={this.onChangeHandler} />
-            </label>
-          </div>
-          <div>
-            <label htmlFor="description">
-              description
-              <textarea id="description" value={this.state.description} onChange={this.onChangeHandler} />
             </label>
           </div>
           <div>
