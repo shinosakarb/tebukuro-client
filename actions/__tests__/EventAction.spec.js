@@ -132,7 +132,7 @@ describe('EventAction', () => {
     })
   })
 
-  describe('joinEvent', () => {
+  describe('registerForEvent', () => {
     describe('when successes to join the Event', () => {
       beforeEach(() => {
         /* eslint-disable no-underscore-dangle */
@@ -141,10 +141,10 @@ describe('EventAction', () => {
       })
       it('returns join action with participant data.', () => {
         expect.assertions(2)
-        return store.dispatch(Actions.joinEvent(testParam))
+        return store.dispatch(Actions.registerForEvent(testParam))
           .then(() => {
             const action = store.getActions()[0]
-            expect(action.type).toBe(ActionsType.Event.joinEvent)
+            expect(action.type).toBe(ActionsType.Event.registerForEvent)
             expect(action.payload).toEqual(testParam)
           })
       })
@@ -158,10 +158,10 @@ describe('EventAction', () => {
       })
       it('returns join action with instance of Error.', () => {
         expect.assertions(2)
-        return store.dispatch(Actions.joinEvent(testParam))
+        return store.dispatch(Actions.registerForEvent(testParam))
           .then(() => {
             const action = store.getActions()[0]
-            expect(action.type).toBe(ActionsType.Event.joinEvent)
+            expect(action.type).toBe(ActionsType.Event.registerForEvent)
             expect(action.payload).toBeInstanceOf(Error)
           })
       })

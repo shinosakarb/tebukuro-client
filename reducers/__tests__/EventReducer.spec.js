@@ -63,7 +63,7 @@ describe('Event Reducer', () => {
   })
 
   describe('when JOIN_EVENT action', () => {
-    const joinEvent = createAction(Actions.Event.joinEvent)
+    const registerForEvent = createAction(Actions.Event.registerForEvent)
 
     const participant = ParticipantParams.participant1
     const receivedData = ConvertCase.snakeKeysOf(participant)
@@ -79,14 +79,14 @@ describe('Event Reducer', () => {
 
     describe('with success event join', () => {
       it('should return joined event', () => {
-        const eventState = EventReducer(prevState, joinEvent(receivedData))
+        const eventState = EventReducer(prevState, registerForEvent(receivedData))
         expect(eventState).toEqual(nextState)
       })
     })
 
     describe('with failure event join', () => {
       it('should return error message', () => {
-        const eventState = EventReducer(prevState, joinEvent(new ApiResponseError(error)))
+        const eventState = EventReducer(prevState, registerForEvent(new ApiResponseError(error)))
         expect(eventState).toEqual(prevState.set('errors', errorMessages))
       })
     })

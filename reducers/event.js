@@ -22,7 +22,7 @@ const eventReducerMap = {
     ),
   },
 
-  [Actions.Event.joinEvent]: {
+  [Actions.Event.registerForEvent]: {
     next: (state, action) => {
       const participant = new ParticipantModel(ConvertCase.camelKeysOf(action.payload))
       // Clear error message of previous error.

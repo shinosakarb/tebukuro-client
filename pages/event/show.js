@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import withRedux from 'next-redux-wrapper'
 import Error from 'next/error'
 import createStore from '../../store'
-import { fetchEvent, joinEvent } from '../../actions/event'
+import { fetchEvent, registerForEvent } from '../../actions/event'
 import type { EventId, EventProps } from '../../types/Event'
 import EventComponent from '../../components/Event'
 import ParticipantFormComponent from '../../components/ParticipantForm'
@@ -12,7 +12,7 @@ type Props = {
   url: { query: EventId },
   event: EventProps,
   fetchEvent: Function,
-  joinEvent: Function,
+  registerForEvent: Function,
 }
 
 export class ShowEvent extends Component<Props> {
@@ -41,7 +41,7 @@ export class ShowEvent extends Component<Props> {
         <h3>This is the event page!</h3>
         <EventComponent event={event} />
         <ParticipantFormComponent
-          onSubmit={this.props.joinEvent}
+          onSubmit={this.props.registerForEvent}
           eventId={this.props.event.id}
         />
       </div>
@@ -53,7 +53,7 @@ const mapStateToProps = state => ({
   event: state.event,
 })
 
-const mapDispatchToProps = { fetchEvent, joinEvent }
+const mapDispatchToProps = { fetchEvent, registerForEvent }
 
 const connectProps = {
   createStore,

@@ -17,4 +17,4 @@ export const createEvent = (params: EventProps) => (dispatch: Dispatch, getState
 )
 
 export const fetchEvent = createAction(ActionsType.Event.fetchEvent, event.find)
-export const joinEvent = createAction(ActionsType.Event.joinEvent, participant.create)
+export const registerForEvent = createAction(ActionsType.Event.registerForEvent, participant.create)

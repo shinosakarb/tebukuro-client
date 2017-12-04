@@ -12,7 +12,7 @@ const testProps = {
   url: { query: { id: Params.event1.id } },
   event: Params.event1,
   fetchEvent: jest.fn(),
-  joinEvent: jest.fn(),
+  registerForEvent: jest.fn(),
 }
 
 describe('ShowEvent', () => {
