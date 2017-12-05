@@ -11,6 +11,7 @@ exports[`ShowEvent renders the event page. 1`] = `
         "description": "This is the first event.",
         "id": 1,
         "name": "event1",
+        "participants": Array [],
       }
     }
   />
