@@ -17,8 +17,8 @@ type Props = {
 
 export class ShowEvent extends Component<Props> {
   componentDidMount() {
-    const eventId = this.props.url.query.id
-    this.props.fetchEvent(eventId)
+    const params = { id: this.props.url.query.id }
+    this.props.fetchEvent(params)
   }
 
   isNotFoundError(errors: ?string[]) {

@@ -43,10 +43,10 @@ describe('ShowEvent', () => {
     expect(tree).toMatchSnapshot()
   })
 
-  it('should call fetchEvent once with correct eventId', () => {
+  it('should call fetchEvent once with correct params', () => {
     mount(<ShowEvent {...testProps} />)
 
     expect(testProps.fetchEvent).toHaveBeenCalledTimes(1)
-    expect(testProps.fetchEvent).toBeCalledWith(Params.event1.id)
+    expect(testProps.fetchEvent).toBeCalledWith({ id: Params.event1.id })
   })
 })
