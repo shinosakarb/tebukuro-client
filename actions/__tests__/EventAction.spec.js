@@ -2,20 +2,15 @@ import configureStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 import promiseMiddleware from 'redux-promise'
 import Router from 'next/router'
-import { normalize } from 'normalizr'
-
 import * as Actions from '../event'
 import ActionsType from '../../constants/Actions'
 
-import EventParams from '../../factories/Event'
-import ParticipantParams from '../../factories/Participant'
-
-import EventSchema from '../../schemas/event'
-import ParticipantSchema from '../../schemas/participant'
-
 jest.mock('../../api/index')
-// eslint-disable-next-line import/first
+/* eslint-disable import/first */
 import mockAPI from '../../api/index'
+/* eslint-enable */
+
+const testParam = { id: 1 }
 
 const middlewares = [promiseMiddleware, thunk]
 const mockStore = configureStore(middlewares)
@@ -40,7 +35,7 @@ class MockedRouter {
 
 describe('EventAction', () => {
   beforeEach(() => {
-    store = mockStore({ event: { id: 1 } })
+    store = mockStore({ event: testParam })
   })
 
   describe('createEvent', () => {
@@ -48,13 +43,11 @@ describe('EventAction', () => {
       Router.router = new MockedRouter(newEventPath)
     })
 
-    const testParam = { ...EventParams.event1, participants: [] }
-    const result = normalize(testParam, EventSchema)
-
     describe('when successes to create the Event', () => {
       beforeEach(() => {
-        // eslint-disable-next-line no-underscore-dangle
+        /* eslint-disable no-underscore-dangle */
         mockAPI.__setMockResult(true)
+        /* eslint-enable */
       })
       it('returns create action with event data.', () => {
         expect.assertions(2)
@@ -62,7 +55,7 @@ describe('EventAction', () => {
           .then(() => {
             const action = store.getActions()[0]
             expect(action.type).toBe(ActionsType.Event.createEvent)
-            expect(action.payload).toEqual(result)
+            expect(action.payload).toEqual(testParam)
           })
       })
 
@@ -78,8 +71,9 @@ describe('EventAction', () => {
 
     describe('when fails to create the Event', () => {
       beforeEach(() => {
-        // eslint-disable-next-line no-underscore-dangle
+        /* eslint-disable no-underscore-dangle */
         mockAPI.__setMockResult(false)
+        /* eslint-enable */
       })
       it('returns create action with instance of Error.', () => {
         expect.assertions(2)
@@ -103,16 +97,11 @@ describe('EventAction', () => {
   })
 
   describe('fetchEvent', () => {
-    const testParam = {
-      ...EventParams.event1,
-      participants: Object.values(ParticipantParams),
-    }
-    const result = normalize(testParam, EventSchema)
-
     describe('when successes to fetch the Event', () => {
       beforeEach(() => {
-        // eslint-disable-next-line no-underscore-dangle
+        /* eslint-disable no-underscore-dangle */
         mockAPI.__setMockResult(true)
+        /* eslint-enable */
       })
       it('returns fetch action with event data.', () => {
         expect.assertions(2)
@@ -120,15 +109,16 @@ describe('EventAction', () => {
           .then(() => {
             const action = store.getActions()[0]
             expect(action.type).toBe(ActionsType.Event.fetchEvent)
-            expect(action.payload).toEqual(result)
+            expect(action.payload).toEqual(testParam)
           })
       })
     })
 
     describe('when fails to fetch the Event', () => {
       beforeEach(() => {
-        // eslint-disable-next-line no-underscore-dangle
+        /* eslint-disable no-underscore-dangle */
         mockAPI.__setMockResult(false)
+        /* eslint-enable */
       })
       it('returns fetch action with instance of Error.', () => {
         expect.assertions(2)
@@ -143,13 +133,11 @@ describe('EventAction', () => {
   })
 
   describe('registerForEvent', () => {
-    const testParam = ParticipantParams.participant1
-    const result = normalize(testParam, ParticipantSchema)
-
     describe('when successes to join the Event', () => {
       beforeEach(() => {
-        // eslint-disable-next-line no-underscore-dangle
+        /* eslint-disable no-underscore-dangle */
         mockAPI.__setMockResult(true)
+        /* eslint-enable */
       })
       it('returns join action with participant data.', () => {
         expect.assertions(2)
@@ -157,15 +145,16 @@ describe('EventAction', () => {
           .then(() => {
             const action = store.getActions()[0]
             expect(action.type).toBe(ActionsType.Event.registerForEvent)
-            expect(action.payload).toEqual(result)
+            expect(action.payload).toEqual(testParam)
           })
       })
     })
 
     describe('when fails to join the Event', () => {
       beforeEach(() => {
-        // eslint-disable-next-line no-underscore-dangle
+        /* eslint-disable no-underscore-dangle */
         mockAPI.__setMockResult(false)
+        /* eslint-enable */
       })
       it('returns join action with instance of Error.', () => {
         expect.assertions(2)
