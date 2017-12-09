@@ -11,7 +11,7 @@ const create = createAction(ActionsType.Event.createEvent, event.create)
 // TODO: Return reject in thunk.
 export const createEvent = (params: EventProps) => (dispatch: Dispatch, getState: Function) => (
   dispatch(create(params)).then((res) => {
-    const { id } = getState().event
+    const id = getState().event.get('entityId')
     !res.error && Router.replace(`/event/show?id=${id}`, `/event/${id}`)
   })
 )

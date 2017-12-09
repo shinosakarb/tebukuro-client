@@ -25,7 +25,7 @@ export const NewEvent = (props: EventFormProps) => (
 
 const mapDispatchToProps = { createEvent }
 const mapStateToProps = state => (
-  { errors: state.event.errors }
+  { errors: state.event.get('errors').toArray() }
 )
 
 const connectProps = {

@@ -30,14 +30,6 @@ exports[`ShowEvent renders the page not found error page. 1`] = `
 
 exports[`ShowEvent renders the page with error messages. 1`] = `
 <div>
-  <ul>
-    <li>
-      nameを入力してください
-    </li>
-    <li>
-      nameは１０文字以内です
-    </li>
-  </ul>
   <h3>
     This is the event page!
   </h3>

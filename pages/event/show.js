@@ -11,6 +11,7 @@ import ParticipantFormComponent from '../../components/ParticipantForm'
 type Props = {
   url: { query: EventId },
   event: EventProps,
+  participantErrors: ?string[],
   fetchEvent: Function,
   registerForEvent: Function,
 }
@@ -27,31 +28,32 @@ export class ShowEvent extends Component<Props> {
 
   render() {
     const { event } = this.props
+
     if (this.isNotFoundError(event.errors)) {
       return <Error statusCode="404" />
     }
 
     return (
       <div>
-        { event.errors &&
-          <ul>
-            { event.errors.map(error => <li>{ error }</li>) }
-          </ul>
-        }
         <h3>This is the event page!</h3>
         <EventComponent event={event} />
         <ParticipantFormComponent
           onSubmit={this.props.registerForEvent}
-          eventId={this.props.event.id}
+          eventId={event.id}
+          errors={this.props.participantErrors}
         />
       </div>
     )
   }
 }
 
-const mapStateToProps = state => ({
-  event: state.event,
-})
+const mapStateToProps = (state) => {
+  const id = state.event.get('entityId').toString()
+  return {
+    event: state.event.getIn(['entities', id]).toObject(),
+    participantErrors: state.participant.get('errors').toArray(),
+  }
+}
 
 const mapDispatchToProps = { fetchEvent, registerForEvent }
 
