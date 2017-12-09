@@ -18,6 +18,7 @@ const toCamelCase = payload => (
   _.mapValues(payload, val => ConvertCase.camelKeysOf(val))
 )
 
+// TODO: Normalize in Reducer is **NOT** recommended. Need to be refactored.
 const participantReducerMap = {
   [Actions.Event.fetchEvent]: {
     next: (state, action) => {

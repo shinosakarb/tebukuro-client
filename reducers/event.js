@@ -12,6 +12,7 @@ export const eventInitialState = new Map({
   errors: new List(),
 })
 
+// TODO: Normalize in Reducer is **NOT** recommended. Need to be refactored.
 const setEvent = {
   next: (state, action) => {
     const normalizedPayload = normalize(action.payload, EventSchema)
