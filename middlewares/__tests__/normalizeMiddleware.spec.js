@@ -53,4 +53,18 @@ describe('normalizeMiddleware', () => {
 
     expect(next).toHaveBeenCalledWith(action)
   })
+
+  it('does not normalize when payload is a promise object', () => {
+    const { next, invoke } = create()
+    const action = {
+      type: 'FETCH',
+      payload: Promise.resolve(),
+      meta: {
+        normalizr: { schema: userSchema },
+      },
+    }
+    invoke(action)
+
+    expect(next).toHaveBeenCalledWith(action)
+  })
 })

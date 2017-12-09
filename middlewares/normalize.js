@@ -1,7 +1,9 @@
 import { normalize } from 'normalizr'
 
+const isPromise = payload => payload instanceof Promise
 const canNormalize = action =>
-  !action.error && action.meta && action.meta.normalizr
+  !action.error && action.meta && action.meta.normalizr &&
+  !isPromise(action.payload)
 
 const normalizeMiddleware = () => next => (action) => {
   if (canNormalize(action)) {
