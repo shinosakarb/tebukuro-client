@@ -19,6 +19,22 @@ exports[`ShowEvent renders the event page. 1`] = `
     eventId={1}
     onSubmit={[Function]}
   />
+  <ParticipantList
+    participants={
+      Array [
+        Object {
+          "eventId": 1,
+          "id": 1,
+          "name": "participant1",
+        },
+        Object {
+          "eventId": 1,
+          "id": 2,
+          "name": "participant2",
+        },
+      ]
+    }
+  />
 </div>
 `;
 
@@ -45,6 +61,22 @@ exports[`ShowEvent renders the page with error messages. 1`] = `
   />
   <ParticipantForm
     onSubmit={[Function]}
+  />
+  <ParticipantList
+    participants={
+      Array [
+        Object {
+          "eventId": 1,
+          "id": 1,
+          "name": "participant1",
+        },
+        Object {
+          "eventId": 1,
+          "id": 2,
+          "name": "participant2",
+        },
+      ]
+    }
   />
 </div>
 `;

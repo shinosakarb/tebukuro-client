@@ -5,14 +5,16 @@ import Error from 'next/error'
 import createStore from '../../store'
 import { fetchEvent, registerForEvent } from '../../actions/event'
 import { getCurrentEvent } from '../../selectors/event'
-import { getParticipantErrorsArray } from '../../selectors/participant'
+import { getParticipants, getParticipantErrorsArray } from '../../selectors/participant'
 import EventComponent from '../../components/Event'
 import ParticipantFormComponent from '../../components/ParticipantForm'
+import ParticipantsListComponent from '../../components/ParticipantsList'
 import type { EventId, EventProps } from '../../types/Event'
 
 type Props = {
   url: { query: EventId },
   event: EventProps,
+  participants: ?Object[],
   participantErrors: ?string[],
   fetchEvent: Function,
   registerForEvent: Function,
@@ -44,6 +46,7 @@ export class ShowEvent extends Component<Props> {
           eventId={event.id}
           errors={this.props.participantErrors}
         />
+        <ParticipantsListComponent participants={this.props.participants} />
       </div>
     )
   }
@@ -51,6 +54,7 @@ export class ShowEvent extends Component<Props> {
 
 const mapStateToProps = state => ({
   event: getCurrentEvent(state),
+  participants: getParticipants(state),
   participantErrors: getParticipantErrorsArray(state),
 })
 
