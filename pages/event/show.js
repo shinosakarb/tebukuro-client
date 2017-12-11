@@ -4,9 +4,11 @@ import withRedux from 'next-redux-wrapper'
 import Error from 'next/error'
 import createStore from '../../store'
 import { fetchEvent, registerForEvent } from '../../actions/event'
-import type { EventId, EventProps } from '../../types/Event'
+import { getCurrentEvent } from '../../selectors/event'
+import { getParticipantErrorsArray } from '../../selectors/participant'
 import EventComponent from '../../components/Event'
 import ParticipantFormComponent from '../../components/ParticipantForm'
+import type { EventId, EventProps } from '../../types/Event'
 
 type Props = {
   url: { query: EventId },
@@ -47,13 +49,10 @@ export class ShowEvent extends Component<Props> {
   }
 }
 
-const mapStateToProps = (state) => {
-  const id = state.event.get('entityId').toString()
-  return {
-    event: state.event.getIn(['entities', id]).toObject(),
-    participantErrors: state.participant.get('errors').toArray(),
-  }
-}
+const mapStateToProps = state => ({
+  event: getCurrentEvent(state),
+  participantErrors: getParticipantErrorsArray(state),
+})
 
 const mapDispatchToProps = { fetchEvent, registerForEvent }
 

@@ -3,6 +3,7 @@ import React from 'react'
 import withRedux from 'next-redux-wrapper'
 import createStore from '../../store'
 import { createEvent } from '../../actions/event'
+import { getEventErrorsArray } from '../../selectors/event'
 import EventFormComponent from '../../components/EventForm'
 
 type EventFormProps = {
@@ -25,7 +26,7 @@ export const NewEvent = (props: EventFormProps) => (
 
 const mapDispatchToProps = { createEvent }
 const mapStateToProps = state => (
-  { errors: state.event.get('errors').toArray() }
+  { errors: getEventErrorsArray(state) }
 )
 
 const connectProps = {
