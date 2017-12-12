@@ -1,7 +1,8 @@
 import { shallow, mount } from 'enzyme'
 import shallowToJson from 'enzyme-to-json'
 import { ShowEvent } from '../../pages/event/show'
-import Params from '../../factories/Event'
+import EventParams from '../../factories/Event'
+import ParticipantParams from '../../factories/Participant'
 
 jest.mock('../../components/Event', () => 'EventComponent')
 jest.mock('../../actions/event', () => ({
@@ -9,8 +10,9 @@ jest.mock('../../actions/event', () => ({
 }))
 
 const testProps = {
-  url: { query: { id: Params.event1.id } },
-  event: Params.event1,
+  url: { query: { id: EventParams.event1.id } },
+  event: EventParams.event1,
+  participants: Object.values(ParticipantParams),
   fetchEvent: jest.fn(),
   registerForEvent: jest.fn(),
 }
@@ -28,7 +30,7 @@ describe('ShowEvent', () => {
   })
 
   it('renders the page with error messages.', () => {
-    const errorTestProps = { ...testProps, event: Params.errorEvent }
+    const errorTestProps = { ...testProps, event: EventParams.errorEvent }
     const page = shallow(<ShowEvent {...errorTestProps} />)
     const tree = shallowToJson(page)
 
@@ -47,6 +49,6 @@ describe('ShowEvent', () => {
     mount(<ShowEvent {...testProps} />)
 
     expect(testProps.fetchEvent).toHaveBeenCalledTimes(1)
-    expect(testProps.fetchEvent).toBeCalledWith({ id: Params.event1.id })
+    expect(testProps.fetchEvent).toBeCalledWith({ id: EventParams.event1.id })
   })
 })

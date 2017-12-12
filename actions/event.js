@@ -4,6 +4,7 @@ import Router from 'next/router'
 import type { Dispatch } from 'redux'
 import ActionsType from '../constants/Actions'
 import { event, participant } from '../api'
+import { getEventId } from '../selectors/event'
 import type { EventProps } from '../types/Event'
 
 const create = createAction(ActionsType.Event.createEvent, event.create)
@@ -11,7 +12,7 @@ const create = createAction(ActionsType.Event.createEvent, event.create)
 // TODO: Return reject in thunk.
 export const createEvent = (params: EventProps) => (dispatch: Dispatch, getState: Function) => (
   dispatch(create(params)).then((res) => {
-    const { id } = getState().event
+    const id = getEventId(getState())
     !res.error && Router.replace(`/event/show?id=${id}`, `/event/${id}`)
   })
 )

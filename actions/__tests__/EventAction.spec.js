@@ -2,6 +2,7 @@ import configureStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 import promiseMiddleware from 'redux-promise'
 import Router from 'next/router'
+import { Map } from 'immutable'
 import * as Actions from '../event'
 import ActionsType from '../../constants/Actions'
 
@@ -10,7 +11,7 @@ jest.mock('../../api/index')
 import mockAPI from '../../api/index'
 /* eslint-enable */
 
-const testParam = { id: 1 }
+const testParam = new Map({ entityId: 1 })
 
 const middlewares = [promiseMiddleware, thunk]
 const mockStore = configureStore(middlewares)

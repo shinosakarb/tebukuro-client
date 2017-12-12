@@ -4,6 +4,7 @@ import React, { Component } from 'react'
 type Props = {
   onSubmit: Function,
   eventId: ?number,
+  errors: ?string[],
 }
 type State = {
   name: string,
@@ -36,6 +37,12 @@ export default class ParticipantForm extends Component<Props, State> {
     return (
       <div>
         <h3>Event participation form</h3>
+        { this.props.errors &&
+          <ul>
+            { this.props.errors.map(error =>
+              <li>{ error }</li>)}
+          </ul>
+        }
         <form onSubmit={this.onSubmitHandler}>
           <div>
             <label htmlFor="name">

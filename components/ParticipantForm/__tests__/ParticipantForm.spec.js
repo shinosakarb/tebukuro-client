@@ -11,10 +11,21 @@ const testProps = {
   eventId: 1,
 }
 
+const errorProps = {
+  ...testProps,
+  errors: ['名前を入力して下さい'],
+}
 
 describe('ParticipantForm', () => {
   it('renders participant form component', () => {
     const wrapper = shallow(<ParticipantForm {...testProps} onSubmit={jest.fn()} />)
+    const tree = shallowToJson(wrapper)
+
+    expect(tree).toMatchSnapshot()
+  })
+
+  it('renders participant form component with error message', () => {
+    const wrapper = shallow(<ParticipantForm {...errorProps} onSubmit={jest.fn()} />)
     const tree = shallowToJson(wrapper)
 
     expect(tree).toMatchSnapshot()
