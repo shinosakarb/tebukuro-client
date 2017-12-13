@@ -5,6 +5,8 @@ import Router from 'next/router'
 import { Map } from 'immutable'
 import * as Actions from '../event'
 import ActionsType from '../../constants/Actions'
+import EventSchema from '../../schemas/event'
+import ParticipantSchema from '../../schemas/participant'
 
 jest.mock('../../api/index')
 /* eslint-disable import/first */
@@ -51,12 +53,13 @@ describe('EventAction', () => {
         /* eslint-enable */
       })
       it('returns create action with event data.', () => {
-        expect.assertions(2)
+        expect.assertions(3)
         return store.dispatch(Actions.createEvent(testParam))
           .then(() => {
             const action = store.getActions()[0]
             expect(action.type).toBe(ActionsType.Event.createEvent)
             expect(action.payload).toEqual(testParam)
+            expect(action.meta.normalizr.schema).toEqual(EventSchema)
           })
       })
 
@@ -105,12 +108,13 @@ describe('EventAction', () => {
         /* eslint-enable */
       })
       it('returns fetch action with event data.', () => {
-        expect.assertions(2)
+        expect.assertions(3)
         return store.dispatch(Actions.fetchEvent(testParam))
           .then(() => {
             const action = store.getActions()[0]
             expect(action.type).toBe(ActionsType.Event.fetchEvent)
             expect(action.payload).toEqual(testParam)
+            expect(action.meta.normalizr.schema).toEqual(EventSchema)
           })
       })
     })
@@ -141,12 +145,13 @@ describe('EventAction', () => {
         /* eslint-enable */
       })
       it('returns join action with participant data.', () => {
-        expect.assertions(2)
+        expect.assertions(3)
         return store.dispatch(Actions.registerForEvent(testParam))
           .then(() => {
             const action = store.getActions()[0]
             expect(action.type).toBe(ActionsType.Event.registerForEvent)
             expect(action.payload).toEqual(testParam)
+            expect(action.meta.normalizr.schema).toEqual(ParticipantSchema)
           })
       })
     })

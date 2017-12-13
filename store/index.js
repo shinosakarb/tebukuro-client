@@ -2,9 +2,8 @@
 import { createStore, applyMiddleware, compose } from 'redux'
 import promiseMiddleware from 'redux-promise'
 import thunkMiddleware from 'redux-thunk'
-
 import Immutable from 'immutable'
-import Records from '../models'
+import normalizeMiddleware from '../middlewares/normalize'
 import Reducers from '../reducers'
 
 export default (initialState: Object = {}) => {
@@ -16,12 +15,11 @@ export default (initialState: Object = {}) => {
       window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
         serialize: {
           immutable: Immutable,
-          refs: Records,
         },
       }) : compose
   /* eslint-enable */
 
-  const middlewares = [promiseMiddleware, thunkMiddleware]
+  const middlewares = [promiseMiddleware, normalizeMiddleware, thunkMiddleware]
 
   const store = createStore(
     Reducers, initialState,

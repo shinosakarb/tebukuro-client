@@ -4,10 +4,17 @@ import Router from 'next/router'
 import type { Dispatch } from 'redux'
 import ActionsType from '../constants/Actions'
 import { event, participant } from '../api'
+import EventSchema from '../schemas/event'
+import ParticipantSchema from '../schemas/participant'
 import { getEventId } from '../selectors/event'
 import type { EventProps } from '../types/Event'
 
-const create = createAction(ActionsType.Event.createEvent, event.create)
+const metaCreator = schema => () => (
+  { normalizr: { schema } }
+)
+
+const create =
+  createAction(ActionsType.Event.createEvent, event.create, metaCreator(EventSchema))
 
 // TODO: Return reject in thunk.
 export const createEvent = (params: EventProps) => (dispatch: Dispatch, getState: Function) => (
@@ -17,5 +24,16 @@ export const createEvent = (params: EventProps) => (dispatch: Dispatch, getState
   })
 )
 
-export const fetchEvent = createAction(ActionsType.Event.fetchEvent, event.find)
-export const registerForEvent = createAction(ActionsType.Event.registerForEvent, participant.create)
+export const fetchEvent =
+  createAction(
+    ActionsType.Event.fetchEvent,
+    event.find,
+    metaCreator(EventSchema),
+  )
+
+export const registerForEvent =
+  createAction(
+    ActionsType.Event.registerForEvent,
+    participant.create,
+    metaCreator(ParticipantSchema),
+  )

@@ -1,4 +1,5 @@
 import { createAction } from 'redux-actions'
+import { normalize } from 'normalizr'
 import { List } from 'immutable'
 
 import EventReducer, { eventInitialState } from '../event'
@@ -6,21 +7,25 @@ import Actions from '../../constants/Actions'
 import ApiResponseError from '../../api/ApiResponseError'
 import EventParams from '../../factories/Event'
 import ParticipantParams from '../../factories/Participant'
+import EventSchema from '../../schemas/event'
+import ParticipantSchema from '../../schemas/participant'
+
+const { participant1 } = ParticipantParams
+const { event1 } = EventParams
+
+const normalizedEvent = normalize(event1, EventSchema)
+const normalizedParticipant = normalize(participant1, ParticipantSchema)
 
 const initialState = eventInitialState
-const testEventParams = EventParams.event1
-const testParticipantParams = ParticipantParams.participant1
-
-const testEventResult = initialState.merge({
-  entityId: testEventParams.id,
-  entities: { [testEventParams.id]: testEventParams },
+const eventMergedState = initialState.merge({
+  entityId: event1.id,
+  entities: { [event1.id]: event1 },
   errors: [],
 })
 
 const error = {
   response: { data: { name: ['を入力して下さい', 'は１０文字以下です'] } },
 }
-
 const errorMessages = new List(['nameを入力して下さい', 'nameは１０文字以下です'])
 
 describe('Event Reducer', () => {
@@ -35,8 +40,8 @@ describe('Event Reducer', () => {
 
     describe('with success event create', () => {
       it('should return created event', () => {
-        const subject = EventReducer(initialState, createEvent(testEventParams))
-        expect(subject).toEqual(testEventResult)
+        const subject = EventReducer(initialState, createEvent(normalizedEvent))
+        expect(subject).toEqual(eventMergedState)
       })
     })
 
@@ -53,8 +58,8 @@ describe('Event Reducer', () => {
 
     describe('with success event fetch', () => {
       it('should return fetched event', () => {
-        const subject = EventReducer(initialState, fetchEvent(testEventParams))
-        expect(subject).toEqual(testEventResult)
+        const subject = EventReducer(initialState, fetchEvent(normalizedEvent))
+        expect(subject).toEqual(eventMergedState)
       })
     })
 
@@ -69,16 +74,16 @@ describe('Event Reducer', () => {
   describe('when REGISTER_FOR_EVENT action', () => {
     const registerForEvent = createAction(Actions.Event.registerForEvent)
 
-    const prevState = testEventResult
+    const prevState = eventMergedState
     const eventId = prevState.get('entityId').toString()
     const nextState = prevState.updateIn(
       ['entities', eventId, 'participants'],
-      participants => participants.push(testParticipantParams.id),
+      participants => participants.push(participant1.id),
     )
 
     describe('with success event register', () => {
       it('should add registered participant', () => {
-        const subject = EventReducer(prevState, registerForEvent(testParticipantParams))
+        const subject = EventReducer(prevState, registerForEvent(normalizedParticipant))
         expect(subject).toEqual(nextState)
       })
     })

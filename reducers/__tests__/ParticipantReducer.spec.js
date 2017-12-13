@@ -1,18 +1,24 @@
 import { createAction } from 'redux-actions'
-import { List } from 'immutable'
+import { Map, List } from 'immutable'
+import { normalize } from 'normalizr'
 
 import ParticipantReducer, { participantInitialState } from '../participant'
 import Actions from '../../constants/Actions'
 import ApiResponseError from '../../api/ApiResponseError'
-import EventParams from '../../factories/Event'
-import ParticipantParams from '../../factories/Participant'
 import ConvertCase from '../../utils/ConvertCase'
 
+import EventParams from '../../factories/Event'
+import ParticipantParams from '../../factories/Participant'
+
+import EventSchema from '../../schemas/event'
+import ParticipantSchema from '../../schemas/participant'
+
+const { participant1, participant2 } = ParticipantParams
+const participantEntity1 = { [participant1.id]: new Map(participant1) }
+const participantEntity2 = { [participant2.id]: new Map(participant2) }
+
 const initialState = participantInitialState
-const participantParams1 = ParticipantParams.participant1
-const participantParams2 = ParticipantParams.participant2
-const participantEntity1 = { [participantParams1.id]: participantParams1 }
-const participantEntity2 = { [participantParams2.id]: participantParams2 }
+const participantMergedState = initialState.merge({ entities: participantEntity1 })
 
 const error = {
   response: { data: { name: ['を入力して下さい', 'は１０文字以下です'] } },
@@ -28,15 +34,17 @@ describe('Participant Reducer', () => {
 
   describe('when FETCH_EVENT action', () => {
     const fetchEvent = createAction(Actions.Event.fetchEvent)
-    const eventParams = {
-      ...EventParams.event1,
-      participants: [ConvertCase.snakeKeysOf(participantParams1)],
-    }
 
     describe('with success event fetch', () => {
       it('should return participants in fetched event', () => {
-        const subject = ParticipantReducer(initialState, fetchEvent(eventParams))
-        expect(subject).toEqual(initialState.merge({ entities: participantEntity1 }))
+        const eventParams = {
+          ...EventParams.event1,
+          participants: [ConvertCase.snakeKeysOf(participant1)],
+        }
+        const normalizedEvent = normalize(eventParams, EventSchema)
+        const subject = ParticipantReducer(initialState, fetchEvent(normalizedEvent))
+
+        expect(subject).toEqual(participantMergedState)
       })
     })
 
@@ -54,12 +62,15 @@ describe('Participant Reducer', () => {
 
     describe('with success event registerFor', () => {
       it('should add regitered participant', () => {
-        const prevState = initialState.merge({ entities: participantEntity1 })
+        const participantParams = ConvertCase.snakeKeysOf(participant2)
+        const normalizedParticipant = normalize(participantParams, ParticipantSchema)
         const subject = ParticipantReducer(
-          prevState,
-          registerForEvent(ConvertCase.snakeKeysOf(participantParams2)),
+          participantMergedState,
+          registerForEvent(normalizedParticipant),
         )
-        expect(subject).toEqual(prevState.mergeDeep({ entities: participantEntity2 }))
+        const nextState = participantMergedState.mergeDeep({ entities: participantEntity2 })
+
+        expect(subject).toEqual(nextState)
       })
     })
 
