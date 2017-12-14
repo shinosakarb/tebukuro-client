@@ -1,10 +1,8 @@
 // @flow
 import { handleActions } from 'redux-actions'
-import { normalize } from 'normalizr'
 import { Map, List } from 'immutable'
 
 import Actions from '../constants/Actions'
-import EventSchema from '../schemas/event'
 
 export const eventInitialState = new Map({
   entityId: 0,
@@ -12,24 +10,21 @@ export const eventInitialState = new Map({
   errors: new List(),
 })
 
-// TODO: Normalize in Reducer is **NOT** recommended. Need to be refactored.
 const setEvent = {
-  next: (state, action) => {
-    const normalizedPayload = normalize(action.payload, EventSchema)
-
-    return state.merge({
-      entityId: normalizedPayload.result,
-      entities: normalizedPayload.entities.event,
+  next: (state, action) => (
+    state.merge({
+      entityId: action.payload.result,
+      entities: action.payload.entities.event,
       errors: [],
     })
-  },
+  ),
   throw: (state, action) => state.merge({ errors: action.payload.errors }),
 }
 
 const mergeParticipant = {
   next: (state, action) => {
     const eventId = state.get('entityId').toString()
-    const participantId = action.payload.id
+    const participantId = action.payload.result
 
     return state.updateIn(
       ['entities', eventId, 'participants'],
