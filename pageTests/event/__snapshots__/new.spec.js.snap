@@ -1,18 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`NewEvent on first page load renders the new event page without error messages. 1`] = `
-<div>
+<Main>
   <h3>
     This is the event form page!
   </h3>
   <EventFormComponent
     onSubmit={[Function]}
   />
-</div>
+</Main>
 `;
 
 exports[`NewEvent on submit invalid inputs renders the new event page without error messages. 1`] = `
-<div>
+<Main>
   <h3>
     This is the event form page!
   </h3>
@@ -27,5 +27,5 @@ exports[`NewEvent on submit invalid inputs renders the new event page without er
   <EventFormComponent
     onSubmit={[Function]}
   />
-</div>
+</Main>
 `;

@@ -5,6 +5,7 @@ import createStore from '../../store'
 import { createEvent } from '../../actions/event'
 import { getEventErrorsArray } from '../../selectors/event'
 import EventFormComponent from '../../components/EventForm'
+import Page from '../../layouts/Main'
 
 type EventFormProps = {
   createEvent: Function,
@@ -12,7 +13,7 @@ type EventFormProps = {
 }
 
 export const NewEvent = (props: EventFormProps) => (
-  <div>
+  <Page>
     <h3>This is the event form page!</h3>
     { props.errors &&
       <ul>
@@ -21,7 +22,7 @@ export const NewEvent = (props: EventFormProps) => (
       </ul>
     }
     <EventFormComponent onSubmit={props.createEvent} />
-  </div>
+  </Page>
 )
 
 const mapDispatchToProps = { createEvent }
