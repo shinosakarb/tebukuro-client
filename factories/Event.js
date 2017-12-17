@@ -3,6 +3,7 @@ export default {
     id: 1,
     name: 'event1',
     description: 'This is the first event.',
+    quota: 10,
     participants: [],
   },
   errorEvent: {

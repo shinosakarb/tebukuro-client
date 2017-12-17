@@ -2,11 +2,12 @@ import React from 'react'
 import { mount, shallow } from 'enzyme'
 import shallowToJson from 'enzyme-to-json'
 import EventForm from '../index'
-import Params from '../../../factories/Event'
+import EventParams from '../../../factories/Event'
 
 const inputValues = {
-  name: Params.event1.name,
-  description: Params.event1.description,
+  name: EventParams.event1.name,
+  description: EventParams.event1.description,
+  quota: EventParams.event1.quota,
 }
 
 describe('EventForm', () => {
@@ -22,8 +23,9 @@ describe('EventForm', () => {
       const onSubmit = jest.fn()
       const wrapper = mount(<EventForm onSubmit={onSubmit} />)
 
-      const nameElement = wrapper.find('[type="text"]')
-      const descriptionElement = wrapper.find('textarea')
+      const nameElement = wrapper.find('#name')
+      const descriptionElement = wrapper.find('#description')
+      const quotaElement = wrapper.find('#quota')
 
       nameElement.simulate(
         'change',
@@ -32,6 +34,10 @@ describe('EventForm', () => {
       descriptionElement.simulate(
         'change',
         { target: { id: 'description', value: inputValues.description } },
+      )
+      quotaElement.simulate(
+        'change',
+        { target: { id: 'quota', value: inputValues.quota } },
       )
       wrapper.find('[type="submit"]').simulate('submit')
 

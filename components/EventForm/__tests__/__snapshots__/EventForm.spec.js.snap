@@ -34,6 +34,19 @@ exports[`EventForm render event form component 1`] = `
       </label>
     </div>
     <div>
+      <label
+        htmlFor="quota"
+      >
+        quota
+        <input
+          id="quota"
+          onChange={[Function]}
+          type="number"
+          value={0}
+        />
+      </label>
+    </div>
+    <div>
       <input
         type="submit"
       />
