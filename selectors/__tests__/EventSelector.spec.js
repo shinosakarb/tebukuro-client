@@ -7,7 +7,7 @@ const errorMessages = ['nameを入力して下さい', 'nameは１０文字以�
 
 const testEventState = new Map({
   entityId: eventId,
-  entities: new Map({ [eventId]: new Map(EventParams.event1) }),
+  entities: new Map({ [eventId]: new Map().merge(EventParams.event1) }),
   errors: new List(errorMessages),
 })
 const mockState = { event: testEventState }

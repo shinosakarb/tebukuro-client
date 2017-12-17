@@ -8,5 +8,11 @@ export const getEventId = (state: Object) => state.event.get('entityId')
 export const getEventErrorsArray = createSelector(getEventErrors, errors => errors.toArray())
 export const getCurrentEvent = createSelector(
   [getEventId, getEventEntities],
-  (id, entities) => entities.get(id.toString()).toObject(),
+  (id, entities) => {
+    const entitiesObject = entities.get(id.toString()).toObject()
+    return {
+      ...entitiesObject,
+      participants: entitiesObject.participants.toArray(),
+    }
+  },
 )
