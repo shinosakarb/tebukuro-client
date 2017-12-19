@@ -82,4 +82,30 @@ describe('Participant Reducer', () => {
       })
     })
   })
+
+  describe('when CANCEL_REGISTRATION action', () => {
+    const cancelRegistration = createAction(Actions.Event.cancelRegistration)
+
+    describe('with success cancel registration', () => {
+      it('should delete registered participant', () => {
+        const participantParams = ConvertCase.snakeKeysOf(participant2)
+        const prevState = participantMergedState.mergeDeep({ entities: participantEntity2 })
+        const subject = ParticipantReducer(
+          prevState,
+          cancelRegistration(participantParams),
+        )
+        const nextState = participantMergedState
+
+        expect(subject).toEqual(nextState)
+      })
+    })
+
+    describe('with failure cancel registration', () => {
+      it('should return error message', () => {
+        const subject =
+          ParticipantReducer(initialState, cancelRegistration(new ApiResponseError(error)))
+        expect(subject.get('errors')).toEqual(errorMessages)
+      })
+    })
+  })
 })

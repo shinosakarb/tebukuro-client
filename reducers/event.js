@@ -33,10 +33,23 @@ const mergeParticipant = {
   },
 }
 
+const deleteParticipant = {
+  next: (state, action) => {
+    const eventId = state.get('entityId').toString()
+    const participantId = action.payload.id
+
+    return state.updateIn(
+      ['entities', eventId, 'participants'],
+      participants => participants.filter(id => id !== participantId),
+    )
+  },
+}
+
 const eventReducerMap = {
   [Actions.Event.createEvent]: setEvent,
   [Actions.Event.fetchEvent]: setEvent,
   [Actions.Event.registerForEvent]: mergeParticipant,
+  [Actions.Event.cancelRegistration]: deleteParticipant,
 }
 
 export default handleActions(eventReducerMap, eventInitialState)

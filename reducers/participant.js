@@ -34,6 +34,16 @@ const participantReducerMap = {
     ),
     throw: (state, action) => state.merge({ errors: action.payload.errors }),
   },
+
+  [Actions.Event.cancelRegistration]: {
+    next: (state, action) => (
+      state.merge({
+        entities: state.get('entities').delete(action.payload.id.toString()),
+        errors: [],
+      })
+    ),
+    throw: (state, action) => state.merge({ errors: action.payload.errors }),
+  },
 }
 
 export default handleActions(participantReducerMap, participantInitialState)

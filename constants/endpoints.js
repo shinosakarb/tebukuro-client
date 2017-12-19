@@ -8,4 +8,5 @@ export const event = {
 
 export const participant = {
   create: '/events/:eventId/participants',
+  delete: '/events/:eventId/participants/:id',
 }
