@@ -6,12 +6,20 @@ exports[`ParticipantList Component renders self. 1`] = `
     <li
       key="1"
     >
-      participant1
+      <Participant
+        eventId={1}
+        id={1}
+        name="participant1"
+      />
     </li>
     <li
       key="2"
     >
-      participant2
+      <Participant
+        eventId={1}
+        id={2}
+        name="participant2"
+      />
     </li>
   </ul>
 </div>

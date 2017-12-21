@@ -1,15 +1,24 @@
 // @flow
 import React from 'react'
+import ParticipantComponent from '../Participant'
 
-const ParticipantList = (props: {participants: ?Object[]}) => (
+type Props = {
+  participants: ?Object[],
+  onCancel: Function,
+}
+
+const ParticipantsList = (props: Props) => (
   <div>
     { props.participants &&
       <ul>
-        { props.participants.map(participant =>
-          <li key={participant.id}>{ participant.name }</li>)}
+        { props.participants.map(participant => (
+          <li key={participant.id}>
+            <ParticipantComponent {...participant} onCancel={props.onCancel} />
+          </li>
+        ))}
       </ul>
     }
   </div>
 )
 
-export default ParticipantList
+export default ParticipantsList
