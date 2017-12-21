@@ -9,6 +9,7 @@ import { getParticipants, getParticipantErrorsArray } from '../../selectors/part
 import EventComponent from '../../components/Event'
 import ParticipantFormComponent from '../../components/ParticipantForm'
 import ParticipantsListComponent from '../../components/ParticipantsList'
+import Page from '../../layouts/Main'
 import type { EventId, EventProps } from '../../types/Event'
 
 type Props = {
@@ -38,7 +39,7 @@ export class ShowEvent extends Component<Props> {
     }
 
     return (
-      <div>
+      <Page>
         <h3>This is the event page!</h3>
         <EventComponent event={event} />
         <ParticipantFormComponent
@@ -47,7 +48,7 @@ export class ShowEvent extends Component<Props> {
           errors={this.props.participantErrors}
         />
         <ParticipantsListComponent participants={this.props.participants} />
-      </div>
+      </Page>
     )
   }
 }
