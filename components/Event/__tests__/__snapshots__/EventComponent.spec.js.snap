@@ -10,5 +10,13 @@ exports[`Event Component renders self. 1`] = `
     description: 
     This is the first event.
   </p>
+  <p>
+    quota: 
+    10
+  </p>
+  <p>
+    number of participants: 
+    3
+  </p>
 </div>
 `;

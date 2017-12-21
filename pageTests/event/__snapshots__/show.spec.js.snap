@@ -12,6 +12,7 @@ exports[`ShowEvent renders the event page. 1`] = `
         "id": 1,
         "name": "event1",
         "participants": Array [],
+        "quota": 10,
       }
     }
   />

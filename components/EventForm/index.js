@@ -4,13 +4,14 @@ import React, { Component } from 'react'
 type Props = { onSubmit: Function }
 type State = {
   name: string,
-  description: string
+  description: string,
+  quota: number
 }
 
 export default class EventForm extends Component<Props, State> {
   constructor(props: Props) {
     super(props)
-    this.state = { name: '', description: '' }
+    this.state = { name: '', description: '', quota: 0 }
   }
 
   onChangeHandler = (e: SyntheticInputEvent<>) => {
@@ -41,6 +42,12 @@ export default class EventForm extends Component<Props, State> {
             <label htmlFor="description">
               description
               <textarea id="description" value={this.state.description} onChange={this.onChangeHandler} />
+            </label>
+          </div>
+          <div>
+            <label htmlFor="quota">
+              quota
+              <input type="number" id="quota" value={this.state.quota} onChange={this.onChangeHandler} />
             </label>
           </div>
           <div>
