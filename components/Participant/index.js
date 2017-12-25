@@ -9,8 +9,7 @@ type Props = {
 }
 
 export default class Participant extends Component<Props> {
-  onCancelHandler = (e: SyntheticEvent<>) => {
-    e.preventDefault()
+  onCancelHandler = () => {
     this.props.onCancel({
       id: this.props.id,
       eventId: this.props.eventId,
