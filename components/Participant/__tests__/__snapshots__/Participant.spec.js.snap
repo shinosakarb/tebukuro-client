@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Participant renders participant component 1`] = `
+<div>
+  Participant 1
+  <button
+    onClick={[Function]}
+  >
+    cancel
+  </button>
+</div>
+`;

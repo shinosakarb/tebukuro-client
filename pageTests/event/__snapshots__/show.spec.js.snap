@@ -20,7 +20,7 @@ exports[`ShowEvent renders the event page. 1`] = `
     eventId={1}
     onSubmit={[Function]}
   />
-  <ParticipantList
+  <ParticipantsList
     participants={
       Array [
         Object {
@@ -63,7 +63,7 @@ exports[`ShowEvent renders the page with error messages. 1`] = `
   <ParticipantForm
     onSubmit={[Function]}
   />
-  <ParticipantList
+  <ParticipantsList
     participants={
       Array [
         Object {

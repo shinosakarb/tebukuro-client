@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import withRedux from 'next-redux-wrapper'
 import Error from 'next/error'
 import createStore from '../../store'
-import { fetchEvent, registerForEvent } from '../../actions/event'
+import { fetchEvent, registerForEvent, cancelRegistration } from '../../actions/event'
 import { getCurrentEvent } from '../../selectors/event'
 import { getParticipants, getParticipantErrorsArray } from '../../selectors/participant'
 import EventComponent from '../../components/Event'
@@ -18,6 +18,7 @@ type Props = {
   participantErrors: ?string[],
   fetchEvent: Function,
   registerForEvent: Function,
+  cancelRegistration: Function,
 }
 
 export class ShowEvent extends Component<Props> {
@@ -46,7 +47,10 @@ export class ShowEvent extends Component<Props> {
           eventId={event.id}
           errors={this.props.participantErrors}
         />
-        <ParticipantsListComponent participants={this.props.participants} />
+        <ParticipantsListComponent
+          participants={this.props.participants}
+          onCancel={this.props.cancelRegistration}
+        />
       </div>
     )
   }
@@ -58,7 +62,7 @@ const mapStateToProps = state => ({
   participantErrors: getParticipantErrorsArray(state),
 })
 
-const mapDispatchToProps = { fetchEvent, registerForEvent }
+const mapDispatchToProps = { fetchEvent, registerForEvent, cancelRegistration }
 
 const connectProps = {
   createStore,

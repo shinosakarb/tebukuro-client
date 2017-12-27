@@ -9,9 +9,8 @@ import EventSchema from '../../schemas/event'
 import ParticipantSchema from '../../schemas/participant'
 
 jest.mock('../../api/index')
-/* eslint-disable import/first */
+// eslint-disable-next-line import/first
 import mockAPI from '../../api/index'
-/* eslint-enable */
 
 const testParam = new Map({ entityId: 1 })
 
@@ -48,9 +47,8 @@ describe('EventAction', () => {
 
     describe('when successes to create the Event', () => {
       beforeEach(() => {
-        /* eslint-disable no-underscore-dangle */
+        // eslint-disable-next-line no-underscore-dangle
         mockAPI.__setMockResult(true)
-        /* eslint-enable */
       })
       it('returns create action with event data.', () => {
         expect.assertions(3)
@@ -75,9 +73,8 @@ describe('EventAction', () => {
 
     describe('when fails to create the Event', () => {
       beforeEach(() => {
-        /* eslint-disable no-underscore-dangle */
+        // eslint-disable-next-line no-underscore-dangle
         mockAPI.__setMockResult(false)
-        /* eslint-enable */
       })
       it('returns create action with instance of Error.', () => {
         expect.assertions(2)
@@ -103,9 +100,8 @@ describe('EventAction', () => {
   describe('fetchEvent', () => {
     describe('when successes to fetch the Event', () => {
       beforeEach(() => {
-        /* eslint-disable no-underscore-dangle */
+        // eslint-disable-next-line no-underscore-dangle
         mockAPI.__setMockResult(true)
-        /* eslint-enable */
       })
       it('returns fetch action with event data.', () => {
         expect.assertions(3)
@@ -121,9 +117,8 @@ describe('EventAction', () => {
 
     describe('when fails to fetch the Event', () => {
       beforeEach(() => {
-        /* eslint-disable no-underscore-dangle */
+        // eslint-disable-next-line no-underscore-dangle
         mockAPI.__setMockResult(false)
-        /* eslint-enable */
       })
       it('returns fetch action with instance of Error.', () => {
         expect.assertions(2)
@@ -140,9 +135,8 @@ describe('EventAction', () => {
   describe('registerForEvent', () => {
     describe('when successes to join the Event', () => {
       beforeEach(() => {
-        /* eslint-disable no-underscore-dangle */
+        // eslint-disable-next-line no-underscore-dangle
         mockAPI.__setMockResult(true)
-        /* eslint-enable */
       })
       it('returns join action with participant data.', () => {
         expect.assertions(3)
@@ -158,13 +152,47 @@ describe('EventAction', () => {
 
     describe('when fails to join the Event', () => {
       beforeEach(() => {
-        /* eslint-disable no-underscore-dangle */
+        // eslint-disable-next-line no-underscore-dangle
         mockAPI.__setMockResult(false)
-        /* eslint-enable */
       })
       it('returns join action with instance of Error.', () => {
         expect.assertions(2)
         return store.dispatch(Actions.registerForEvent(testParam))
+          .then(() => {
+            const action = store.getActions()[0]
+            expect(action.type).toBe(ActionsType.Event.registerForEvent)
+            expect(action.payload).toBeInstanceOf(Error)
+          })
+      })
+    })
+  })
+
+  describe('cancelRegistration', () => {
+    const cancelTestParams = { id: 1, eventId: 1 }
+    describe('when successes to cancel Registraion', () => {
+      beforeEach(() => {
+        // eslint-disable-next-line no-underscore-dangle
+        mockAPI.__setMockResult(true)
+      })
+      it('returns cancel regstration action with participant data.', () => {
+        expect.assertions(2)
+        return store.dispatch(Actions.registerForEvent(cancelTestParams))
+          .then(() => {
+            const action = store.getActions()[0]
+            expect(action.type).toBe(ActionsType.Event.registerForEvent)
+            expect(action.payload).toEqual(cancelTestParams)
+          })
+      })
+    })
+
+    describe('when fails to cancel Registration', () => {
+      beforeEach(() => {
+        // eslint-disable-next-line no-underscore-dangle
+        mockAPI.__setMockResult(false)
+      })
+      it('returns join action with instance of Error.', () => {
+        expect.assertions(2)
+        return store.dispatch(Actions.registerForEvent(cancelTestParams))
           .then(() => {
             const action = store.getActions()[0]
             expect(action.type).toBe(ActionsType.Event.registerForEvent)
