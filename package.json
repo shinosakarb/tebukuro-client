@@ -9,7 +9,9 @@
   "scripts": {
     "start:prod": "next start",
     "start": "next -p 4000",
-    "test": "jest",
+    "test": "npm run jest && npm run lint && npm run flow",
+    "jest": "jest",
+    "jest:watch": "npm run jest -- --watch",
     "lint": "eslint . --cache",
     "flow": "flow",
     "build": "next build && next export",
