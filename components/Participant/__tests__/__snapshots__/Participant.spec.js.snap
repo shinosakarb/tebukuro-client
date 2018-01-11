@@ -1,12 +1,57 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Participant renders participant component 1`] = `
+exports[`Participant with admitted participant renders participant component with admitted message. 1`] = `
 <div>
-  Participant 1
+  <span
+    style={
+      Object {
+        "marginRight": 10,
+      }
+    }
+  >
+    Participant 1
+  </span>
+  <span
+    style={
+      Object {
+        "marginRight": 10,
+      }
+    }
+  >
+    参加可能
+  </span>
   <button
     onClick={[Function]}
   >
-    cancel
+    キャンセル
+  </button>
+</div>
+`;
+
+exports[`Participant with waitlisted participant renders participant component with waitlisted message. 1`] = `
+<div>
+  <span
+    style={
+      Object {
+        "marginRight": 10,
+      }
+    }
+  >
+    Participant 1
+  </span>
+  <span
+    style={
+      Object {
+        "marginRight": 10,
+      }
+    }
+  >
+    キャンセル待ち
+  </span>
+  <button
+    onClick={[Function]}
+  >
+    キャンセル
   </button>
 </div>
 `;

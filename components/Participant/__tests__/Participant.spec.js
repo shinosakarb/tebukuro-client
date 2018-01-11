@@ -7,14 +7,26 @@ const testProps = {
   id: 1,
   eventId: 2,
   name: 'Participant 1',
+  onWaitingList: false,
 }
 
 describe('Participant', () => {
-  it('renders participant component', () => {
-    const wrapper = shallow(<Participant {...testProps} onCancel={jest.fn()} />)
-    const tree = shallowToJson(wrapper)
+  describe('with admitted participant', () => {
+    it('renders participant component with admitted message.', () => {
+      const wrapper = shallow(<Participant {...testProps} onCancel={jest.fn()} />)
+      const tree = shallowToJson(wrapper)
 
-    expect(tree).toMatchSnapshot()
+      expect(tree).toMatchSnapshot()
+    })
+  })
+
+  describe('with waitlisted participant', () => {
+    it('renders participant component with waitlisted message.', () => {
+      const wrapper = shallow(<Participant {...testProps} onWaitingList onCancel={jest.fn()} />)
+      const tree = shallowToJson(wrapper)
+
+      expect(tree).toMatchSnapshot()
+    })
   })
 
   describe('when clicked', () => {

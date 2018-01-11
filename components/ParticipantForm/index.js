@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 
 type Props = {
   onSubmit: Function,
+  participateButtonText: string,
   eventId: ?number,
   errors: ?string[],
 }
@@ -51,7 +52,7 @@ export default class ParticipantForm extends Component<Props, State> {
             </label>
           </div>
           <div>
-            <input type="submit" />
+            <input type="submit" value={this.props.participateButtonText} />
           </div>
         </form>
       </div>

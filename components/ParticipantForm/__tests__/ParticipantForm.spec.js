@@ -9,6 +9,7 @@ const inputValues = {
 
 const testProps = {
   eventId: 1,
+  participateButtonText: '参加登録',
 }
 
 const errorProps = {
@@ -49,7 +50,7 @@ describe('ParticipantForm', () => {
       })
 
       it('should call onSubmit with correct argument.', () => {
-        expect(onSubmit).toBeCalledWith({ ...inputValues, ...testProps })
+        expect(onSubmit).toBeCalledWith({ ...inputValues, eventId: testProps.eventId })
       })
     })
   })

@@ -31,6 +31,11 @@ export class ShowEvent extends Component<Props> {
     return errors && errors[0] === 'Not Found'
   }
 
+  participateButtonText(event: Object) {
+    return event.quota > event.participants.length ?
+      '参加登録' : 'キャンセル待ちに登録'
+  }
+
   render() {
     const { event } = this.props
 
@@ -46,6 +51,7 @@ export class ShowEvent extends Component<Props> {
           onSubmit={this.props.registerForEvent}
           eventId={event.id}
           errors={this.props.participantErrors}
+          participateButtonText={this.participateButtonText(event)}
         />
         <ParticipantsListComponent
           participants={this.props.participants}

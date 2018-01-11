@@ -22,11 +22,28 @@ describe('ShowEvent', () => {
     testProps.fetchEvent.mockReset()
   })
 
-  it('renders the event page.', () => {
-    const page = shallow(<ShowEvent {...testProps} />)
-    const tree = shallowToJson(page)
+  describe('when available to participate', () => {
+    it('renders the event page with participate text.', () => {
+      const page = shallow(<ShowEvent {...testProps} />)
+      const tree = shallowToJson(page)
 
-    expect(tree).toMatchSnapshot()
+      expect(tree).toMatchSnapshot()
+    })
+  })
+
+  describe('when having a waiting list', () => {
+    it('renders the event page wtih waitlisted text.', () => {
+      const waitlistedEvent = {
+        ...EventParams.event1,
+        quota: 1,
+        participants: [1, 2],
+      }
+
+      const page = shallow(<ShowEvent {...testProps} event={waitlistedEvent} />)
+      const tree = shallowToJson(page)
+
+      expect(tree).toMatchSnapshot()
+    })
   })
 
   it('renders the page with error messages.', () => {
