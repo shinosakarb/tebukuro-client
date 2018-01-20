@@ -4,6 +4,8 @@ import { createSelector } from 'reselect'
 const participantEntities = state => state.participant.get('entities')
 const participantErrors = state => state.participant.get('errors')
 
+export const getParticipantMessage = (state: Object) => state.participant.get('message')
+
 export const getParticipants = createSelector(
   participantEntities,
   (participants) => {

@@ -9,10 +9,15 @@ import ConvertCase from '../utils/ConvertCase'
 export const participantInitialState = new Map({
   entities: new Map(),
   errors: new List(),
+  message: null,
 })
 
 const toCamelCase = payload => (
   _.mapValues(payload, val => ConvertCase.camelKeysOf(val))
+)
+
+const participationCompleteMessage = onWaitingList => (
+  onWaitingList ? 'キャンセル待ちに登録しました。' : '参加登録が完了しました。'
 )
 
 const participantReducerMap = {
@@ -26,12 +31,15 @@ const participantReducerMap = {
   },
 
   [Actions.Event.registerForEvent]: {
-    next: (state, action) => (
-      state.mergeDeep({
-        entities: toCamelCase(action.payload.entities.participant),
+    next: (state, action) => {
+      const participant = toCamelCase(action.payload.entities.participant)
+      const { onWaitingList } = participant[action.payload.result]
+      return state.mergeDeep({
+        entities: participant,
+        message: participationCompleteMessage(onWaitingList),
         errors: [],
       })
-    ),
+    },
     throw: (state, action) => state.merge({ errors: action.payload.errors }),
   },
 
