@@ -12,6 +12,8 @@ jest.mock('../../actions/event', () => ({
 const testProps = {
   url: { query: { id: EventParams.event1.id } },
   event: EventParams.event1,
+  hasNotFoundError: false,
+  hasWaitlist: false,
   participants: Object.values(ParticipantParams),
   fetchEvent: jest.fn(),
   registerForEvent: jest.fn(),
@@ -33,13 +35,9 @@ describe('ShowEvent', () => {
 
   describe('when having a waiting list', () => {
     it('renders the event page wtih waitlisted text.', () => {
-      const waitlistedEvent = {
-        ...EventParams.event1,
-        quota: 1,
-        participants: [1, 2],
-      }
+      const waitlistProps = { ...testProps, hasWaitlist: true }
 
-      const page = shallow(<ShowEvent {...testProps} event={waitlistedEvent} />)
+      const page = shallow(<ShowEvent {...waitlistProps} />)
       const tree = shallowToJson(page)
 
       expect(tree).toMatchSnapshot()
@@ -55,8 +53,8 @@ describe('ShowEvent', () => {
   })
 
   it('renders the page not found error page.', () => {
-    const errorTestProps = { ...testProps, event: { errors: ['Not Found'] } }
-    const page = shallow(<ShowEvent {...errorTestProps} />)
+    const notFoundErrorProps = { ...testProps, hasNotFoundError: true }
+    const page = shallow(<ShowEvent {...notFoundErrorProps} />)
     const tree = shallowToJson(page)
 
     expect(tree).toMatchSnapshot()

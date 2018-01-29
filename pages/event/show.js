@@ -4,7 +4,7 @@ import withRedux from 'next-redux-wrapper'
 import Error from 'next/error'
 import createStore from '../../store'
 import { fetchEvent, registerForEvent, cancelRegistration } from '../../actions/event'
-import { getCurrentEvent } from '../../selectors/event'
+import { getCurrentEvent, getHasWaitlist, getHasNotFoundError } from '../../selectors/event'
 import { getParticipants, getParticipantErrorsArray } from '../../selectors/participant'
 import EventComponent from '../../components/Event'
 import ParticipantFormComponent from '../../components/ParticipantForm'
@@ -14,6 +14,8 @@ import type { EventId, EventProps } from '../../types/Event'
 type Props = {
   url: { query: EventId },
   event: EventProps,
+  hasNotFoundError: boolean,
+  hasWaitlist: boolean,
   participants: ?Object[],
   participantErrors: ?string[],
   fetchEvent: Function,
@@ -27,19 +29,10 @@ export class ShowEvent extends Component<Props> {
     this.props.fetchEvent(params)
   }
 
-  isNotFoundError(errors: ?string[]) {
-    return errors && errors[0] === 'Not Found'
-  }
-
-  participateButtonText(event: Object) {
-    return event.quota > event.participants.length ?
-      '参加登録' : 'キャンセル待ちに登録'
-  }
-
   render() {
     const { event } = this.props
 
-    if (this.isNotFoundError(event.errors)) {
+    if (this.props.hasNotFoundError) {
       return <Error statusCode="404" />
     }
 
@@ -51,7 +44,7 @@ export class ShowEvent extends Component<Props> {
           onSubmit={this.props.registerForEvent}
           eventId={event.id}
           errors={this.props.participantErrors}
-          participateButtonText={this.participateButtonText(event)}
+          hasEventWaitlist={this.props.hasWaitlist}
         />
         <ParticipantsListComponent
           participants={this.props.participants}
@@ -64,6 +57,8 @@ export class ShowEvent extends Component<Props> {
 
 const mapStateToProps = state => ({
   event: getCurrentEvent(state),
+  hasNotFoundError: getHasNotFoundError(state),
+  hasWaitlist: getHasWaitlist(state),
   participants: getParticipants(state),
   participantErrors: getParticipantErrorsArray(state),
 })

@@ -21,12 +21,7 @@ exports[`ParticipantForm renders participant form component 1`] = `
         />
       </label>
     </div>
-    <div>
-      <input
-        type="submit"
-        value="参加登録"
-      />
-    </div>
+    <ParticipantButton />
   </form>
 </div>
 `;
@@ -57,12 +52,7 @@ exports[`ParticipantForm renders participant form component with error message 1
         />
       </label>
     </div>
-    <div>
-      <input
-        type="submit"
-        value="参加登録"
-      />
-    </div>
+    <ParticipantButton />
   </form>
 </div>
 `;

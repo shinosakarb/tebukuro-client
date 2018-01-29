@@ -33,4 +33,49 @@ describe('EventSelector', () => {
       expect(subject).toEqual(EventParams.event1)
     })
   })
+
+  describe('getHasNotFoundError', () => {
+    it('returns true when current event has 404 Error.', () => {
+      const notFoundErrorMessage = ['Not Found']
+      const notFoundErrorState = {
+        event: testEventState.setIn(['errors'], new List(notFoundErrorMessage)),
+      }
+      const subject = EventSelector.getHasNotFoundError(notFoundErrorState)
+      expect(subject).toEqual(true)
+    })
+
+    it('returns false when current event doesnt have 404 Error', () => {
+      const subject = EventSelector.getHasNotFoundError(mockState)
+      expect(subject).toEqual(false)
+    })
+  })
+
+  describe('getHasWaitlist', () => {
+    it('returns true when current event has a waitlist.', () => {
+      const waitlistEvent = {
+        ...EventParams.event1,
+        quota: 2,
+        participants: [1, 2],
+      }
+      const waitlistState = {
+        event: testEventState.setIn(['entities'], new Map({ [eventId]: new Map().merge(waitlistEvent) })),
+      }
+      const subject = EventSelector.getHasWaitlist(waitlistState)
+      expect(subject).toEqual(true)
+    })
+
+    it('returns false when current event has no waitlist.', () => {
+      const noWaitlistEvent = {
+        ...EventParams.event1,
+        quota: 2,
+        participants: [1],
+      }
+      const noWaitlistState = {
+        event: testEventState.setIn(['entities'], new Map({ [eventId]: new Map().merge(noWaitlistEvent) })),
+      }
+
+      const subject = EventSelector.getHasWaitlist(noWaitlistState)
+      expect(subject).toEqual(false)
+    })
+  })
 })

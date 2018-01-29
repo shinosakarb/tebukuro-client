@@ -1,9 +1,10 @@
 // @flow
 import React, { Component } from 'react'
+import ParticipantButton from '../ParticipantButton'
 
 type Props = {
   onSubmit: Function,
-  participateButtonText: string,
+  hasEventWaitlist: boolean,
   eventId: ?number,
   errors: ?string[],
 }
@@ -51,9 +52,7 @@ export default class ParticipantForm extends Component<Props, State> {
               <input type="text" id="name" value={this.state.name} onChange={this.onChangeHandler} />
             </label>
           </div>
-          <div>
-            <input type="submit" value={this.props.participateButtonText} />
-          </div>
+          <ParticipantButton hasEventWaitlist={this.props.hasEventWaitlist} />
         </form>
       </div>
     )

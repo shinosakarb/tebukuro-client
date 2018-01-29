@@ -28,8 +28,8 @@ exports[`ShowEvent renders the page with error messages. 1`] = `
   />
   <ParticipantForm
     eventId={1}
+    hasEventWaitlist={false}
     onSubmit={[Function]}
-    participateButtonText="参加登録"
   />
   <ParticipantsList
     participants={
@@ -68,8 +68,8 @@ exports[`ShowEvent when available to participate renders the event page with par
   />
   <ParticipantForm
     eventId={1}
+    hasEventWaitlist={false}
     onSubmit={[Function]}
-    participateButtonText="参加登録"
   />
   <ParticipantsList
     participants={
@@ -101,18 +101,15 @@ exports[`ShowEvent when having a waiting list renders the event page wtih waitli
         "description": "This is the first event.",
         "id": 1,
         "name": "event1",
-        "participants": Array [
-          1,
-          2,
-        ],
-        "quota": 1,
+        "participants": Array [],
+        "quota": 10,
       }
     }
   />
   <ParticipantForm
     eventId={1}
+    hasEventWaitlist={true}
     onSubmit={[Function]}
-    participateButtonText="キャンセル待ちに登録"
   />
   <ParticipantsList
     participants={
