@@ -32,25 +32,24 @@ export class ShowEvent extends Component<Props> {
   render() {
     const { event } = this.props
 
-    if (this.props.hasNotFoundError) {
-      return <Error statusCode="404" />
-    }
-
     return (
-      <div>
-        <h3>This is the event page!</h3>
-        <EventComponent event={event} />
-        <ParticipantFormComponent
-          onSubmit={this.props.registerForEvent}
-          eventId={event.id}
-          errors={this.props.participantErrors}
-          hasEventWaitlist={this.props.hasWaitlist}
-        />
-        <ParticipantsListComponent
-          participants={this.props.participants}
-          onCancel={this.props.cancelRegistration}
-        />
-      </div>
+      this.props.hasNotFoundError ?
+        <Error statusCode="404" />
+        :
+        <div>
+          <h3>This is the event page!</h3>
+          <EventComponent event={event} />
+          <ParticipantFormComponent
+            onSubmit={this.props.registerForEvent}
+            eventId={event.id}
+            errors={this.props.participantErrors}
+            hasEventWaitlist={this.props.hasWaitlist}
+          />
+          <ParticipantsListComponent
+            participants={this.props.participants}
+            onCancel={this.props.cancelRegistration}
+          />
+        </div>
     )
   }
 }

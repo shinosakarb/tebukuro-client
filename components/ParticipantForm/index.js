@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react'
-import ParticipantButton from '../ParticipantButton'
+import ParticipantButton from '../buttons/ParticipantButton'
 
 type Props = {
   onSubmit: Function,
