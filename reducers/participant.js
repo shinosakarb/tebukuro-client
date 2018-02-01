@@ -5,6 +5,7 @@ import _ from 'lodash'
 
 import Actions from '../constants/Actions'
 import ConvertCase from '../utils/ConvertCase'
+import Messages from '../constants/Messages'
 
 export const participantInitialState = new Map({
   entities: new Map(),
@@ -16,8 +17,9 @@ const toCamelCase = payload => (
   _.mapValues(payload, val => ConvertCase.camelKeysOf(val))
 )
 
+const { admittedRegestration, waitlistedRegestration } = Messages.Participants
 const participationCompleteMessage = onWaitingList => (
-  onWaitingList ? 'キャンセル待ちに登録しました。' : '参加登録が完了しました。'
+  onWaitingList ? waitlistedRegestration : admittedRegestration
 )
 
 const participantReducerMap = {

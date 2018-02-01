@@ -4,6 +4,7 @@ import { normalize } from 'normalizr'
 
 import ParticipantReducer, { participantInitialState } from '../participant'
 import Actions from '../../constants/Actions'
+import Messages from '../../constants/Messages'
 import ApiResponseError from '../../api/ApiResponseError'
 import ConvertCase from '../../utils/ConvertCase'
 
@@ -22,6 +23,7 @@ const waitlistedParticipantEntity = { [waitlistedParticipant.id]: new Map(waitli
 const initialState = participantInitialState
 const participantMergedState = initialState.merge({ entities: admittedParticipantEntity })
 
+const { admittedRegestration, waitlistedRegestration } = Messages.Participants
 const error = {
   response: { data: { name: ['を入力して下さい', 'は１０文字以下です'] } },
 }
@@ -73,7 +75,7 @@ describe('Participant Reducer', () => {
           const subject = reducedParticipant(admittedParticipant)
           const nextState = initialState.mergeDeep({
             entities: admittedParticipantEntity,
-            message: '参加登録が完了しました。',
+            message: admittedRegestration,
           })
           expect(subject).toEqual(nextState)
         })
@@ -84,7 +86,7 @@ describe('Participant Reducer', () => {
           const subject = reducedParticipant(waitlistedParticipant)
           const nextState = initialState.mergeDeep({
             entities: waitlistedParticipantEntity,
-            message: 'キャンセル待ちに登録しました。',
+            message: waitlistedRegestration,
           })
           expect(subject).toEqual(nextState)
         })
