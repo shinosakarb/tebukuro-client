@@ -5,7 +5,12 @@ import Error from 'next/error'
 import createStore from '../../store'
 import { fetchEvent, registerForEvent, cancelRegistration } from '../../actions/event'
 import { getCurrentEvent, getHasWaitlist, getHasNotFoundError } from '../../selectors/event'
-import { getParticipants, getParticipantErrorsArray } from '../../selectors/participant'
+import {
+  getParticipants,
+  getParticipantErrorsArray,
+  getParticipantMessage,
+} from '../../selectors/participant'
+
 import EventComponent from '../../components/Event'
 import ParticipantFormComponent from '../../components/ParticipantForm'
 import ParticipantsListComponent from '../../components/ParticipantsList'
@@ -18,6 +23,7 @@ type Props = {
   hasWaitlist: boolean,
   participants: ?Object[],
   participantErrors: ?string[],
+  participantMessage: string,
   fetchEvent: Function,
   registerForEvent: Function,
   cancelRegistration: Function,
@@ -40,10 +46,11 @@ export class ShowEvent extends Component<Props> {
           <h3>This is the event page!</h3>
           <EventComponent event={event} />
           <ParticipantFormComponent
-            onSubmit={this.props.registerForEvent}
             eventId={event.id}
             errors={this.props.participantErrors}
             hasEventWaitlist={this.props.hasWaitlist}
+            message={this.props.participantMessage}
+            onSubmit={this.props.registerForEvent}
           />
           <ParticipantsListComponent
             participants={this.props.participants}
@@ -60,6 +67,7 @@ const mapStateToProps = state => ({
   hasWaitlist: getHasWaitlist(state),
   participants: getParticipants(state),
   participantErrors: getParticipantErrorsArray(state),
+  participantMessage: getParticipantMessage(state),
 })
 
 const mapDispatchToProps = { fetchEvent, registerForEvent, cancelRegistration }

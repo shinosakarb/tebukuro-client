@@ -26,6 +26,33 @@ exports[`ParticipantForm renders participant form component 1`] = `
 </div>
 `;
 
+exports[`ParticipantForm renders participant form component with completion message 1`] = `
+<div>
+  <h3>
+    Event participation form
+  </h3>
+  参加登録が完了しました。
+  <form
+    onSubmit={[Function]}
+  >
+    <div>
+      <label
+        htmlFor="name"
+      >
+        name
+        <input
+          id="name"
+          onChange={[Function]}
+          type="text"
+          value=""
+        />
+      </label>
+    </div>
+    <ParticipantButton />
+  </form>
+</div>
+`;
+
 exports[`ParticipantForm renders participant form component with error message 1`] = `
 <div>
   <h3>

@@ -7,6 +7,7 @@ type Props = {
   hasEventWaitlist: boolean,
   eventId: ?number,
   errors: ?string[],
+  message: string,
 }
 type State = {
   name: string,
@@ -45,6 +46,7 @@ export default class ParticipantForm extends Component<Props, State> {
               <li>{ error }</li>)}
           </ul>
         }
+        { this.props.message }
         <form onSubmit={this.onSubmitHandler}>
           <div>
             <label htmlFor="name">
