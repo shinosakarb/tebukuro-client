@@ -9,16 +9,32 @@ const inputValues = {
 
 const testProps = {
   eventId: 1,
+  participateButtonText: '参加登録',
+  message: null,
+}
+
+const completeProps = {
+  eventId: 1,
+  participateButtonText: '参加登録',
+  message: '参加登録が完了しました。',
 }
 
 const errorProps = {
   ...testProps,
   errors: ['名前を入力して下さい'],
+  message: null,
 }
 
 describe('ParticipantForm', () => {
   it('renders participant form component', () => {
     const wrapper = shallow(<ParticipantForm {...testProps} onSubmit={jest.fn()} />)
+    const tree = shallowToJson(wrapper)
+
+    expect(tree).toMatchSnapshot()
+  })
+
+  it('renders participant form component with completion message', () => {
+    const wrapper = shallow(<ParticipantForm {...completeProps} onSubmit={jest.fn()} />)
     const tree = shallowToJson(wrapper)
 
     expect(tree).toMatchSnapshot()
@@ -49,7 +65,7 @@ describe('ParticipantForm', () => {
       })
 
       it('should call onSubmit with correct argument.', () => {
-        expect(onSubmit).toBeCalledWith({ ...inputValues, ...testProps })
+        expect(onSubmit).toBeCalledWith({ ...inputValues, eventId: testProps.eventId })
       })
     })
   })

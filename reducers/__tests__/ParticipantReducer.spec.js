@@ -4,6 +4,7 @@ import { normalize } from 'normalizr'
 
 import ParticipantReducer, { participantInitialState } from '../participant'
 import Actions from '../../constants/Actions'
+import Messages from '../../constants/Messages'
 import ApiResponseError from '../../api/ApiResponseError'
 import ConvertCase from '../../utils/ConvertCase'
 
@@ -14,12 +15,15 @@ import EventSchema from '../../schemas/event'
 import ParticipantSchema from '../../schemas/participant'
 
 const { participant1, participant2 } = ParticipantParams
-const participantEntity1 = { [participant1.id]: new Map(participant1) }
-const participantEntity2 = { [participant2.id]: new Map(participant2) }
+const admittedParticipant = { ...participant1, onWaitingList: false }
+const waitlistedParticipant = { ...participant2, onWaitingList: true }
+const admittedParticipantEntity = { [admittedParticipant.id]: new Map(admittedParticipant) }
+const waitlistedParticipantEntity = { [waitlistedParticipant.id]: new Map(waitlistedParticipant) }
 
 const initialState = participantInitialState
-const participantMergedState = initialState.merge({ entities: participantEntity1 })
+const participantMergedState = initialState.merge({ entities: admittedParticipantEntity })
 
+const { admittedRegestration, waitlistedRegestration } = Messages.Participants
 const error = {
   response: { data: { name: ['を入力して下さい', 'は１０文字以下です'] } },
 }
@@ -39,7 +43,7 @@ describe('Participant Reducer', () => {
       it('should return participants in fetched event', () => {
         const eventParams = {
           ...EventParams.event1,
-          participants: [ConvertCase.snakeKeysOf(participant1)],
+          participants: [ConvertCase.snakeKeysOf(admittedParticipant)],
         }
         const normalizedEvent = normalize(eventParams, EventSchema)
         const subject = ParticipantReducer(initialState, fetchEvent(normalizedEvent))
@@ -60,17 +64,32 @@ describe('Participant Reducer', () => {
   describe('when REGISTER_FOR_EVENT action', () => {
     const registerForEvent = createAction(Actions.Event.registerForEvent)
 
-    describe('with success event registerFor', () => {
-      it('should add regitered participant', () => {
-        const participantParams = ConvertCase.snakeKeysOf(participant2)
-        const normalizedParticipant = normalize(participantParams, ParticipantSchema)
-        const subject = ParticipantReducer(
-          participantMergedState,
-          registerForEvent(normalizedParticipant),
-        )
-        const nextState = participantMergedState.mergeDeep({ entities: participantEntity2 })
+    const reducedParticipant = (participant) => {
+      const normalizedPayload = normalize(ConvertCase.snakeKeysOf(participant), ParticipantSchema)
+      return ParticipantReducer(initialState, registerForEvent(normalizedPayload))
+    }
 
-        expect(subject).toEqual(nextState)
+    describe('with success registeration for event', () => {
+      describe('with onWaitingList true', () => {
+        it('should add regitered participant with the admitted message.', () => {
+          const subject = reducedParticipant(admittedParticipant)
+          const nextState = initialState.mergeDeep({
+            entities: admittedParticipantEntity,
+            message: admittedRegestration,
+          })
+          expect(subject).toEqual(nextState)
+        })
+      })
+
+      describe('with onWaitingList false.', () => {
+        it('should add regitered participant with the waitlisted message.', () => {
+          const subject = reducedParticipant(waitlistedParticipant)
+          const nextState = initialState.mergeDeep({
+            entities: waitlistedParticipantEntity,
+            message: waitlistedRegestration,
+          })
+          expect(subject).toEqual(nextState)
+        })
       })
     })
 
@@ -88,8 +107,9 @@ describe('Participant Reducer', () => {
 
     describe('with success cancel registration', () => {
       it('should delete registered participant', () => {
-        const participantParams = ConvertCase.snakeKeysOf(participant2)
-        const prevState = participantMergedState.mergeDeep({ entities: participantEntity2 })
+        const participantParams = ConvertCase.snakeKeysOf(waitlistedParticipant)
+        const prevState =
+          participantMergedState.mergeDeep({ entities: waitlistedParticipantEntity })
         const subject = ParticipantReducer(
           prevState,
           cancelRegistration(participantParams),

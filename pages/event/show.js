@@ -4,8 +4,13 @@ import withRedux from 'next-redux-wrapper'
 import Error from 'next/error'
 import createStore from '../../store'
 import { fetchEvent, registerForEvent, cancelRegistration } from '../../actions/event'
-import { getCurrentEvent } from '../../selectors/event'
-import { getParticipants, getParticipantErrorsArray } from '../../selectors/participant'
+import { getCurrentEvent, getHasWaitlist, getHasNotFoundError } from '../../selectors/event'
+import {
+  getParticipants,
+  getParticipantErrorsArray,
+  getParticipantMessage,
+} from '../../selectors/participant'
+
 import EventComponent from '../../components/Event'
 import ParticipantFormComponent from '../../components/ParticipantForm'
 import ParticipantsListComponent from '../../components/ParticipantsList'
@@ -14,8 +19,11 @@ import type { EventId, EventProps } from '../../types/Event'
 type Props = {
   url: { query: EventId },
   event: EventProps,
+  hasNotFoundError: boolean,
+  hasWaitlist: boolean,
   participants: ?Object[],
   participantErrors: ?string[],
+  participantMessage: string,
   fetchEvent: Function,
   registerForEvent: Function,
   cancelRegistration: Function,
@@ -27,39 +35,39 @@ export class ShowEvent extends Component<Props> {
     this.props.fetchEvent(params)
   }
 
-  isNotFoundError(errors: ?string[]) {
-    return errors && errors[0] === 'Not Found'
-  }
-
   render() {
     const { event } = this.props
 
-    if (this.isNotFoundError(event.errors)) {
-      return <Error statusCode="404" />
-    }
-
     return (
-      <div>
-        <h3>This is the event page!</h3>
-        <EventComponent event={event} />
-        <ParticipantFormComponent
-          onSubmit={this.props.registerForEvent}
-          eventId={event.id}
-          errors={this.props.participantErrors}
-        />
-        <ParticipantsListComponent
-          participants={this.props.participants}
-          onCancel={this.props.cancelRegistration}
-        />
-      </div>
+      this.props.hasNotFoundError ?
+        <Error statusCode="404" />
+        :
+        <div>
+          <h3>This is the event page!</h3>
+          <EventComponent event={event} />
+          <ParticipantFormComponent
+            eventId={event.id}
+            errors={this.props.participantErrors}
+            hasEventWaitlist={this.props.hasWaitlist}
+            message={this.props.participantMessage}
+            onSubmit={this.props.registerForEvent}
+          />
+          <ParticipantsListComponent
+            participants={this.props.participants}
+            onCancel={this.props.cancelRegistration}
+          />
+        </div>
     )
   }
 }
 
 const mapStateToProps = state => ({
   event: getCurrentEvent(state),
+  hasNotFoundError: getHasNotFoundError(state),
+  hasWaitlist: getHasWaitlist(state),
   participants: getParticipants(state),
   participantErrors: getParticipantErrorsArray(state),
+  participantMessage: getParticipantMessage(state),
 })
 
 const mapDispatchToProps = { fetchEvent, registerForEvent, cancelRegistration }

@@ -5,6 +5,7 @@ type Props = {
   id: number,
   eventId: number,
   name: string,
+  onWaitingList: boolean,
   onCancel: Function,
 }
 
@@ -17,11 +18,19 @@ export default class Participant extends Component<Props> {
   }
 
   render() {
+    const margin = { marginRight: 10 }
     return (
       <div>
-        { this.props.name }
+        <span style={margin}>
+          { this.props.name }
+        </span>
+        <span style={margin}>
+          { this.props.onWaitingList ?
+            'キャンセル待ち' : '参加可能'
+          }
+        </span>
         <button onClick={this.onCancelHandler} >
-          cancel
+          キャンセル
         </button>
       </div>
     )
