@@ -8,49 +8,24 @@ exports[`EventForm render event form component 1`] = `
   <form
     onSubmit={[Function]}
   >
-    <div>
-      <label
-        htmlFor="name"
-      >
-        name
-        <input
-          id="name"
-          onChange={[Function]}
-          type="text"
-          value=""
-        />
-      </label>
-    </div>
-    <div>
-      <label
-        htmlFor="description"
-      >
-        description
-        <textarea
-          id="description"
-          onChange={[Function]}
-          value=""
-        />
-      </label>
-    </div>
-    <div>
-      <label
-        htmlFor="quota"
-      >
-        quota
-        <input
-          id="quota"
-          onChange={[Function]}
-          type="number"
-          value={0}
-        />
-      </label>
-    </div>
-    <div>
-      <input
-        type="submit"
-      />
-    </div>
+    <Component
+      id="name"
+      onChange={[Function]}
+      value=""
+    />
+    <Component
+      id="description"
+      onChange={[Function]}
+      value=""
+    />
+    <Component
+      id="quota"
+      onChange={[Function]}
+      value={0}
+    />
+    <input
+      type="submit"
+    />
   </form>
 </div>
 `;

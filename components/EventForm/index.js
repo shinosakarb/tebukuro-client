@@ -1,5 +1,6 @@
 // @flow
 import React, { Component } from 'react'
+import TextInput from '../forms/TextInput'
 
 type Props = { onSubmit: Function }
 type State = {
@@ -26,33 +27,15 @@ export default class EventForm extends Component<Props, State> {
     this.props.onSubmit(this.state)
   }
 
-  // TODO: Extract component and fields as common components
   render() {
     return (
       <div>
         <h3>Event registration form</h3>
         <form onSubmit={this.onSubmitHandler}>
-          <div>
-            <label htmlFor="name">
-              name
-              <input type="text" id="name" value={this.state.name} onChange={this.onChangeHandler} />
-            </label>
-          </div>
-          <div>
-            <label htmlFor="description">
-              description
-              <textarea id="description" value={this.state.description} onChange={this.onChangeHandler} />
-            </label>
-          </div>
-          <div>
-            <label htmlFor="quota">
-              quota
-              <input type="number" id="quota" value={this.state.quota} onChange={this.onChangeHandler} />
-            </label>
-          </div>
-          <div>
-            <input type="submit" />
-          </div>
+          <TextInput id="name" value={this.state.name} onChange={this.onChangeHandler} />
+          <TextInput id="description" value={this.state.description} onChange={this.onChangeHandler} />
+          <TextInput id="quota" value={this.state.quota} onChange={this.onChangeHandler} />
+          <input type="submit" />
         </form>
       </div>
     )

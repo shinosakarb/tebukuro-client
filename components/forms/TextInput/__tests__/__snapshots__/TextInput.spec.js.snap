@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TextInput render event form component 1`] = `
+<div>
+  <label>
+    <input
+      name="name"
+      onChange={[Function]}
+      type="text"
+      value="event1"
+    />
+  </label>
+</div>
+`;

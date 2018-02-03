@@ -23,9 +23,9 @@ describe('EventForm', () => {
       const onSubmit = jest.fn()
       const wrapper = mount(<EventForm onSubmit={onSubmit} />)
 
-      const nameElement = wrapper.find('#name')
-      const descriptionElement = wrapper.find('#description')
-      const quotaElement = wrapper.find('#quota')
+      const nameElement = wrapper.find('input#name')
+      const descriptionElement = wrapper.find('input#description')
+      const quotaElement = wrapper.find('input#quota')
 
       nameElement.simulate(
         'change',
