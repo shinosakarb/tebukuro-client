@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react'
-import TextInput from '../forms/TextInput'
+import TextInputField from '../forms/TextInputField'
 
 type Props = { onSubmit: Function }
 type State = {
@@ -32,9 +32,9 @@ export default class EventForm extends Component<Props, State> {
       <div>
         <h3>Event registration form</h3>
         <form onSubmit={this.onSubmitHandler}>
-          <TextInput id="name" value={this.state.name} onChange={this.onChangeHandler} />
-          <TextInput id="description" value={this.state.description} onChange={this.onChangeHandler} />
-          <TextInput id="quota" value={this.state.quota} onChange={this.onChangeHandler} />
+          <TextInputField id="name" value={this.state.name} onChange={this.onChangeHandler} />
+          <TextInputField id="description" value={this.state.description} onChange={this.onChangeHandler} />
+          <TextInputField id="quota" value={this.state.quota} onChange={this.onChangeHandler} />
           <input type="submit" />
         </form>
       </div>

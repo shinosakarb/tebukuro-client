@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react'
 import ParticipantButton from '../buttons/ParticipantButton'
-import TextInput from '../forms/TextInput'
+import TextInputField from '../forms/TextInputField'
 
 type Props = {
   onSubmit: Function,
@@ -48,7 +48,7 @@ export default class ParticipantForm extends Component<Props, State> {
         }
         { this.props.message }
         <form onSubmit={this.onSubmitHandler}>
-          <TextInput id="name" value={this.state.name} onChange={this.onChangeHandler} />
+          <TextInputField id="name" value={this.state.name} onChange={this.onChangeHandler} />
           <ParticipantButton hasEventWaitlist={this.props.hasEventWaitlist} />
         </form>
       </div>

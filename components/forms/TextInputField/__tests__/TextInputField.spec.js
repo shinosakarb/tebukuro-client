@@ -1,7 +1,7 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 import shallowToJson from 'enzyme-to-json'
-import TextInput from '../index'
+import TextInputField from '../index'
 
 const testProps = {
   id: 'name',
@@ -11,7 +11,7 @@ const testProps = {
 
 describe('TextInput', () => {
   it('render event form component', () => {
-    const wrapper = shallow(<TextInput {...testProps} />)
+    const wrapper = shallow(<TextInputField {...testProps} />)
     const tree = shallowToJson(wrapper)
 
     expect(tree).toMatchSnapshot()
