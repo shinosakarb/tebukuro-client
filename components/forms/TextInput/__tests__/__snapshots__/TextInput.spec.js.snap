@@ -2,9 +2,12 @@
 
 exports[`TextInput render event form component 1`] = `
 <div>
-  <label>
+  <label
+    htmlFor="name"
+  >
+    name
     <input
-      name="name"
+      id="name"
       onChange={[Function]}
       type="text"
       value="event1"

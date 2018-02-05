@@ -4,7 +4,7 @@ import shallowToJson from 'enzyme-to-json'
 import TextInput from '../index'
 
 const testProps = {
-  name: 'name',
+  id: 'name',
   value: 'event1',
   onChange: jest.fn(),
 }
