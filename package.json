@@ -14,8 +14,7 @@
     "jest:watch": "npm run jest -- --watch",
     "lint": "eslint . --cache",
     "flow": "flow",
-    "build": "next build && next export",
-    "precommit": "yarn lint && yarn flow"
+    "build": "next build && next export"
   },
   "dependencies": {
     "axios": "^0.16.2",
@@ -49,7 +48,6 @@
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.5.0",
     "flow-bin": "^0.57.3",
-    "husky": "^0.14.3",
     "jest": "^21.2.1",
     "moxios": "^0.4.0",
     "react-test-renderer": "^16.2.0",
