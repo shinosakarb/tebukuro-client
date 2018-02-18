@@ -14,6 +14,8 @@ const detailUrl = `${baseUrl}/1`
 const events = [eventParams.event1, eventParams.event2]
 const { event1 } = eventParams
 
+jest.mock('../../utils/session')
+
 describe('Base', () => {
   beforeEach(() => {
     expect.assertions(1)
