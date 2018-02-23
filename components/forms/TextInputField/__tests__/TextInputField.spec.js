@@ -7,6 +7,8 @@ const testProps = {
   id: 'name',
   value: 'event1',
   onChange: jest.fn(),
+  onBlur: jest.fn(),
+  errorMessages: ['nameは必須です。'],
 }
 
 describe('TextInput', () => {

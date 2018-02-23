@@ -9,21 +9,30 @@ exports[`EventForm render event form component 1`] = `
     onSubmit={[Function]}
   >
     <Component
+      errorMessages={
+        Array [
+          "nameは必須です。",
+        ]
+      }
       id="name"
+      onBlur={[Function]}
       onChange={[Function]}
       value=""
     />
     <Component
       id="description"
+      onBlur={[Function]}
       onChange={[Function]}
       value=""
     />
     <Component
       id="quota"
+      onBlur={[Function]}
       onChange={[Function]}
       value={0}
     />
     <input
+      disabled={false}
       type="submit"
     />
   </form>

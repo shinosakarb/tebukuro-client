@@ -9,7 +9,9 @@ exports[`ParticipantForm renders participant form component 1`] = `
     onSubmit={[Function]}
   >
     <Component
+      errorMessages={Array []}
       id="name"
+      onBlur={[Function]}
       onChange={[Function]}
       value=""
     />
@@ -28,7 +30,9 @@ exports[`ParticipantForm renders participant form component with completion mess
     onSubmit={[Function]}
   >
     <Component
+      errorMessages={Array []}
       id="name"
+      onBlur={[Function]}
       onChange={[Function]}
       value=""
     />
@@ -51,7 +55,9 @@ exports[`ParticipantForm renders participant form component with error message 1
     onSubmit={[Function]}
   >
     <Component
+      errorMessages={Array []}
       id="name"
+      onBlur={[Function]}
       onChange={[Function]}
       value=""
     />

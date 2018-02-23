@@ -7,11 +7,28 @@ exports[`TextInput render event form component 1`] = `
   >
     name
     <input
+      errorMessages={
+        Array [
+          "nameは必須です。",
+        ]
+      }
       id="name"
+      onBlur={[Function]}
       onChange={[Function]}
       type="text"
       value="event1"
     />
+    <span
+      style={
+        Object {
+          "color": "red",
+          "fontSize": "13px",
+          "paddingLeft": "5px",
+        }
+      }
+    >
+      nameは必須です。
+    </span>
   </label>
 </div>
 `;
