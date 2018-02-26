@@ -8,14 +8,17 @@ jest.mock('../../actions/event', () => ({
   createEvent: () => {},
 }))
 
+const testProps = {
+  createEvent: jest.fn(),
+  validateEventForm: jest.fn(),
+  errors: null,
+  validationErrors: { name: [], quota: [] },
+  validationFailed: false,
+}
+
 describe('NewEvent', () => {
   describe('on first page load', () => {
     it('renders the new event page without error messages.', () => {
-      const testProps = {
-        createEvent: jest.fn(),
-        errors: null,
-      }
-
       const page = shallow(<NewEvent {...testProps} />)
       const tree = shallowToJson(page)
 
@@ -24,12 +27,12 @@ describe('NewEvent', () => {
   })
   describe('on submit invalid inputs', () => {
     it('renders the new event page without error messages.', () => {
-      const testProps = {
-        createEvent: jest.fn(),
+      const errorTestProps = {
+        ...testProps,
         errors: Params.errorEvent.errors,
       }
 
-      const page = shallow(<NewEvent {...testProps} />)
+      const page = shallow(<NewEvent {...errorTestProps} />)
       const tree = shallowToJson(page)
 
       expect(tree).toMatchSnapshot()

@@ -5,5 +5,8 @@ export default {
     registerForEvent: 'REGISTER_FOR_EVENT',
     cancelRegistration: 'CANCEL_REGISTRATION',
   },
+  EventForm: {
+    validateEventParam: 'VALIDATE_EVENT_PARAM',
+  },
 }
 

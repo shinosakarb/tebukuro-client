@@ -48,7 +48,13 @@ export default class ParticipantForm extends Component<Props, State> {
         }
         { this.props.message }
         <form onSubmit={this.onSubmitHandler}>
-          <TextInputField id="name" value={this.state.name} onChange={this.onChangeHandler} />
+          <TextInputField
+            id="name"
+            value={this.state.name}
+            onChange={this.onChangeHandler}
+            onBlur={() => {}}
+            errorMessages={[]}
+          />
           <ParticipantButton hasEventWaitlist={this.props.hasEventWaitlist} />
         </form>
       </div>

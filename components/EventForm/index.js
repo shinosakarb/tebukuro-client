@@ -2,7 +2,12 @@
 import React, { Component } from 'react'
 import TextInputField from '../forms/TextInputField'
 
-type Props = { onSubmit: Function }
+type Props = {
+  onSubmit: Function,
+  onValidation: Function,
+  validationErrors: Object,
+  validationFailed: boolean,
+}
 type State = {
   name: string,
   description: string,
@@ -15,11 +20,18 @@ export default class EventForm extends Component<Props, State> {
     this.state = { name: '', description: '', quota: 0 }
   }
 
+  onBlurHandler = (e: SyntheticInputEvent<>) => {
+    const { id, value } = e.target
+    this.props.onValidation(id, value)
+  }
+
   onChangeHandler = (e: SyntheticInputEvent<>) => {
+    const { id, value } = e.target
     this.setState({
       ...this.state,
-      [e.target.id]: e.target.value,
+      [id]: value,
     })
+    this.props.onValidation(id, value)
   }
 
   onSubmitHandler = (e: SyntheticEvent<>) => {
@@ -32,10 +44,28 @@ export default class EventForm extends Component<Props, State> {
       <div>
         <h3>Event registration form</h3>
         <form onSubmit={this.onSubmitHandler}>
-          <TextInputField id="name" value={this.state.name} onChange={this.onChangeHandler} />
-          <TextInputField id="description" value={this.state.description} onChange={this.onChangeHandler} />
-          <TextInputField id="quota" value={this.state.quota} onChange={this.onChangeHandler} />
-          <input type="submit" />
+          <TextInputField
+            id="name"
+            value={this.state.name}
+            onChange={this.onChangeHandler}
+            onBlur={this.onBlurHandler}
+            errorMessages={this.props.validationErrors.name}
+          />
+          <TextInputField
+            id="description"
+            value={this.state.description}
+            onChange={this.onChangeHandler}
+            onBlur={this.onBlurHandler}
+            errorMessages={this.props.validationErrors.description}
+          />
+          <TextInputField
+            id="quota"
+            value={this.state.quota}
+            onChange={this.onChangeHandler}
+            onBlur={this.onBlurHandler}
+            errorMessages={this.props.validationErrors.quota}
+          />
+          <input type="submit" disabled={this.props.validationFailed} />
         </form>
       </div>
     )

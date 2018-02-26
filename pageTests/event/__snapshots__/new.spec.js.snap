@@ -7,6 +7,14 @@ exports[`NewEvent on first page load renders the new event page without error me
   </h3>
   <EventFormComponent
     onSubmit={[Function]}
+    onValidation={[Function]}
+    validationErrors={
+      Object {
+        "name": Array [],
+        "quota": Array [],
+      }
+    }
+    validationFailed={false}
   />
 </div>
 `;
@@ -26,6 +34,14 @@ exports[`NewEvent on submit invalid inputs renders the new event page without er
   </ul>
   <EventFormComponent
     onSubmit={[Function]}
+    onValidation={[Function]}
+    validationErrors={
+      Object {
+        "name": Array [],
+        "quota": Array [],
+      }
+    }
+    validationFailed={false}
   />
 </div>
 `;
