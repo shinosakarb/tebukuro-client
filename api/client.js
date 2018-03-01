@@ -1,6 +1,6 @@
 // @flow
 import axios from 'axios'
-import { setToken, getAuthInfo } from '../utils/session'
+import { setToken, getAuthInfo } from '../utils/auth'
 
 const client = axios.create({
   baseURL: process.env.BASE_URL,
