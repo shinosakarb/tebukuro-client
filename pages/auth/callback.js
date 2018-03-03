@@ -1,28 +1,18 @@
 // @flow
 import React, { Component } from 'react'
 import Router from 'next/router'
-import { setAuthInfo } from '../../utils/session'
+import { setAuthInfo, getAuthParams } from '../../utils/auth'
+import type { AuthInfo } from '../../utils/auth'
 
 type Props = {
-  authInfo: {
-    accessToken: string,
-    clientId: string,
-    uid: string,
-  }
+  authInfo: AuthInfo,
 }
 
 export default class AuthCallback extends Component<Props> {
   static async getInitialProps(ctx) {
-    if (ctx.query) {
-      return {
-        authInfo: {
-          accessToken: ctx.query.auth_token,
-          clientId: ctx.query.client_id,
-          uid: ctx.query.uid,
-        },
-      }
-    }
-    return {}
+    return ctx.query ? {
+      authInfo: getAuthParams(ctx.query),
+    } : {}
   }
 
   componentDidMount() {
