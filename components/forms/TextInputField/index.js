@@ -9,14 +9,17 @@ type Props = {
   errorMessages: ?[],
 }
 
-export default (props: Props) => (
-  <div>
-    <label htmlFor={props.id}>
-      { props.id }
-      <input type="text" {...props} />
-      <span style={{ color: 'red', fontSize: '13px', paddingLeft: '5px' }} >
-        { props.errorMessages }
-      </span>
-    </label>
-  </div>
-)
+export default (props: Props) => {
+  const { errorMessages, ...inputProps } = props
+  return (
+    <div>
+      <label htmlFor={inputProps.id}>
+        { inputProps.id }
+        <input type="text" {...inputProps} />
+        <span style={{ color: 'red', fontSize: '13px', paddingLeft: '5px' }} >
+          { errorMessages }
+        </span>
+      </label>
+    </div>
+  )
+}
