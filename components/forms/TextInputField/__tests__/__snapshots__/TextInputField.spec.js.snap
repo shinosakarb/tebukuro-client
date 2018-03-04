@@ -7,11 +7,6 @@ exports[`TextInput render event form component 1`] = `
   >
     name
     <input
-      errorMessages={
-        Array [
-          "nameは必須です。",
-        ]
-      }
       id="name"
       onBlur={[Function]}
       onChange={[Function]}
