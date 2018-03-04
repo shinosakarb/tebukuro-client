@@ -4,9 +4,18 @@ import { Map, List } from 'immutable'
 
 import Actions from '../constants/Actions'
 
+const initialId = 0
+
 export const eventInitialState = new Map({
-  entityId: 0,
-  entities: new Map(),
+  entityId: initialId,
+  entities: new Map({
+    [initialId]: new Map({
+      name: null,
+      description: null,
+      quota: 0,
+      participants: new List([]),
+    }),
+  }),
   errors: new List(),
 })
 
