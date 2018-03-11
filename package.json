@@ -7,8 +7,8 @@
     "node": ">= 6.0"
   },
   "scripts": {
-    "start:prod": "next start",
-    "start": "next -p 4000",
+    "start:prod": "NODE_ENV=production node server.js",
+    "start": "NODE_ENV=development node server.js",
     "test": "npm run lint && npm run flow && npm run jest",
     "jest": "jest",
     "jest:watch": "npm run jest -- --watch",
@@ -22,6 +22,7 @@
     "lodash": "^4.17.4",
     "next": "^4.2.1",
     "normalizr": "^3.2.4",
+    "path-match": "^1.2.4",
     "path-to-regexp": "^2.1.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
