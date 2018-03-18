@@ -3,10 +3,6 @@ import { mount, shallow } from 'enzyme'
 import shallowToJson from 'enzyme-to-json'
 import ParticipantForm from '../index'
 
-const inputValues = {
-  name: 'participant1',
-}
-
 const testProps = {
   eventId: 1,
   participateButtonText: '参加登録',
@@ -52,20 +48,14 @@ describe('ParticipantForm', () => {
       const onSubmit = jest.fn()
       const wrapper = mount(<ParticipantForm {...testProps} onSubmit={onSubmit} />)
 
-      const nameElement = wrapper.find('[type="text"]')
-
-      nameElement.simulate(
-        'change',
-        { target: { id: 'name', value: inputValues.name } },
-      )
-      wrapper.find('[type="submit"]').simulate('submit')
+      wrapper.find('[type="button"]').simulate('click')
 
       it('should call onSubmit once.', () => {
         expect(onSubmit).toHaveBeenCalledTimes(1)
       })
 
       it('should call onSubmit with correct argument.', () => {
-        expect(onSubmit).toBeCalledWith({ ...inputValues, eventId: testProps.eventId })
+        expect(onSubmit).toBeCalledWith({ eventId: testProps.eventId })
       })
     })
   })
