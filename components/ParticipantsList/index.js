@@ -4,7 +4,6 @@ import ParticipantComponent from '../Participant'
 
 type Props = {
   participants: ?Object[],
-  onCancel: Function,
 }
 
 const ParticipantsList = (props: Props) => (
@@ -13,7 +12,7 @@ const ParticipantsList = (props: Props) => (
       <ul>
         { props.participants.map(participant => (
           <li key={participant.id}>
-            <ParticipantComponent {...participant} onCancel={props.onCancel} />
+            <ParticipantComponent {...participant} />
           </li>
         ))}
       </ul>

@@ -11,20 +11,9 @@ exports[`Participant with admitted participant renders participant component wit
   >
     Participant 1
   </span>
-  <span
-    style={
-      Object {
-        "marginRight": 10,
-      }
-    }
-  >
+  <span>
     参加可能
   </span>
-  <button
-    onClick={[Function]}
-  >
-    キャンセル
-  </button>
 </div>
 `;
 
@@ -39,19 +28,8 @@ exports[`Participant with waitlisted participant renders participant component w
   >
     Participant 1
   </span>
-  <span
-    style={
-      Object {
-        "marginRight": 10,
-      }
-    }
-  >
+  <span>
     キャンセル待ち
   </span>
-  <button
-    onClick={[Function]}
-  >
-    キャンセル
-  </button>
 </div>
 `;
