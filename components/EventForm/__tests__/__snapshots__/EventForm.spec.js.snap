@@ -8,7 +8,7 @@ exports[`EventForm render event form component 1`] = `
   <form
     onSubmit={[Function]}
   >
-    <Component
+    <TextInputField
       errorMessages={
         Array [
           "nameは必須です。",
@@ -19,13 +19,13 @@ exports[`EventForm render event form component 1`] = `
       onChange={[Function]}
       value=""
     />
-    <Component
+    <TextInputField
       id="description"
       onBlur={[Function]}
       onChange={[Function]}
       value=""
     />
-    <Component
+    <TextInputField
       id="quota"
       onBlur={[Function]}
       onChange={[Function]}
