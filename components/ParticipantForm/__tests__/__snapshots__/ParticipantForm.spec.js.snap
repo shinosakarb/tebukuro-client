@@ -8,7 +8,7 @@ exports[`ParticipantForm renders participant form component 1`] = `
   <form
     onSubmit={[Function]}
   >
-    <Component
+    <TextInputField
       errorMessages={Array []}
       id="name"
       onBlur={[Function]}
@@ -29,7 +29,7 @@ exports[`ParticipantForm renders participant form component with completion mess
   <form
     onSubmit={[Function]}
   >
-    <Component
+    <TextInputField
       errorMessages={Array []}
       id="name"
       onBlur={[Function]}
@@ -54,7 +54,7 @@ exports[`ParticipantForm renders participant form component with error message 1
   <form
     onSubmit={[Function]}
   >
-    <Component
+    <TextInputField
       errorMessages={Array []}
       id="name"
       onBlur={[Function]}
