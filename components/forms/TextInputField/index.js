@@ -9,7 +9,7 @@ type Props = {
   errorMessages: ?[],
 }
 
-export default (props: Props) => {
+const TextInputField = (props: Props) => {
   const { errorMessages, ...inputProps } = props
   return (
     <div>
@@ -23,3 +23,5 @@ export default (props: Props) => {
     </div>
   )
 }
+
+export default TextInputField
