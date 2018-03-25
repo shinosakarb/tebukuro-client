@@ -6,7 +6,7 @@ type Props = {
   onWaitingList: boolean,
 }
 
-export default (props: Props) => (
+const Participant = (props: Props) => (
   <div>
     <span style={{ marginRight: 10 }}>
       { props.name }
@@ -16,3 +16,5 @@ export default (props: Props) => (
     </span>
   </div>
 )
+
+export default Participant

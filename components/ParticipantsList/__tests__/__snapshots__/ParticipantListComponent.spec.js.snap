@@ -6,7 +6,7 @@ exports[`ParticipantList Component renders self. 1`] = `
     <li
       key="1"
     >
-      <Component
+      <Participant
         eventId={1}
         id={1}
         name="participant1"
@@ -15,7 +15,7 @@ exports[`ParticipantList Component renders self. 1`] = `
     <li
       key="2"
     >
-      <Component
+      <Participant
         eventId={1}
         id={2}
         name="participant2"
