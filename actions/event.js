@@ -38,7 +38,9 @@ export const registerForEvent =
     metaCreator(ParticipantSchema),
   )
 
-export const cancelRegistration = createAction(
-  ActionsType.Event.cancelRegistration,
-  participant.delete,
-)
+export const cancelRegistration =
+  createAction(
+    ActionsType.Event.cancelRegistration,
+    event.cancelRegistration,
+    metaCreator(EventSchema),
+  )

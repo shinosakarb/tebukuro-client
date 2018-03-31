@@ -168,19 +168,20 @@ describe('EventAction', () => {
   })
 
   describe('cancelRegistration', () => {
-    const cancelTestParams = { id: 1, eventId: 1 }
+    const cancelTestParams = { id: 1 }
     describe('when successes to cancel Registraion', () => {
       beforeEach(() => {
         // eslint-disable-next-line no-underscore-dangle
         mockAPI.__setMockResult(true)
       })
       it('returns cancel regstration action with participant data.', () => {
-        expect.assertions(2)
-        return store.dispatch(Actions.registerForEvent(cancelTestParams))
+        expect.assertions(3)
+        return store.dispatch(Actions.cancelRegistration(cancelTestParams))
           .then(() => {
             const action = store.getActions()[0]
-            expect(action.type).toBe(ActionsType.Event.registerForEvent)
+            expect(action.type).toBe(ActionsType.Event.cancelRegistration)
             expect(action.payload).toEqual(cancelTestParams)
+            expect(action.meta.normalizr.schema).toEqual(EventSchema)
           })
       })
     })
@@ -192,10 +193,10 @@ describe('EventAction', () => {
       })
       it('returns join action with instance of Error.', () => {
         expect.assertions(2)
-        return store.dispatch(Actions.registerForEvent(cancelTestParams))
+        return store.dispatch(Actions.cancelRegistration(cancelTestParams))
           .then(() => {
             const action = store.getActions()[0]
-            expect(action.type).toBe(ActionsType.Event.registerForEvent)
+            expect(action.type).toBe(ActionsType.Event.cancelRegistration)
             expect(action.payload).toBeInstanceOf(Error)
           })
       })
