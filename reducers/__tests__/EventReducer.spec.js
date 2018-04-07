@@ -108,7 +108,7 @@ describe('Event Reducer', () => {
 
     describe('with success cancel registration', () => {
       it('should delete registered participant', () => {
-        const subject = EventReducer(prevState, cancelRegistration(participant1))
+        const subject = EventReducer(prevState, cancelRegistration(normalizedEvent))
         expect(subject).toEqual(nextState)
       })
     })
@@ -116,7 +116,7 @@ describe('Event Reducer', () => {
     describe('with failure cancel registration', () => {
       it('should keep previous state', () => {
         const subject = EventReducer(prevState, cancelRegistration(new ApiResponseError(error)))
-        expect(subject).toEqual(prevState)
+        expect(subject.get('errors')).toEqual(errorMessages)
       })
     })
   })
