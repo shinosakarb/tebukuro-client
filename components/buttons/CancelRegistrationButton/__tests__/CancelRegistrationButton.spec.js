@@ -30,7 +30,7 @@ describe('CancelRegistrationButton', () => {
 
     it('should call onCancel with correct argument.', () => {
       expect(onCancel).toBeCalledWith({
-        eventId: testProps.eventId,
+        id: testProps.eventId,
       })
     })
   })

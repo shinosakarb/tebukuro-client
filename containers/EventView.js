@@ -45,13 +45,14 @@ class EventView extends React.Component<Props> {
           <EventComponent event={event} />
           <ParticipantFormComponent
             eventId={event.id}
+            isUserRegistered={event.registered}
             hasEventWaitlist={this.props.hasWaitlist}
             message={this.props.participantMessage}
             onSubmit={this.props.registerForEvent}
+            onCancel={this.props.cancelRegistration}
           />
           <ParticipantsListComponent
             participants={this.props.participants}
-            onCancel={this.props.cancelRegistration}
           />
         </div>
     )

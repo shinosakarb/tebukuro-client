@@ -1,27 +1,38 @@
 // @flow
 import React from 'react'
+import ParticipantButton from '../buttons/ParticipantButton'
+import CancelRegistrationButton from '../buttons/CancelRegistrationButton'
 
 type Props = {
   eventId: ?number,
   hasEventWaitlist: boolean,
+  isUserRegistered: boolean,
   message: string,
   onSubmit: Function,
+  onCancel: Function,
 }
 
-export default (props: Props) => {
-  const onClickHandler = (e: SyntheticEvent<>) => {
-    e.preventDefault()
-    props.onSubmit({ eventId: props.eventId })
-  }
+const ParticipantForm = (props: Props) => {
+  const {
+    eventId, onSubmit, onCancel, hasEventWaitlist,
+  } = props
 
   return (
     <div>
       <p> { props.message } </p>
-      <input
-        type="button"
-        value={props.hasEventWaitlist ? 'キャンセル待ちに登録' : 'このイベントに参加する'}
-        onClick={onClickHandler}
-      />
+      { props.isUserRegistered ?
+        <CancelRegistrationButton
+          eventId={eventId}
+          onClick={onCancel}
+        /> :
+        <ParticipantButton
+          eventId={eventId}
+          hasEventWaitlist={hasEventWaitlist}
+          onClick={onSubmit}
+        />
+      }
     </div>
   )
 }
+
+export default ParticipantForm

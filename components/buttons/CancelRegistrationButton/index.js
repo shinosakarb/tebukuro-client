@@ -6,10 +6,10 @@ type Props = {
   onClick: Function,
 }
 
-export default (props: Props) => {
+const CancelRegistrationButton = (props: Props) => {
   const onClickHandler = (e: SyntheticEvent<>) => {
     e.preventDefault()
-    props.onClick({ eventId: props.eventId })
+    props.onClick({ id: props.eventId })
   }
 
   return (
@@ -18,3 +18,5 @@ export default (props: Props) => {
     </button>
   )
 }
+
+export default CancelRegistrationButton
