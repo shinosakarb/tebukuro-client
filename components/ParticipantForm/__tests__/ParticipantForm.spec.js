@@ -1,72 +1,51 @@
 import React from 'react'
-import { mount, shallow } from 'enzyme'
+import { shallow } from 'enzyme'
 import shallowToJson from 'enzyme-to-json'
 import ParticipantForm from '../index'
 
-const inputValues = {
-  name: 'participant1',
-}
-
 const testProps = {
   eventId: 1,
-  participateButtonText: '参加登録',
+  hasEventWaitlist: true,
+  isUserRegistered: false,
   message: null,
+  onSubmit: () => {},
+  onCancel: () => {},
 }
 
 const completeProps = {
-  eventId: 1,
-  participateButtonText: '参加登録',
+  ...testProps,
   message: '参加登録が完了しました。',
 }
 
-const errorProps = {
-  ...testProps,
-  errors: ['名前を入力して下さい'],
-  message: null,
-}
-
 describe('ParticipantForm', () => {
-  it('renders participant form component', () => {
-    const wrapper = shallow(<ParticipantForm {...testProps} onSubmit={jest.fn()} />)
-    const tree = shallowToJson(wrapper)
+  describe('renders participant form component', () => {
+    describe('when user has already registered for the event', () => {
+      it('renders CancelRegistrationButton component.', () => {
+        const wrapper =
+          shallow(<ParticipantForm {...testProps} isUserRegistered />)
+        const tree = shallowToJson(wrapper)
 
-    expect(tree).toMatchSnapshot()
-  })
-
-  it('renders participant form component with completion message', () => {
-    const wrapper = shallow(<ParticipantForm {...completeProps} onSubmit={jest.fn()} />)
-    const tree = shallowToJson(wrapper)
-
-    expect(tree).toMatchSnapshot()
-  })
-
-  it('renders participant form component with error message', () => {
-    const wrapper = shallow(<ParticipantForm {...errorProps} onSubmit={jest.fn()} />)
-    const tree = shallowToJson(wrapper)
-
-    expect(tree).toMatchSnapshot()
-  })
-
-  describe('when submit', () => {
-    describe('with correct argument', () => {
-      const onSubmit = jest.fn()
-      const wrapper = mount(<ParticipantForm {...testProps} onSubmit={onSubmit} />)
-
-      const nameElement = wrapper.find('[type="text"]')
-
-      nameElement.simulate(
-        'change',
-        { target: { id: 'name', value: inputValues.name } },
-      )
-      wrapper.find('[type="submit"]').simulate('submit')
-
-      it('should call onSubmit once.', () => {
-        expect(onSubmit).toHaveBeenCalledTimes(1)
+        expect(tree).toMatchSnapshot()
       })
+    })
 
-      it('should call onSubmit with correct argument.', () => {
-        expect(onSubmit).toBeCalledWith({ ...inputValues, eventId: testProps.eventId })
+    describe('when user has NOT registered for the event yet', () => {
+      it('renders ParticipantButton component.', () => {
+        const wrapper =
+          shallow(<ParticipantForm {...testProps} />)
+        const tree = shallowToJson(wrapper)
+
+        expect(tree).toMatchSnapshot()
       })
+    })
+  })
+
+  describe('on completing registeration for event', () => {
+    it('renders completion message', () => {
+      const wrapper = shallow(<ParticipantForm {...completeProps} />)
+      const tree = shallowToJson(wrapper)
+
+      expect(tree).toMatchSnapshot()
     })
   })
 })

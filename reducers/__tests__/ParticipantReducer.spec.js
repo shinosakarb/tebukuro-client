@@ -106,17 +106,15 @@ describe('Participant Reducer', () => {
     const cancelRegistration = createAction(Actions.Event.cancelRegistration)
 
     describe('with success cancel registration', () => {
-      it('should delete registered participant', () => {
-        const participantParams = ConvertCase.snakeKeysOf(waitlistedParticipant)
-        const prevState =
-          participantMergedState.mergeDeep({ entities: waitlistedParticipantEntity })
-        const subject = ParticipantReducer(
-          prevState,
-          cancelRegistration(participantParams),
-        )
-        const nextState = participantMergedState
+      it('should return participants in canceled event', () => {
+        const eventParams = {
+          ...EventParams.event1,
+          participants: [ConvertCase.snakeKeysOf(admittedParticipant)],
+        }
+        const normalizedEvent = normalize(eventParams, EventSchema)
+        const subject = ParticipantReducer(initialState, cancelRegistration(normalizedEvent))
 
-        expect(subject).toEqual(nextState)
+        expect(subject).toEqual(participantMergedState)
       })
     })
 

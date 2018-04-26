@@ -9,6 +9,7 @@ export type EventProps = {
   name: string,
   description: string,
   quota: number,
+  registered: boolean,
   participants: Object[],
   errors: ?string[]
 }

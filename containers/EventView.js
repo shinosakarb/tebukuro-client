@@ -7,7 +7,6 @@ import { fetchEvent, registerForEvent, cancelRegistration } from '../actions/eve
 import { getCurrentEvent, getHasWaitlist, getHasNotFoundError } from '../selectors/event'
 import {
   getParticipants,
-  getParticipantErrorsArray,
   getParticipantMessage,
 } from '../selectors/participant'
 
@@ -22,7 +21,6 @@ type Props = {
   hasNotFoundError: boolean,
   hasWaitlist: boolean,
   participants: ?Object[],
-  participantErrors: ?string[],
   participantMessage: string,
   fetchEvent: Function,
   registerForEvent: Function,
@@ -47,14 +45,14 @@ class EventView extends React.Component<Props> {
           <EventComponent event={event} />
           <ParticipantFormComponent
             eventId={event.id}
-            errors={this.props.participantErrors}
+            isUserRegistered={event.registered}
             hasEventWaitlist={this.props.hasWaitlist}
             message={this.props.participantMessage}
             onSubmit={this.props.registerForEvent}
+            onCancel={this.props.cancelRegistration}
           />
           <ParticipantsListComponent
             participants={this.props.participants}
-            onCancel={this.props.cancelRegistration}
           />
         </div>
     )
@@ -66,7 +64,6 @@ const mapStateToProps = state => ({
   hasNotFoundError: getHasNotFoundError(state),
   hasWaitlist: getHasWaitlist(state),
   participants: getParticipants(state),
-  participantErrors: getParticipantErrorsArray(state),
   participantMessage: getParticipantMessage(state),
 })
 

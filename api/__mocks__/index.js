@@ -13,6 +13,7 @@ const mockedPromise = params => (
 export const event = {
   create: mockedPromise,
   find: mockedPromise,
+  cancelRegistration: mockedPromise,
 }
 
 export const participant = {

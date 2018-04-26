@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CancelRegistrationButton with event has a waitlist renders CancelRegistrationButton. 1`] = `
+<button
+  onClick={[Function]}
+>
+  登録をキャンセルする
+</button>
+`;

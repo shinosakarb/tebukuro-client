@@ -1,63 +1,38 @@
 // @flow
-import React, { Component } from 'react'
+import React from 'react'
 import ParticipantButton from '../buttons/ParticipantButton'
-import TextInputField from '../forms/TextInputField'
+import CancelRegistrationButton from '../buttons/CancelRegistrationButton'
 
 type Props = {
-  onSubmit: Function,
+  eventId: ?number,
   hasEventWaitlist: boolean,
-  eventId: ?number,
-  errors: ?string[],
+  isUserRegistered: boolean,
   message: string,
-}
-type State = {
-  name: string,
-  eventId: ?number,
+  onSubmit: Function,
+  onCancel: Function,
 }
 
-export default class ParticipantForm extends Component<Props, State> {
-  constructor(props: Props) {
-    super(props)
-    this.state = {
-      name: '',
-      eventId: props.eventId,
-    }
-  }
+const ParticipantForm = (props: Props) => {
+  const {
+    eventId, onSubmit, onCancel, hasEventWaitlist,
+  } = props
 
-  onChangeHandler = (e: SyntheticInputEvent<>) => {
-    this.setState({
-      ...this.state,
-      [e.target.id]: e.target.value,
-    })
-  }
-
-  onSubmitHandler = (e: SyntheticEvent<>) => {
-    e.preventDefault()
-    this.props.onSubmit(this.state)
-  }
-
-  render() {
-    return (
-      <div>
-        <h3>Event participation form</h3>
-        { this.props.errors &&
-          <ul>
-            { this.props.errors.map(error =>
-              <li>{ error }</li>)}
-          </ul>
-        }
-        { this.props.message }
-        <form onSubmit={this.onSubmitHandler}>
-          <TextInputField
-            id="name"
-            value={this.state.name}
-            onChange={this.onChangeHandler}
-            onBlur={() => {}}
-            errorMessages={[]}
-          />
-          <ParticipantButton hasEventWaitlist={this.props.hasEventWaitlist} />
-        </form>
-      </div>
-    )
-  }
+  return (
+    <div>
+      <p> { props.message } </p>
+      { props.isUserRegistered ?
+        <CancelRegistrationButton
+          eventId={eventId}
+          onClick={onCancel}
+        /> :
+        <ParticipantButton
+          eventId={eventId}
+          hasEventWaitlist={hasEventWaitlist}
+          onClick={onSubmit}
+        />
+      }
+    </div>
+  )
 }
+
+export default ParticipantForm

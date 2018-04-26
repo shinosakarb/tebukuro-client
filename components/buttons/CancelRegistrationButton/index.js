@@ -3,21 +3,20 @@ import React from 'react'
 
 type Props = {
   eventId: ?number,
-  hasEventWaitlist: boolean,
   onClick: Function,
 }
 
-const ParticipantButton = (props: Props) => {
+const CancelRegistrationButton = (props: Props) => {
   const onClickHandler = (e: SyntheticEvent<>) => {
     e.preventDefault()
-    props.onClick({ eventId: props.eventId })
+    props.onClick({ id: props.eventId })
   }
 
   return (
     <button onClick={onClickHandler}>
-      {props.hasEventWaitlist ? 'キャンセル待ちに登録' : '参加登録'}
+      登録をキャンセルする
     </button>
   )
 }
 
-export default ParticipantButton
+export default CancelRegistrationButton

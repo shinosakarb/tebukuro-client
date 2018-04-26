@@ -1,67 +1,43 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ParticipantForm renders participant form component 1`] = `
+exports[`ParticipantForm on completing registeration for event renders completion message 1`] = `
 <div>
-  <h3>
-    Event participation form
-  </h3>
-  <form
-    onSubmit={[Function]}
-  >
-    <TextInputField
-      errorMessages={Array []}
-      id="name"
-      onBlur={[Function]}
-      onChange={[Function]}
-      value=""
-    />
-    <ParticipantButton />
-  </form>
+  <p>
+     
+    参加登録が完了しました。
+     
+  </p>
+  <ParticipantButton
+    eventId={1}
+    hasEventWaitlist={true}
+    onClick={[Function]}
+  />
 </div>
 `;
 
-exports[`ParticipantForm renders participant form component with completion message 1`] = `
+exports[`ParticipantForm renders participant form component when user has NOT registered for the event yet renders ParticipantButton component. 1`] = `
 <div>
-  <h3>
-    Event participation form
-  </h3>
-  参加登録が完了しました。
-  <form
-    onSubmit={[Function]}
-  >
-    <TextInputField
-      errorMessages={Array []}
-      id="name"
-      onBlur={[Function]}
-      onChange={[Function]}
-      value=""
-    />
-    <ParticipantButton />
-  </form>
+  <p>
+     
+     
+  </p>
+  <ParticipantButton
+    eventId={1}
+    hasEventWaitlist={true}
+    onClick={[Function]}
+  />
 </div>
 `;
 
-exports[`ParticipantForm renders participant form component with error message 1`] = `
+exports[`ParticipantForm renders participant form component when user has already registered for the event renders CancelRegistrationButton component. 1`] = `
 <div>
-  <h3>
-    Event participation form
-  </h3>
-  <ul>
-    <li>
-      名前を入力して下さい
-    </li>
-  </ul>
-  <form
-    onSubmit={[Function]}
-  >
-    <TextInputField
-      errorMessages={Array []}
-      id="name"
-      onBlur={[Function]}
-      onChange={[Function]}
-      value=""
-    />
-    <ParticipantButton />
-  </form>
+  <p>
+     
+     
+  </p>
+  <CancelRegistrationButton
+    eventId={1}
+    onClick={[Function]}
+  />
 </div>
 `;
