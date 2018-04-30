@@ -54,7 +54,7 @@ const withAuth = (Component: ComponentType<*>) =>
           { this.state.isLoading ? (
             <Loading />
           ) : (
-            <Component {...this.state} session={this.state.session} />
+            <Component {...this.props} {...this.state} session={this.state.session} />
           )}
         </div>
       )

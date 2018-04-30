@@ -5,8 +5,9 @@ import CancelRegistrationButton from '../buttons/CancelRegistrationButton'
 
 type Props = {
   eventId: ?number,
-  hasEventWaitlist: boolean,
+  isSignedIn: boolean,
   isUserRegistered: boolean,
+  hasEventWaitlist: boolean,
   message: string,
   onSubmit: Function,
   onCancel: Function,
@@ -19,18 +20,22 @@ const ParticipantForm = (props: Props) => {
 
   return (
     <div>
-      <p> { props.message } </p>
-      { props.isUserRegistered ?
-        <CancelRegistrationButton
-          eventId={eventId}
-          onClick={onCancel}
-        /> :
-        <ParticipantButton
-          eventId={eventId}
-          hasEventWaitlist={hasEventWaitlist}
-          onClick={onSubmit}
-        />
-      }
+      { props.isSignedIn &&
+        <div>
+          <p> { props.message } </p>
+          { props.isUserRegistered ?
+            <CancelRegistrationButton
+              eventId={eventId}
+              onClick={onCancel}
+            /> :
+            <ParticipantButton
+              eventId={eventId}
+              hasEventWaitlist={hasEventWaitlist}
+              onClick={onSubmit}
+            />
+          }
+        </div>
+    }
     </div>
   )
 }
