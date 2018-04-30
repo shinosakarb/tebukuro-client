@@ -2,42 +2,50 @@
 
 exports[`ParticipantForm on completing registeration for event renders completion message 1`] = `
 <div>
-  <p>
-     
-    参加登録が完了しました。
-     
-  </p>
-  <ParticipantButton
-    eventId={1}
-    hasEventWaitlist={true}
-    onClick={[Function]}
-  />
+  <div>
+    <p>
+       
+      参加登録が完了しました。
+       
+    </p>
+    <ParticipantButton
+      eventId={1}
+      hasEventWaitlist={true}
+      onClick={[Function]}
+    />
+  </div>
 </div>
 `;
 
+exports[`ParticipantForm renders participant form component when user NOT signed in renders nothig. 1`] = `<div />`;
+
 exports[`ParticipantForm renders participant form component when user has NOT registered for the event yet renders ParticipantButton component. 1`] = `
 <div>
-  <p>
-     
-     
-  </p>
-  <ParticipantButton
-    eventId={1}
-    hasEventWaitlist={true}
-    onClick={[Function]}
-  />
+  <div>
+    <p>
+       
+       
+    </p>
+    <ParticipantButton
+      eventId={1}
+      hasEventWaitlist={true}
+      onClick={[Function]}
+    />
+  </div>
 </div>
 `;
 
 exports[`ParticipantForm renders participant form component when user has already registered for the event renders CancelRegistrationButton component. 1`] = `
 <div>
-  <p>
-     
-     
-  </p>
-  <CancelRegistrationButton
-    eventId={1}
-    onClick={[Function]}
-  />
+  <div>
+    <p>
+       
+       
+    </p>
+    <CancelRegistrationButton
+      eventId={1}
+      onClick={[Function]}
+    />
+  </div>
 </div>
 `;

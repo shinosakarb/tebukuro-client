@@ -6,6 +6,7 @@ import ParticipantForm from '../index'
 const testProps = {
   eventId: 1,
   hasEventWaitlist: true,
+  isSignedIn: true,
   isUserRegistered: false,
   message: null,
   onSubmit: () => {},
@@ -33,6 +34,16 @@ describe('ParticipantForm', () => {
       it('renders ParticipantButton component.', () => {
         const wrapper =
           shallow(<ParticipantForm {...testProps} />)
+        const tree = shallowToJson(wrapper)
+
+        expect(tree).toMatchSnapshot()
+      })
+    })
+
+    describe('when user NOT signed in', () => {
+      it('renders nothig.', () => {
+        const wrapper =
+          shallow(<ParticipantForm {...testProps} isSignedIn={false} />)
         const tree = shallowToJson(wrapper)
 
         expect(tree).toMatchSnapshot()
