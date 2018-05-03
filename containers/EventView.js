@@ -2,7 +2,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Error from 'next/error'
-import withAuth from '../components/Auth'
+import { SessionProvider } from '../components/SessionProvider'
 import withProvider from '../components/Provider'
 import { fetchEvent, registerForEvent, cancelRegistration } from '../actions/event'
 import { getCurrentEvent, getHasWaitlist, getHasNotFoundError } from '../selectors/event'
@@ -15,11 +15,9 @@ import EventComponent from '../components/Event'
 import ParticipantFormComponent from '../components/ParticipantForm'
 import ParticipantsListComponent from '../components/ParticipantsList'
 import type { EventId, EventProps } from '../types/Event'
-import type { SessionType } from '../components/Auth'
 
 type Props = {
   url: { query: EventId },
-  session: SessionType,
   event: EventProps,
   hasNotFoundError: boolean,
   hasWaitlist: boolean,
@@ -43,12 +41,11 @@ class EventView extends React.Component<Props> {
       this.props.hasNotFoundError ?
         <Error statusCode="404" />
         :
-        <div>
+        <SessionProvider>
           <h3>This is the event page!</h3>
           <EventComponent event={event} />
           <ParticipantFormComponent
             eventId={event.id}
-            isSignedIn={this.props.session.isSignedIn}
             isUserRegistered={event.registered}
             hasEventWaitlist={this.props.hasWaitlist}
             message={this.props.participantMessage}
@@ -58,7 +55,7 @@ class EventView extends React.Component<Props> {
           <ParticipantsListComponent
             participants={this.props.participants}
           />
-        </div>
+        </SessionProvider>
     )
   }
 }
@@ -77,4 +74,4 @@ const mapDispatchToProps = {
   cancelRegistration,
 }
 
-export default withProvider(connect(mapStateToProps, mapDispatchToProps)(withAuth(EventView)))
+export default withProvider(connect(mapStateToProps, mapDispatchToProps)(EventView))
