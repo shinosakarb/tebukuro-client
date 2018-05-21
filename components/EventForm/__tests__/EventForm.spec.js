@@ -8,6 +8,7 @@ const inputValues = {
   name: EventParams.event1.name,
   description: EventParams.event1.description,
   quota: EventParams.event1.quota,
+  eventStartsAt: EventParams.event1.eventStartsAt,
 }
 
 const testProps = {
@@ -70,6 +71,14 @@ describe('EventForm', () => {
       quotaElement.simulate(
         'change',
         { target: { id: 'quota', value: inputValues.quota } },
+      )
+      quotaElement.simulate(
+        'change',
+        { target: { id: 'eventStartsAt', value: inputValues.eventStartsAt } },
+      )
+      quotaElement.simulate(
+        'change',
+        { target: { id: 'eventEndsAt', value: inputValues.eventEndsAt } },
       )
       wrapper.find('[type="submit"]').simulate('submit')
 

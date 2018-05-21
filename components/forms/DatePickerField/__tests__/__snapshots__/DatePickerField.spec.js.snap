@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TextInput render event form component 1`] = `
+<div>
+  <label
+    htmlFor="name"
+  >
+    name
+    <input
+      id="name"
+      onBlur={[Function]}
+      onChange={[Function]}
+      type="datetime-local"
+      value="event1"
+    />
+    <span
+      style={
+        Object {
+          "color": "red",
+          "fontSize": "13px",
+          "paddingLeft": "5px",
+        }
+      }
+    >
+      nameは必須です。
+    </span>
+  </label>
+</div>
+`;

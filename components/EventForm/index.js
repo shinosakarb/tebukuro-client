@@ -1,6 +1,7 @@
 // @flow
 import React, { Component } from 'react'
 import TextInputField from '../forms/TextInputField'
+import DatePickerField from '../forms/DatePickerField'
 
 type Props = {
   onSubmit: Function,
@@ -8,16 +9,21 @@ type Props = {
   validationErrors: Object,
   validationFailed: boolean,
 }
+
 type State = {
   name: string,
   description: string,
-  quota: number
+  quota: number,
+  eventStartsAt: string,
+  eventEndsAt: string,
 }
 
 export default class EventForm extends Component<Props, State> {
   constructor(props: Props) {
     super(props)
-    this.state = { name: '', description: '', quota: 0 }
+    this.state = {
+      name: '', description: '', quota: 0, eventStartsAt: '', eventEndsAt: '',
+    }
   }
 
   onBlurHandler = (e: SyntheticInputEvent<>) => {
@@ -64,6 +70,20 @@ export default class EventForm extends Component<Props, State> {
             onChange={this.onChangeHandler}
             onBlur={this.onBlurHandler}
             errorMessages={this.props.validationErrors.quota}
+          />
+          <DatePickerField
+            id="eventStartsAt"
+            value={this.state.eventStartsAt}
+            onChange={this.onChangeHandler}
+            onBlur={this.onBlurHandler}
+            errorMessages={this.props.validationErrors.eventStartsAt}
+          />
+          <DatePickerField
+            id="eventEndsAt"
+            value={this.state.eventEndsAt}
+            onChange={this.onChangeHandler}
+            onBlur={this.onBlurHandler}
+            errorMessages={this.props.validationErrors.eventEndsAt}
           />
           <input type="submit" disabled={this.props.validationFailed} />
         </form>
