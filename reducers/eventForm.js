@@ -13,6 +13,14 @@ export const eventFormInitialState = new Map({
     validationPassed: false,
     errors: new List(),
   }),
+  eventStartsAt: new Map({
+    validationPassed: false,
+    errors: new List(),
+  }),
+  eventEndsAt: new Map({
+    validationPassed: false,
+    errors: new List(),
+  }),
 })
 
 const validateEventForm = {

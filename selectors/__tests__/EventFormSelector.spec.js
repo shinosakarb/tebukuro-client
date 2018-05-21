@@ -2,7 +2,6 @@ import { Map, List } from 'immutable'
 import * as EventFormSelector from '../eventForm'
 
 const nameErrorMessages = ['nameは必須です。']
-const quotaErrorMessages = []
 
 const testEventFormState = new Map({
   name: new Map({
@@ -11,7 +10,15 @@ const testEventFormState = new Map({
   }),
   quota: new Map({
     validationPassed: true,
-    errors: new List(quotaErrorMessages),
+    errors: new List([]),
+  }),
+  eventStartsAt: new Map({
+    validationPassed: true,
+    errors: new List([]),
+  }),
+  eventEndsAt: new Map({
+    validationPassed: true,
+    errors: new List([]),
   }),
 })
 const mockState = { eventForm: testEventFormState }
@@ -22,7 +29,9 @@ describe('EventFormSelector', () => {
       const subject = EventFormSelector.getValidationErrorMessages(mockState)
       expect(subject).toEqual({
         name: nameErrorMessages,
-        quota: quotaErrorMessages,
+        quota: [],
+        eventStartsAt: [],
+        eventEndsAt: [],
       })
     })
   })
