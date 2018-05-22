@@ -8,7 +8,7 @@ export type AuthInfo = {
   uid: string,
 }
 
-type AuthQueryParams = {
+export type AuthQueryParams = {
   auth_token: string,
   client_id: string,
   uid: string,
