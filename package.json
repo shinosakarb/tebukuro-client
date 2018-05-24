@@ -20,6 +20,8 @@
     "axios": "^0.16.2",
     "immutable": "^3.8.2",
     "lodash": "^4.17.4",
+    "moment-timezone": "^0.5.17",
+    "moment": "^2.22.1",
     "next": "^4.2.1",
     "normalizr": "^3.2.4",
     "path-match": "^1.2.4",

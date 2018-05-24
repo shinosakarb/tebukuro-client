@@ -14,7 +14,7 @@ const metaCreator = schema => () => (
 )
 
 const create =
-  createAction(ActionsType.Event.createEvent, event.create, metaCreator(EventSchema))
+  createAction(ActionsType.Event.createEvent, event.createEvent, metaCreator(EventSchema))
 
 // TODO: Return reject in thunk.
 export const createEvent = (params: EventProps) => (dispatch: Dispatch, getState: Function) => (

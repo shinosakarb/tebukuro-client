@@ -31,6 +31,18 @@ exports[`EventForm render event form component 1`] = `
       onChange={[Function]}
       value={0}
     />
+    <DatePickerField
+      id="eventStartsAt"
+      onBlur={[Function]}
+      onChange={[Function]}
+      value=""
+    />
+    <DatePickerField
+      id="eventEndsAt"
+      onBlur={[Function]}
+      onChange={[Function]}
+      value=""
+    />
     <input
       disabled={false}
       type="submit"

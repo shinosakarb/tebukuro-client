@@ -11,7 +11,7 @@ const mockedPromise = params => (
 )
 
 export const event = {
-  create: mockedPromise,
+  createEvent: mockedPromise,
   find: mockedPromise,
   cancelRegistration: mockedPromise,
 }
