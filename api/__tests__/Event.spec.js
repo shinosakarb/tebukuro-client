@@ -71,8 +71,8 @@ describe('Event', () => {
             const requestParams = moxios.requests.mostRecent().config.data
             // should no offset
             expect(JSON.parse(requestParams)).toEqual(expect.objectContaining({
-              event_starts_at: '2018-03-01T09:00:00.000Z',
-              event_ends_at: '2018-03-01T17:00:00.000Z',
+              event_starts_at: '2018-03-01T09:00:00Z',
+              event_ends_at: '2018-03-01T17:00:00Z',
             }))
           })
         })
@@ -89,10 +89,10 @@ describe('Event', () => {
 
           return event.createEvent(params).then(() => {
             const requestParams = moxios.requests.mostRecent().config.data
-            // should -9 hours as offset of Asia/Tokyo timezone
+            // should +9 hours as offset of Asia/Tokyo timezone
             expect(JSON.parse(requestParams)).toEqual(expect.objectContaining({
-              event_starts_at: '2018-03-01T00:00:00.000Z',
-              event_ends_at: '2018-03-01T08:00:00.000Z',
+              event_starts_at: '2018-03-01T09:00:00+09:00',
+              event_ends_at: '2018-03-01T17:00:00+09:00',
             }))
           })
         })

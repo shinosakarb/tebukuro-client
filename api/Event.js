@@ -11,7 +11,7 @@ type createProps = {
   eventEndsAt: string,
 }
 
-const toUTCString = (datetime: string) => moment(datetime).utc().toISOString()
+const toISOString = (datetime: string) => moment(datetime).format()
 
 export default class Event extends Base {
   cancelRegistration = (params: number) => {
@@ -22,8 +22,8 @@ export default class Event extends Base {
   createEvent = (params: createProps) => {
     const createParams = {
       ...params,
-      eventStartsAt: toUTCString(params.eventStartsAt),
-      eventEndsAt: toUTCString(params.eventEndsAt),
+      eventStartsAt: toISOString(params.eventStartsAt),
+      eventEndsAt: toISOString(params.eventEndsAt),
     }
 
     return this.create(createParams)
