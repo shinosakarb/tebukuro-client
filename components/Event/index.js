@@ -7,6 +7,8 @@ const Event = (props: {event: EventProps}) => (
     <p>name: {props.event.name}</p>
     <p>description: {props.event.description}</p>
     <p>quota: {props.event.quota}</p>
+    <p>eventStartsAt: {props.event.eventStartsAt}</p>
+    <p>eventEndsAt: {props.event.eventEndsAt}</p>
     <p>number of participants: {props.event.participants.length}</p>
   </div>
 )

@@ -10,10 +10,16 @@ import ParticipantParams from '../../factories/Participant'
 
 const { participant1 } = ParticipantParams
 const { event1 } = EventParams
+const { eventStartsAt, eventEndsAt, ...otherEvent1Params } = event1
+const eventEntity = {
+  ...otherEvent1Params,
+  event_starts_at: eventStartsAt,
+  event_ends_at: eventEndsAt,
+}
 
 const eventPayload = {
   result: event1.id,
-  entities: { event: { [event1.id]: event1 } },
+  entities: { event: { [event1.id]: eventEntity } },
   errors: [],
 }
 

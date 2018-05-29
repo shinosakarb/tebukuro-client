@@ -1,5 +1,10 @@
 // @flow
 import { createSelector } from 'reselect'
+import moment from 'moment-timezone'
+
+const localizeISOString = (isostring: string) => (
+  moment(isostring).locale('ja').format('LLLL')
+)
 
 const getEventEntities = state => state.event.get('entities')
 const getEventErrors = state => state.event.get('errors')
@@ -10,8 +15,11 @@ export const getCurrentEvent = createSelector(
   [getEventId, getEventEntities],
   (id, entities) => {
     const entitiesObject = entities.get(id.toString()).toObject()
+
     return {
       ...entitiesObject,
+      eventStartsAt: localizeISOString(entitiesObject.eventStartsAt),
+      eventEndsAt: localizeISOString(entitiesObject.eventEndsAt),
       participants: entitiesObject.participants.toArray(),
     }
   },

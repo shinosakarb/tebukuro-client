@@ -15,6 +15,14 @@ exports[`Event Component renders self. 1`] = `
     10
   </p>
   <p>
+    eventStartsAt: 
+    2018-03-01T09:00:00
+  </p>
+  <p>
+    eventEndsAt: 
+    2018-03-01T17:00:00
+  </p>
+  <p>
     number of participants: 
     3
   </p>
