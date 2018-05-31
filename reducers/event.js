@@ -15,6 +15,7 @@ export const eventInitialState = new Map({
       quota: 0,
       eventStartsAt: null,
       eventEndsAt: null,
+      withinDeadline: false,
       userParticipation: new Map({
         registered: false,
         onWaitingList: false,

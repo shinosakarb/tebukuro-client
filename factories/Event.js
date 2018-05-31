@@ -6,11 +6,12 @@ export default {
     quota: 10,
     eventStartsAt: '2018-03-01T09:00:00',
     eventEndsAt: '2018-03-01T17:00:00',
-    participants: [],
+    withinDeadline: true,
     userParticipation: {
       registered: true,
       onWaitingList: false,
     },
+    participants: [],
   },
   errorEvent: {
     id: 1,
@@ -20,10 +21,11 @@ export default {
     errors: ['nameを入力してください', 'nameは１０文字以内です'],
     eventStartsAt: '2018-03-01T09:00:00',
     eventEndsAt: '2018-03-01T17:00:00',
-    participants: [],
+    withinDeadline: true,
     userParticipation: {
       registered: false,
       onWaitingList: false,
     },
+    participants: [],
   },
 }

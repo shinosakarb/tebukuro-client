@@ -1,8 +1,9 @@
 // @flow
 import React from 'react'
 
-import { SessionConsumer } from '../SessionProvider'
+import { toggleComponentsBySession } from '../SessionProvider'
 
+import AfterDeadline from '../AfterDeadline'
 import ParticipantButton from '../buttons/ParticipantButton'
 import CancelRegistrationButton from '../buttons/CancelRegistrationButton'
 
@@ -33,17 +34,22 @@ export const ParticipantForm = (props: Props) => {
           hasEventWaitlist={hasEventWaitlist}
           onClick={onSubmit}
         />
-      }
+       }
     </div>
   )
 }
 
 ParticipantForm.displayName = 'ParticipantForm'
 
-const ParticipantFormWithSession = (props: Props) => (
-  <SessionConsumer>
-    { (session: any) => (session.isSignedIn ? <ParticipantForm {...props} /> : null) }
-  </SessionConsumer>
+const ParticipantFormWithDeadline = ({ isEventWithinDeadline, ...props }: any) => (
+  <div>
+    { isEventWithinDeadline ? <ParticipantForm {...props} /> : <AfterDeadline /> }
+  </div>
 )
+
+ParticipantFormWithDeadline.displayName = 'ParticipantFormWithDeadline'
+
+const ParticipantFormWithSession =
+  toggleComponentsBySession(ParticipantFormWithDeadline, () => <div />)
 
 export default ParticipantFormWithSession
