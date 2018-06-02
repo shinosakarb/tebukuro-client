@@ -3,7 +3,7 @@ import { createAction } from 'redux-actions'
 import Router from 'next/router'
 import type { Dispatch } from 'redux'
 import ActionsType from '../constants/Actions'
-import { event, participant } from '../api'
+import { event } from '../api'
 import EventSchema from '../schemas/event'
 import ParticipantSchema from '../schemas/participant'
 import { getEventId } from '../selectors/event'
@@ -34,7 +34,7 @@ export const fetchEvent =
 export const registerForEvent =
   createAction(
     ActionsType.Event.registerForEvent,
-    participant.create,
+    event.registerForEvent,
     metaCreator(ParticipantSchema),
   )
 

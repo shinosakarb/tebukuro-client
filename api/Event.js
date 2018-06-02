@@ -19,6 +19,11 @@ export default class Event extends Base {
     return this.client.delete(url).then(this.onSuccess, this.onFailure)
   }
 
+  registerForEvent = (params: number) => {
+    const url = pathToRegexp.compile(this.endpoints.registerForEvent)(params)
+    return this.client.post(url).then(this.onSuccess, this.onFailure)
+  }
+
   createEvent = (params: createProps) => {
     const createParams = {
       ...params,
