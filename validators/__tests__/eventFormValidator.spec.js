@@ -1,7 +1,7 @@
 import eventFormValidator from '../eventFormValidator'
 
 const id = 'name'
-const value = 'event1'
+const value = { name: 'event1' }
 
 const passedResult = {
   id,

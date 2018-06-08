@@ -10,7 +10,7 @@ type Props = {
   validationFailed: boolean,
 }
 
-type State = {
+export type EventState = {
   name: string,
   description: string,
   quota: number,
@@ -18,7 +18,7 @@ type State = {
   eventEndsAt: string,
 }
 
-export default class EventForm extends Component<Props, State> {
+export default class EventForm extends Component<Props, EventState> {
   constructor(props: Props) {
     super(props)
     this.state = {
@@ -27,8 +27,7 @@ export default class EventForm extends Component<Props, State> {
   }
 
   onBlurHandler = (e: SyntheticInputEvent<>) => {
-    const { id, value } = e.target
-    this.props.onValidation(id, value)
+    this.props.onValidation(e.target.id, this.state)
   }
 
   onChangeHandler = (e: SyntheticInputEvent<>) => {
@@ -37,7 +36,7 @@ export default class EventForm extends Component<Props, State> {
       ...this.state,
       [id]: value,
     })
-    this.props.onValidation(id, value)
+    this.props.onValidation(id, this.state)
   }
 
   onSubmitHandler = (e: SyntheticEvent<>) => {
