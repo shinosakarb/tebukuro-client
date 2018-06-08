@@ -3,11 +3,16 @@ import * as EventSelector from '../event'
 import EventParams from '../../factories/Event'
 
 const eventId = EventParams.event1.id
+const eventEntity = {
+  ...EventParams.event1,
+  eventStartsAt: '2018-03-01T09:00:00+09:00',
+  eventEndsAt: '2018-03-01T17:00:00+09:00',
+}
 const errorMessages = ['nameを入力して下さい', 'nameは１０文字以下です']
 
 const testEventState = new Map({
   entityId: eventId,
-  entities: new Map({ [eventId]: new Map().merge(EventParams.event1) }),
+  entities: new Map({ [eventId]: new Map().merge(eventEntity) }),
   errors: new List(errorMessages),
 })
 const mockState = { event: testEventState }
@@ -30,7 +35,13 @@ describe('EventSelector', () => {
   describe('getCurrentEvent', () => {
     it('returns event object pointed by entityId.', () => {
       const subject = EventSelector.getCurrentEvent(mockState)
-      expect(subject).toEqual(EventParams.event1)
+      const result = {
+        ...EventParams.event1,
+        eventStartsAt: '2018年3月1日 木曜日 00:00',
+        eventEndsAt: '2018年3月1日 木曜日 08:00',
+      }
+
+      expect(subject).toEqual(result)
     })
   })
 
