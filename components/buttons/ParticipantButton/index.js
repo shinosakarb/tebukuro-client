@@ -10,7 +10,7 @@ type Props = {
 const ParticipantButton = (props: Props) => {
   const onClickHandler = (e: SyntheticEvent<>) => {
     e.preventDefault()
-    props.onClick({ eventId: props.eventId })
+    props.onClick({ id: props.eventId })
   }
 
   return (

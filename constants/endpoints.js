@@ -4,6 +4,7 @@ export const event = {
   create: '/events',
   update: '/events/:id',
   delete: '/events/:id',
+  registerForEvent: '/events/:id/registrations',
   cancelRegistration: '/events/:id/registrations',
 }
 

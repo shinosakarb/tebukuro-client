@@ -10,7 +10,7 @@ const event = new Event(endpoints.event)
 
 // Removing extra '/' from endpoint
 const baseUrl = process.env.BASE_URL + endpoints.event.all.substring(1)
-const cancelUrl = `${baseUrl}/1/registrations`
+const registrationUrl = `${baseUrl}/1/registrations`
 
 const { event1 } = eventParams
 
@@ -26,11 +26,37 @@ describe('Event', () => {
     moxios.uninstall()
   })
 
+  describe('.registerForEvent', () => {
+    describe('on success', () => {
+      const participant = { id: 10 }
+
+      it('should return  mock data.', () => {
+        expect.assertions(1)
+        moxios.stubOnce('post', registrationUrl, { status: 200, response: participant })
+        return event.registerForEvent({ id: 1 }).then((res) => {
+          expect(res).toEqual(participant)
+        })
+      })
+    })
+    describe('on failure', () => {
+      const errorResponse = { eventId: ['への参加登録に失敗しました'] }
+      const errorMessages = ['eventIdへの参加登録に失敗しました']
+
+      it('should return Error object with messages.', () => {
+        expect.assertions(1)
+        moxios.stubOnce('post', registrationUrl, { status: 422, response: errorResponse })
+        return event.registerForEvent({ id: 1 }).catch((err) => {
+          expect(err.errors).toEqual(errorMessages)
+        })
+      })
+    })
+  })
+
   describe('.cancelRegistration', () => {
     describe('on success', () => {
       it('should return canceled mock data.', () => {
         expect.assertions(1)
-        moxios.stubOnce('delete', cancelUrl, { status: 200, response: event1 })
+        moxios.stubOnce('delete', registrationUrl, { status: 200, response: event1 })
         return event.cancelRegistration(event1).then((res) => {
           expect(res).toEqual(event1)
         })
@@ -39,7 +65,7 @@ describe('Event', () => {
     describe('on failure', () => {
       it('should return Error object with messages.', () => {
         expect.assertions(1)
-        moxios.stubOnce('delete', cancelUrl, { status: 404 })
+        moxios.stubOnce('delete', registrationUrl, { status: 404 })
         return event.cancelRegistration(event1).catch((err) => {
           expect(err.errors).toEqual(['Not Found'])
         })
