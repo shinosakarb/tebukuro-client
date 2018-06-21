@@ -6,7 +6,6 @@ import { Map } from 'immutable'
 import * as Actions from '../event'
 import ActionsType from '../../constants/Actions'
 import EventSchema from '../../schemas/event'
-import ParticipantSchema from '../../schemas/participant'
 
 jest.mock('../../api/index')
 // eslint-disable-next-line import/first
@@ -145,7 +144,7 @@ describe('EventAction', () => {
             const action = store.getActions()[0]
             expect(action.type).toBe(ActionsType.Event.registerForEvent)
             expect(action.payload).toEqual(testParam)
-            expect(action.meta.normalizr.schema).toEqual(ParticipantSchema)
+            expect(action.meta.normalizr.schema).toEqual(EventSchema)
           })
       })
     })

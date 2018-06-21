@@ -5,7 +5,6 @@ import type { Dispatch } from 'redux'
 import ActionsType from '../constants/Actions'
 import { event } from '../api'
 import EventSchema from '../schemas/event'
-import ParticipantSchema from '../schemas/participant'
 import { getEventId } from '../selectors/event'
 import type { EventProps } from '../types/Event'
 
@@ -35,7 +34,7 @@ export const registerForEvent =
   createAction(
     ActionsType.Event.registerForEvent,
     event.registerForEvent,
-    metaCreator(ParticipantSchema),
+    metaCreator(EventSchema),
   )
 
 export const cancelRegistration =

@@ -20,7 +20,7 @@ const participantReducerMap = {
   [Actions.Event.fetchEvent]: {
     next: (state, action) => (
       state.merge({
-        entities: action.payload.entities.participant,
+        entities: action.payload.entities.participant || {},
         errors: [],
       })
     ),
@@ -28,8 +28,10 @@ const participantReducerMap = {
 
   [Actions.Event.registerForEvent]: {
     next: (state, action) => {
-      const { participant } = action.payload.entities
-      const { onWaitingList } = participant[action.payload.result]
+      const { result, entities } = action.payload
+      const { event, participant } = entities
+      const { onWaitingList } = event[result].userParticipation
+
       return state.mergeDeep({
         entities: participant,
         message: participationCompleteMessage(onWaitingList),

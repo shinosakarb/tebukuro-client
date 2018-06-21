@@ -6,15 +6,11 @@ import Actions from '../../constants/Actions'
 import Messages from '../../constants/Messages'
 import ApiResponseError from '../../api/ApiResponseError'
 
+import EventParams from '../../factories/Event'
 import ParticipantParams from '../../factories/Participant'
 
+const { event1 } = EventParams
 const { participant1, participant2 } = ParticipantParams
-
-const participantPayload = participant => ({
-  result: participant.id,
-  entities: { participant: { [participant.id]: participant } },
-  errors: [],
-})
 
 const error = { response: { data: { name: ['を入力して下さい', 'は１０文字以下です'] } } }
 const errorMessages = new List(['nameを入力して下さい', 'nameは１０文字以下です'])
@@ -31,6 +27,19 @@ describe('Participant Reducer', () => {
 
     describe('with success event fetch', () => {
       it('should return participants in fetched event', () => {
+        const payload = {
+          result: event1.id,
+          entities: {
+            event: {
+              [event1.id]: { ...event1, participants: [participant1.id] },
+            },
+            participant: { [participant1.id]: participant1 },
+            errors: [],
+          },
+        }
+
+        const subject = ParticipantReducer(participantInitialState, fetchEvent(payload))
+
         const expectedState = new Map({
           entities: new Map({
             [participant1.id]: new Map({ ...participant1 }),
@@ -38,8 +47,7 @@ describe('Participant Reducer', () => {
           errors: new List(),
           message: null,
         })
-        const payload = participantPayload(participant1)
-        const subject = ParticipantReducer(participantInitialState, fetchEvent(payload))
+
 
         expect(subject).toEqual(expectedState)
       })
@@ -61,12 +69,26 @@ describe('Participant Reducer', () => {
     describe('with success registeration for event', () => {
       describe('with onWaitingList false', () => {
         it('should add regitered participant with the admitted message.', () => {
-          const payload = participantPayload({ ...participant1, onWaitingList: false })
+          const registeredEvent = {
+            ...event1,
+            participants: [participant1.id],
+            userParticipation: { regitered: true, onWaitingList: false },
+          }
+
+          const payload = {
+            result: event1.id,
+            entities: {
+              event: { [event1.id]: registeredEvent },
+              participant: { [participant1.id]: participant1 },
+              errors: [],
+            },
+          }
+
           const subject = ParticipantReducer(participantInitialState, registerForEvent(payload))
 
           const expectedState = new Map({
             entities: new Map({
-              [participant1.id]: new Map({ ...participant1, onWaitingList: false }),
+              [participant1.id]: new Map(participant1),
             }),
             errors: new List(),
             message: Messages.Participants.admittedRegestration,
@@ -78,12 +100,26 @@ describe('Participant Reducer', () => {
 
       describe('with onWaitingList true.', () => {
         it('should add regitered participant with the waitlisted message.', () => {
-          const payload = participantPayload({ ...participant1, onWaitingList: true })
+          const waitlistedEvent = {
+            ...event1,
+            participants: [participant1.id],
+            userParticipation: { regitered: true, onWaitingList: true },
+          }
+
+          const payload = {
+            result: event1.id,
+            entities: {
+              event: { [event1.id]: waitlistedEvent },
+              participant: { [participant1.id]: participant1 },
+              errors: [],
+            },
+          }
+
           const subject = ParticipantReducer(participantInitialState, registerForEvent(payload))
 
           const expectedState = new Map({
             entities: new Map({
-              [participant1.id]: new Map({ ...participant1, onWaitingList: true }),
+              [participant1.id]: new Map(participant1),
             }),
             errors: new List(),
             message: Messages.Participants.waitlistedRegestration,
@@ -116,7 +152,22 @@ describe('Participant Reducer', () => {
           errors: new List(),
           message: null,
         })
-        const payload = participantPayload(participant1)
+
+        const cancelledEvent = {
+          ...event1,
+          participants: [participant1.id],
+          userParticipation: { regitered: true, onWaitingList: false },
+        }
+
+        const payload = {
+          result: event1.id,
+          entities: {
+            event: { [event1.id]: cancelledEvent },
+            participant: { [participant1.id]: participant1 },
+            errors: [],
+          },
+        }
+
         const subject = ParticipantReducer(prevState, cancelRegistration(payload))
 
         const expectedState = prevState.deleteIn(['entities', `${participant2.id}`])
