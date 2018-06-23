@@ -14,7 +14,7 @@ export default class Base {
   }
 
   onSuccess(response: Object) {
-    return response.data
+    return ConvertCase.camelKeysOf(response.data)
   }
 
   onFailure(error: Object): Promise<Error> {
