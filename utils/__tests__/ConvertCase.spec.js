@@ -4,11 +4,19 @@ describe('ConvertCase', () => {
   const camelKeysParams = {
     eventId: 1,
     name: 'name',
+    userParticipation: {
+      registered: true,
+      onWaitingList: true,
+    },
   }
 
   const snakeKeysParams = {
     event_id: 1,
     name: 'name',
+    user_participation: {
+      registered: true,
+      on_waiting_list: true,
+    },
   }
 
   describe('.camelKeysOf()', () => {

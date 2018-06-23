@@ -1,16 +1,10 @@
 // @flow
 import { handleActions } from 'redux-actions'
 import { Map, List } from 'immutable'
-import _ from 'lodash'
 
 import Actions from '../constants/Actions'
-import ConvertCase from '../utils/ConvertCase'
 
 const initialId = 0
-
-const toCamelCase = payload => (
-  _.mapValues(payload, val => ConvertCase.camelKeysOf(val))
-)
 
 export const eventInitialState = new Map({
   entityId: initialId,
@@ -32,7 +26,7 @@ const setEvent = {
   next: (state, action) => (
     state.merge({
       entityId: action.payload.result,
-      entities: toCamelCase(action.payload.entities.event),
+      entities: action.payload.entities.event,
       errors: [],
     })
   ),

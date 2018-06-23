@@ -1,10 +1,8 @@
 // @flow
 import { handleActions } from 'redux-actions'
 import { Map, List } from 'immutable'
-import _ from 'lodash'
 
 import Actions from '../constants/Actions'
-import ConvertCase from '../utils/ConvertCase'
 import Messages from '../constants/Messages'
 
 export const participantInitialState = new Map({
@@ -12,10 +10,6 @@ export const participantInitialState = new Map({
   errors: new List(),
   message: null,
 })
-
-const toCamelCase = payload => (
-  _.mapValues(payload, val => ConvertCase.camelKeysOf(val))
-)
 
 const { admittedRegestration, waitlistedRegestration } = Messages.Participants
 const participationCompleteMessage = onWaitingList => (
@@ -26,7 +20,7 @@ const participantReducerMap = {
   [Actions.Event.fetchEvent]: {
     next: (state, action) => (
       state.merge({
-        entities: toCamelCase(action.payload.entities.participant),
+        entities: action.payload.entities.participant,
         errors: [],
       })
     ),
@@ -34,7 +28,7 @@ const participantReducerMap = {
 
   [Actions.Event.registerForEvent]: {
     next: (state, action) => {
-      const participant = toCamelCase(action.payload.entities.participant)
+      const { participant } = action.payload.entities
       const { onWaitingList } = participant[action.payload.result]
       return state.mergeDeep({
         entities: participant,
@@ -48,7 +42,7 @@ const participantReducerMap = {
   [Actions.Event.cancelRegistration]: {
     next: (state, action) => (
       state.merge({
-        entities: toCamelCase(action.payload.entities.participant),
+        entities: action.payload.entities.participant,
         errors: [],
       })
     ),
