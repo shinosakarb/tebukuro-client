@@ -1,17 +1,24 @@
 // @flow
 import _ from 'lodash'
 
-const convertKeys = (dict, converter) => (
-  _.mapKeys(dict, (v, k) => converter(k))
-)
+const convertKeysInDeep = (obj, converter) => {
+  if (!_.isObject(obj)) { return obj }
+
+  if (_.isArray(obj)) { return obj.map(v => convertKeysInDeep(v, converter)) }
+
+  return _.chain(obj)
+    .mapKeys((v, k) => converter(k))
+    .mapValues(v => convertKeysInDeep(v, converter))
+    .value()
+}
 
 const ConvertCase = {
-  camelKeysOf(dict: Object) {
-    return convertKeys(dict, _.camelCase)
+  camelKeysOf(obj: Object) {
+    return convertKeysInDeep(obj, _.camelCase)
   },
 
-  snakeKeysOf(dict: Object) {
-    return convertKeys(dict, _.snakeCase)
+  snakeKeysOf(obj: Object) {
+    return convertKeysInDeep(obj, _.snakeCase)
   },
 }
 
