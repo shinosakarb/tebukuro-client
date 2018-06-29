@@ -21,6 +21,7 @@ export const getCurrentEvent = createSelector(
       eventStartsAt: localizeISOString(entitiesObject.eventStartsAt),
       eventEndsAt: localizeISOString(entitiesObject.eventEndsAt),
       participants: entitiesObject.participants.toArray(),
+      userParticipation: entitiesObject.userParticipation.toObject(),
     }
   },
 )

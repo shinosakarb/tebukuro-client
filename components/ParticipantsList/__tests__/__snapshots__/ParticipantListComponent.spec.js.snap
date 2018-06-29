@@ -10,6 +10,7 @@ exports[`ParticipantList Component renders self. 1`] = `
         eventId={1}
         id={1}
         name="participant1"
+        onWaitingList={false}
       />
     </li>
     <li
@@ -19,6 +20,7 @@ exports[`ParticipantList Component renders self. 1`] = `
         eventId={1}
         id={2}
         name="participant2"
+        onWaitingList={true}
       />
     </li>
   </ul>

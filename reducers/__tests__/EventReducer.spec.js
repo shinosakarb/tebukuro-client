@@ -38,7 +38,11 @@ describe('Event Reducer', () => {
         const expectedState = new Map({
           entityId: event1.id,
           entities: new Map({
-            [event1.id]: new Map({ ...event1, participants: new List() }),
+            [event1.id]: new Map({
+              ...event1,
+              userParticipation: new Map(event1.userParticipation),
+              participants: new List(),
+            }),
           }),
           errors: new List(),
         })
@@ -64,7 +68,11 @@ describe('Event Reducer', () => {
         const expectedState = new Map({
           entityId: event1.id,
           entities: new Map({
-            [event1.id]: new Map({ ...event1, participants: new List() }),
+            [event1.id]: new Map({
+              ...event1,
+              userParticipation: new Map(event1.userParticipation),
+              participants: new List(),
+            }),
           }),
           errors: new List(),
         })
@@ -88,28 +96,43 @@ describe('Event Reducer', () => {
       entities: new Map({
         [event1.id]: new Map({
           ...event1,
+          userParticipation: new Map({ registered: false, onWaitingList: false }),
           participants: new List(),
         }),
       }),
       errors: new List(),
     })
 
-    const participantPayload = { result: participant1.id }
+    const registeredPayload = {
+      result: event1.id,
+      entities: {
+        event: {
+          [event1.id]: {
+            ...event1,
+            userParticipation: { registered: true, onWaitingList: false },
+            participants: [participant1.id],
+          },
+        },
+        errors: [],
+      },
+    }
 
     describe('with success event register', () => {
       it('should add registered participant', () => {
-        const subject = EventReducer(prevState, registerForEvent(participantPayload))
-        const expectedState =
-          prevState.setIn(['entities', '1', 'participants'], new List([participant1.id]))
+        const subject = EventReducer(prevState, registerForEvent(registeredPayload))
+
+        const expectedState = prevState
+          .setIn(['entities', '1', 'participants'], new List([participant1.id]))
+          .setIn(['entities', '1', 'userParticipation'], new Map({ registered: true, onWaitingList: false }))
 
         expect(subject).toEqual(expectedState)
       })
     })
 
-    describe('with failure event registerFor', () => {
+    describe('with failure event register', () => {
       it('should keep previous state', () => {
         const subject = EventReducer(prevState, registerForEvent(new ApiResponseError(error)))
-        expect(subject).toEqual(prevState)
+        expect(subject.get('errors')).toEqual(errorMessages)
       })
     })
   })
@@ -121,7 +144,9 @@ describe('Event Reducer', () => {
       entityId: event1.id,
       entities: new Map({
         [event1.id]: new Map({
-          ...event1, participants: new List([participant1.id]),
+          ...event1,
+          userParticipation: new Map(event1.userParticipation),
+          participants: new List([participant1.id]),
         }),
       }),
       errors: new List(),

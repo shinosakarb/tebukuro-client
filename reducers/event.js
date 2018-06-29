@@ -15,7 +15,10 @@ export const eventInitialState = new Map({
       quota: 0,
       eventStartsAt: null,
       eventEndsAt: null,
-      registered: false,
+      userParticipation: new Map({
+        registered: false,
+        onWaitingList: false,
+      }),
       participants: new List([]),
     }),
   }),
@@ -23,32 +26,18 @@ export const eventInitialState = new Map({
 })
 
 const setEvent = {
-  next: (state, action) => (
-    state.merge({
-      entityId: action.payload.result,
-      entities: action.payload.entities.event,
-      errors: [],
-    })
-  ),
+  next: (state, action) => state.merge({
+    entityId: action.payload.result,
+    entities: action.payload.entities.event,
+    errors: [],
+  }),
   throw: (state, action) => state.merge({ errors: action.payload.errors }),
-}
-
-const mergeParticipant = {
-  next: (state, action) => {
-    const eventId = state.get('entityId').toString()
-    const participantId = action.payload.result
-
-    return state.updateIn(
-      ['entities', eventId, 'participants'],
-      participants => participants.push(participantId),
-    )
-  },
 }
 
 const eventReducerMap = {
   [Actions.Event.createEvent]: setEvent,
   [Actions.Event.fetchEvent]: setEvent,
-  [Actions.Event.registerForEvent]: mergeParticipant,
+  [Actions.Event.registerForEvent]: setEvent,
   [Actions.Event.cancelRegistration]: setEvent,
 }
 
