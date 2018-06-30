@@ -27,5 +27,7 @@ export const getCurrentEvent = createSelector(
 )
 export const getHasWaitlist =
   createSelector(getCurrentEvent, event => event.participants.length >= event.quota)
+export const getUserParticipation =
+  createSelector(getCurrentEvent, event => event.userParticipation)
 export const getHasNotFoundError =
   createSelector(getEventErrors, errors => errors.indexOf('Not Found') !== -1)

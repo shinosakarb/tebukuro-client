@@ -5,7 +5,13 @@ import Error from 'next/error'
 import { SessionProvider } from '../components/SessionProvider'
 import withProvider from '../components/Provider'
 import { fetchEvent, registerForEvent, cancelRegistration } from '../actions/event'
-import { getCurrentEvent, getHasWaitlist, getHasNotFoundError } from '../selectors/event'
+
+import {
+  getCurrentEvent,
+  getHasWaitlist,
+  getHasNotFoundError,
+  getUserParticipation,
+} from '../selectors/event'
 import {
   getParticipants,
   getParticipantMessage,
@@ -14,7 +20,7 @@ import {
 import EventComponent from '../components/Event'
 import ParticipantFormComponent from '../components/ParticipantForm'
 import ParticipantsListComponent from '../components/ParticipantsList'
-import type { EventId, EventProps } from '../types/Event'
+import type { EventId, EventProps, UserParticipation } from '../types/Event'
 
 type Props = {
   url: { query: EventId },
@@ -23,6 +29,7 @@ type Props = {
   hasWaitlist: boolean,
   participants: ?Object[],
   participantMessage: string,
+  userParticipation: UserParticipation,
   fetchEvent: Function,
   registerForEvent: Function,
   cancelRegistration: Function,
@@ -35,7 +42,7 @@ class EventView extends React.Component<Props> {
   }
 
   render() {
-    const { event } = this.props
+    const { event, userParticipation } = this.props
 
     return (
       this.props.hasNotFoundError ?
@@ -46,7 +53,7 @@ class EventView extends React.Component<Props> {
           <EventComponent event={event} />
           <ParticipantFormComponent
             eventId={event.id}
-            isUserRegistered={event.registered}
+            isUserRegistered={userParticipation.registered}
             hasEventWaitlist={this.props.hasWaitlist}
             message={this.props.participantMessage}
             onSubmit={this.props.registerForEvent}
@@ -66,6 +73,7 @@ const mapStateToProps = state => ({
   hasWaitlist: getHasWaitlist(state),
   participants: getParticipants(state),
   participantMessage: getParticipantMessage(state),
+  userParticipation: getUserParticipation(state),
 })
 
 const mapDispatchToProps = {
