@@ -11,7 +11,11 @@ export type EventProps = {
   quota: number,
   eventStartsAt: string,
   eventEndsAt: string,
-  registered: boolean,
   participants: Object[],
   errors: ?string[]
+}
+
+export type UserParticipation = {
+  registered: boolean,
+  onWaitingList: boolean,
 }

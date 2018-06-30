@@ -89,4 +89,13 @@ describe('EventSelector', () => {
       expect(subject).toEqual(false)
     })
   })
+
+  describe('getUserParticipation', () => {
+    it('returns userParticipation object of current event.', () => {
+      const subject = EventSelector.getUserParticipation(mockState)
+      const result = EventParams.event1.userParticipation
+
+      expect(subject).toEqual(result)
+    })
+  })
 })
