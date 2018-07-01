@@ -55,6 +55,7 @@ class EventView extends React.Component<Props> {
             eventId={event.id}
             isUserRegistered={userParticipation.registered}
             hasEventWaitlist={this.props.hasWaitlist}
+            isEventWithinDeadline={event.withinDeadline}
             message={this.props.participantMessage}
             onSubmit={this.props.registerForEvent}
             onCancel={this.props.cancelRegistration}

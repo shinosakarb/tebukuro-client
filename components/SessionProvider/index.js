@@ -17,5 +17,16 @@ const withSessionProvider = (props: ProviderType) => (
   </Provider>
 )
 
+export const toggleComponentsBySession =
+  (SignedInComponent: ComponentType<*>, NotSignedInComponent: ComponentType<*>) => (
+    (props: any) => (
+      <Consumer>
+        { (session: any) => (
+        session.isSignedIn ?
+          <SignedInComponent {...props} /> : <NotSignedInComponent {...props} />
+      ) }
+      </Consumer>
+    )
+  )
+
 export const SessionProvider = withAuth(withSessionProvider)
-export const SessionConsumer = Consumer

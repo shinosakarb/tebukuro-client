@@ -11,6 +11,7 @@ export type EventProps = {
   quota: number,
   eventStartsAt: string,
   eventEndsAt: string,
+  withinDeadline: boolean,
   participants: Object[],
   errors: ?string[]
 }
