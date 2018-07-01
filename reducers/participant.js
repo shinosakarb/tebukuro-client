@@ -44,7 +44,7 @@ const participantReducerMap = {
   [Actions.Event.cancelRegistration]: {
     next: (state, action) => (
       state.merge({
-        entities: action.payload.entities.participant,
+        entities: action.payload.entities.participant || {},
         errors: [],
       })
     ),

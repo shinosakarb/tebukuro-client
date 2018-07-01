@@ -48,6 +48,27 @@ describe('Participant Reducer', () => {
           message: null,
         })
 
+        expect(subject).toEqual(expectedState)
+      })
+    })
+
+    describe('with success event fetch with no participants', () => {
+      it('should return blank entity', () => {
+        const payload = {
+          result: event1.id,
+          entities: {
+            event: { [event1.id]: { ...event1, participants: [] } },
+            errors: [],
+          },
+        }
+
+        const subject = ParticipantReducer(participantInitialState, fetchEvent(payload))
+
+        const expectedState = new Map({
+          entities: new Map({}),
+          errors: new List(),
+          message: null,
+        })
 
         expect(subject).toEqual(expectedState)
       })
@@ -171,6 +192,42 @@ describe('Participant Reducer', () => {
         const subject = ParticipantReducer(prevState, cancelRegistration(payload))
 
         const expectedState = prevState.deleteIn(['entities', `${participant2.id}`])
+
+        expect(subject).toEqual(expectedState)
+      })
+    })
+
+    describe('with success cancel registration and no participants', () => {
+      it('should return blank entity ', () => {
+        const prevState = new Map({
+          entities: new Map({
+            [participant1.id]: new Map({ ...participant1 }),
+          }),
+          errors: new List(),
+          message: null,
+        })
+
+        const cancelledEvent = {
+          ...event1,
+          participants: [],
+          userParticipation: { regitered: true, onWaitingList: false },
+        }
+
+        const payload = {
+          result: event1.id,
+          entities: {
+            event: { [event1.id]: cancelledEvent },
+            errors: [],
+          },
+        }
+
+        const subject = ParticipantReducer(prevState, cancelRegistration(payload))
+
+        const expectedState = new Map({
+          entities: new Map({}),
+          errors: new List(),
+          message: null,
+        })
 
         expect(subject).toEqual(expectedState)
       })
