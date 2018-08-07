@@ -7,8 +7,8 @@
     "node": ">= 6.0"
   },
   "scripts": {
-    "start:prod": "NODE_ENV=production node server.js",
-    "start": "NODE_ENV=development node server.js",
+    "start:prod": "next start",
+    "start": "next -p 4000",
     "test": "npm run lint && npm run flow && npm run jest",
     "jest": "jest",
     "jest:watch": "npm run jest -- --watch",
