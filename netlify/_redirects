@@ -1,2 +1,1 @@
-# Redirect default Netlify subdomain to primary domain
-http://baliff-hamster-76303.netlify.com/* http://tebukuro.shinosakarb.org/:splat 301!
+/*    /index.html   200
