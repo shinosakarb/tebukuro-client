@@ -14,7 +14,7 @@
     "jest:watch": "npm run jest -- --watch",
     "lint": "eslint . --cache",
     "flow": "flow",
-    "build": "next build && next export && cp netlify/_redirects out/"
+    "build": "next build && next export"
   },
   "dependencies": {
     "axios": "^0.16.2",
