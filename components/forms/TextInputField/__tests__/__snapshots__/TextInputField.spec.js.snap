@@ -8,8 +8,8 @@ exports[`TextInput render event form component 1`] = `
     name
     <input
       id="name"
-      onBlur={[Function]}
-      onChange={[Function]}
+      onBlur={[MockFunction]}
+      onChange={[MockFunction]}
       type="text"
       value="event1"
     />
