@@ -1,8 +1,12 @@
 // @flow
 import React from 'react'
 import EventView from '../../containers/EventView'
+import withQueryString from '../../components/QueryString'
 
 type Props = {
-  url: Object,
+  url: Object
 }
-export default (props: Props) => <EventView url={props.url} />
+
+const EventShowPage = (props: Props) => <EventView url={props.url} />
+
+export default withQueryString(EventShowPage)

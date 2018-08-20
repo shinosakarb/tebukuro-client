@@ -3,6 +3,7 @@ module.exports = {
     return {
       '/': { page: '/' },
       '/auth/callback': { page: '/auth/callback' },
+      '/event/show': { page: '/event/show' },
     }
   },
 }
