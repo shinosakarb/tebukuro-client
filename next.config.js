@@ -1,4 +1,6 @@
-module.exports = {
+const withCSS = require('@zeit/next-css');
+
+module.exports = withCSS({
   exportPathMap() {
     return {
       '/': { page: '/' },
@@ -6,4 +8,4 @@ module.exports = {
       '/event/show': { page: '/event/show' },
     }
   },
-}
+});
