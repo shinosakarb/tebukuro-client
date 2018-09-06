@@ -1,5 +1,39 @@
+// Material Components theme
+$mdc-theme-primary: #fcb8ab;
+$mdc-theme-secondary: #feeae6;
+$mdc-theme-on-primary: #442b2d;
+$mdc-theme-on-secondary: #442b2d;
+@import "@material/theme/color-palette";
+@import "@material/typography/mdc-typography";
+@import "@material/list/mdc-list";
+
+// React Material Components
 @import "@material/react-button/index.scss";
+@import "@material/react-fab/index.scss";
+@import "@material/react-material-icon/index.scss";
+@import "@material/react-select/index.scss";
+@import "@material/react-text-field/index.scss";
+@import "@material/react-top-app-bar/index.scss";
+
+body {
+  margin: 0;
+}
 
 a {
   text-decoration: none;
+}
+
+.home-component {
+  box-sizing: border-box;
+  width: 900px;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 80px;
+}
+
+.home-list {
+  width: 360px;
+  max-width: 100%;
+  padding: 20px;
+  margin: 0 auto;
 }
