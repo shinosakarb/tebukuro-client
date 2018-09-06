@@ -78,7 +78,7 @@ describe('EventAction', () => {
       it('returns create action with instance of Error.', () => {
         expect.assertions(2)
         return store.dispatch(Actions.createEvent(testParam))
-          .then(() => {
+          .catch(() => {
             const action = store.getActions()[0]
             expect(action.type).toBe(ActionsType.Event.createEvent)
             expect(action.payload).toBeInstanceOf(Error)
@@ -88,7 +88,7 @@ describe('EventAction', () => {
       it('keep Nextjs routing path.', () => {
         expect.assertions(2)
         return store.dispatch(Actions.createEvent(testParam))
-          .then(() => {
+          .catch(() => {
             expect(Router.router.path).toEqual(newEventPath)
             expect(Router.router.asPath).toEqual(null)
           })
@@ -122,7 +122,7 @@ describe('EventAction', () => {
       it('returns fetch action with instance of Error.', () => {
         expect.assertions(2)
         return store.dispatch(Actions.fetchEvent(testParam))
-          .then(() => {
+          .catch(() => {
             const action = store.getActions()[0]
             expect(action.type).toBe(ActionsType.Event.fetchEvent)
             expect(action.payload).toBeInstanceOf(Error)
@@ -157,7 +157,7 @@ describe('EventAction', () => {
       it('returns join action with instance of Error.', () => {
         expect.assertions(2)
         return store.dispatch(Actions.registerForEvent(testParam))
-          .then(() => {
+          .catch(() => {
             const action = store.getActions()[0]
             expect(action.type).toBe(ActionsType.Event.registerForEvent)
             expect(action.payload).toBeInstanceOf(Error)
@@ -193,7 +193,7 @@ describe('EventAction', () => {
       it('returns join action with instance of Error.', () => {
         expect.assertions(2)
         return store.dispatch(Actions.cancelRegistration(cancelTestParams))
-          .then(() => {
+          .catch(() => {
             const action = store.getActions()[0]
             expect(action.type).toBe(ActionsType.Event.cancelRegistration)
             expect(action.payload).toBeInstanceOf(Error)
