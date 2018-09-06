@@ -1,11 +1,11 @@
 // @flow
-import React from "react";
-import Head from "next/head";
-import Button from "@material/react-button";
-import TopAppBar from "@material/react-top-app-bar";
-import MaterialIcon from "@material/react-material-icon";
-import UserInfo from "../components/UserInfo";
-import "../styles/style.css";
+import React from 'react';
+import Head from 'next/head';
+import Button from '@material/react-button';
+import TopAppBar from '@material/react-top-app-bar';
+import MaterialIcon from '@material/react-material-icon';
+import UserInfo from '../components/UserInfo';
+import '../styles/style.css';
 
 export default () => (
   <div>
@@ -37,8 +37,8 @@ export default () => (
       <h1 className="mdc-typography--headline2">Welcome to Tebukuro</h1>
 
       <div className="home-list">
-        <ul class="mdc-list" aria-orientation="vertical">
-          <li class="mdc-list-item">
+        <ul className="mdc-list">
+          <li className="mdc-list-item">
             <Button href="event/new">
               <h1 className="mdc-typography--headline6">Create a new event</h1>
             </Button>
