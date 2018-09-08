@@ -15,9 +15,9 @@ class AuthCallback extends Component<Props> {
     } : {}
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     const authInfo = getAuthParams(this.props.url.query)
-    setAuthInfo(authInfo)
+    await setAuthInfo(authInfo)
     Router.replace('/')
   }
 
