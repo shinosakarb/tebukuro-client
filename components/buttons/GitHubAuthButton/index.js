@@ -1,11 +1,16 @@
-import React from 'react'
-import Link from 'next/link'
-import { gitHubAuthUrl } from '../../../constants/urls'
+import React from 'react';
+import Button from '@material/react-button';
+import MaterialIcon from '@material/react-material-icon';
+import { gitHubAuthUrl } from '../../../constants/urls';
 
 const GitHubAuthButton = () => (
-  <Link href={gitHubAuthUrl}>
-    <a>GitHub auth</a>
-  </Link>
-)
+  <Button
+    icon={<MaterialIcon icon="pets" />}
+    raised
+    href={gitHubAuthUrl}
+  >
+    GitHub auth
+  </Button>
+);
 
-export default GitHubAuthButton
+export default GitHubAuthButton;
