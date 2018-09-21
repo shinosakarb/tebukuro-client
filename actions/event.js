@@ -19,7 +19,7 @@ const create =
 export const createEvent = (params: EventProps) => (dispatch: Dispatch, getState: Function) => (
   dispatch(create(params)).then((res) => {
     const id = getEventId(getState())
-    !res.error && Router.replace(`/event/show?id=${id}`, `/event/${id}`)
+    !res.error && Router.replace(`/event/show?id=${id}`)
   })
 )
 
