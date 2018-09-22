@@ -1,5 +1,8 @@
 // @flow
 import React from 'react'
 import EventRegistration from '../../containers/EventRegistration'
+import withLayout from '../../components/Layout'
 
-export default () => <EventRegistration />
+const NewEventPage = () => <EventRegistration />
+
+export default withLayout(NewEventPage)
