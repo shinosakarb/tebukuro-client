@@ -20,17 +20,14 @@ let store = Object.create(null)
 // Create a mocked router for Nextjs Router instance.
 const newEventPath = '/event/new'
 const showEventPath = '/event/show?id=1'
-const showEventAsPath = '/event/1'
 
 class MockedRouter {
   constructor(path) {
     this.path = path
-    this.asPath = null
   }
 
-  replace(path, asPath) {
+  replace(path) {
     this.path = path
-    this.asPath = asPath
   }
 }
 
@@ -61,11 +58,10 @@ describe('EventAction', () => {
       })
 
       it('replace Nextjs routing to event show page.', () => {
-        expect.assertions(2)
+        expect.assertions(1)
         return store.dispatch(Actions.createEvent(testParam))
           .then(() => {
             expect(Router.router.path).toEqual(showEventPath)
-            expect(Router.router.asPath).toEqual(showEventAsPath)
           })
       })
     })
@@ -86,11 +82,10 @@ describe('EventAction', () => {
       })
 
       it('keep Nextjs routing path.', () => {
-        expect.assertions(2)
+        expect.assertions(1)
         return store.dispatch(Actions.createEvent(testParam))
           .catch(() => {
             expect(Router.router.path).toEqual(newEventPath)
-            expect(Router.router.asPath).toEqual(null)
           })
       })
     })
