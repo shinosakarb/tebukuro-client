@@ -1,17 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ParticipantButton with event has a waitlist renders participant button with waitlited message. 1`] = `
-<button
-  onClick={[Function]}
->
-  キャンセル待ちに登録
-</button>
+<div>
+  <WaitlistedButton
+    onClick={[Function]}
+  />
+</div>
 `;
 
 exports[`ParticipantButton with event has no waitlist renders participant button with admit message. 1`] = `
-<button
-  onClick={[Function]}
->
-  参加登録
-</button>
+<div>
+  <RegisterButton
+    onClick={[Function]}
+  />
+</div>
 `;

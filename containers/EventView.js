@@ -49,7 +49,6 @@ class EventView extends React.Component<Props> {
         <Error statusCode="404" />
         :
         <SessionProvider>
-          <h3>This is the event page!</h3>
           <EventComponent event={event} />
           <ParticipantFormComponent
             eventId={event.id}

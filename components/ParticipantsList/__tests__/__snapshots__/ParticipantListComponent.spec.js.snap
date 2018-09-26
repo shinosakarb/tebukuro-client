@@ -2,10 +2,17 @@
 
 exports[`ParticipantList Component renders self. 1`] = `
 <div>
-  <ul>
+  <ul
+    className="mdc-list"
+  >
     <li
+      className="mdc-list-item"
       key="1"
     >
+      <MaterialIcon
+        hasRipple={false}
+        icon="account_circle"
+      />
       <Participant
         eventId={1}
         id={1}
@@ -14,8 +21,13 @@ exports[`ParticipantList Component renders self. 1`] = `
       />
     </li>
     <li
+      className="mdc-list-item"
       key="2"
     >
+      <MaterialIcon
+        hasRipple={false}
+        icon="account_circle"
+      />
       <Participant
         eventId={1}
         id={2}

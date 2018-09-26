@@ -1,5 +1,6 @@
 // @flow
 import React from 'react'
+import MaterialIcon from '@material/react-material-icon'
 import ParticipantComponent from '../Participant'
 
 type Props = {
@@ -9,13 +10,14 @@ type Props = {
 const ParticipantsList = (props: Props) => (
   <div>
     { props.participants &&
-      <ul>
-        { props.participants.map(participant => (
-          <li key={participant.id}>
-            <ParticipantComponent {...participant} />
-          </li>
+    <ul className="mdc-list">
+      { props.participants.map(participant => (
+        <li className="mdc-list-item" key={participant.id}>
+          <MaterialIcon icon="account_circle" />
+          <ParticipantComponent {...participant} />
+        </li>
         ))}
-      </ul>
+    </ul>
     }
   </div>
 )

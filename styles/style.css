@@ -2420,3 +2420,6 @@ a {
   max-width: 100%;
   padding: 20px;
   margin: 0 auto; }
+
+.event-name {
+  background-color: #feeae6; }
