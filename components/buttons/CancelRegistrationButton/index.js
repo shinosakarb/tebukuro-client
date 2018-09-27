@@ -1,5 +1,7 @@
 // @flow
 import React from 'react'
+import Button from '@material/react-button'
+import MaterialIcon from '@material/react-material-icon'
 
 type Props = {
   eventId: ?number,
@@ -13,9 +15,13 @@ const CancelRegistrationButton = (props: Props) => {
   }
 
   return (
-    <button onClick={onClickHandler}>
+    <Button
+      icon={<MaterialIcon icon="cancel" />}
+      onClick={onClickHandler}
+      outlined
+    >
       登録をキャンセルする
-    </button>
+    </Button>
   )
 }
 

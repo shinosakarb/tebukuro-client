@@ -1,9 +1,31 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`CancelRegistrationButton with event has a waitlist renders CancelRegistrationButton. 1`] = `
-<button
+<WithRipple(Button)
+  className=""
+  disabled={false}
+  icon={
+    <MaterialIcon
+      hasRipple={false}
+      icon="cancel"
+    />
+  }
+  initRipple={[Function]}
+  onBlur={[Function]}
   onClick={[Function]}
+  onFocus={[Function]}
+  onKeyDown={[Function]}
+  onKeyUp={[Function]}
+  onMouseDown={[Function]}
+  onMouseUp={[Function]}
+  onTouchEnd={[Function]}
+  onTouchStart={[Function]}
+  outlined={true}
+  raised={false}
+  style={Object {}}
+  unbounded={false}
+  unelevated={false}
 >
   登録をキャンセルする
-</button>
+</WithRipple(Button)>
 `;

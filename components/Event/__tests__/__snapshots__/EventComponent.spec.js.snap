@@ -2,29 +2,69 @@
 
 exports[`Event Component renders self. 1`] = `
 <div>
-  <p>
-    name: 
+  <h1
+    className="mdc-typography--headline3 event-name"
+  >
     event1
-  </p>
-  <p>
-    description: 
-    This is the first event.
-  </p>
-  <p>
-    quota: 
-    10
-  </p>
-  <p>
-    eventStartsAt: 
-    2018-03-01T09:00:00
-  </p>
-  <p>
-    eventEndsAt: 
-    2018-03-01T17:00:00
-  </p>
-  <p>
-    number of participants: 
+  </h1>
+  <ul
+    className="mdc-list"
+  >
+    <li
+      className="mdc-list-item"
+    >
+       
+      This is the first event.
+       
+    </li>
+  </ul>
+  <hr />
+  <h5
+    className="mdc-typography--headline5"
+  >
+    <MaterialIcon
+      hasRipple={false}
+      icon="access_time"
+    />
+     日時
+  </h5>
+  <ul
+    className="mdc-list"
+  >
+    <li
+      className="mdc-list-item"
+    >
+      <MaterialIcon
+        hasRipple={false}
+        icon="outlined_flag"
+      />
+      開始: 
+      2018-03-01T09:00:00
+    </li>
+    <li
+      className="mdc-list-item"
+    >
+      <MaterialIcon
+        hasRipple={false}
+        icon="flag"
+      />
+      終了: 
+      2018-03-01T17:00:00
+    </li>
+  </ul>
+  <hr />
+  <h5
+    className="mdc-typography--headline5"
+  >
+    <MaterialIcon
+      hasRipple={false}
+      icon="people"
+    />
+     参加者一覧 (
     3
-  </p>
+     / 
+    10
+     名)
+  </h5>
 </div>
 `;
