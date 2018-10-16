@@ -1,5 +1,9 @@
 {
   "plugins": [
+    [
+      "transform-define-file",
+      { file: "./env-config.js" }
+    ],
     "@babel/plugin-transform-flow-strip-types"
   ],
   "env": {
