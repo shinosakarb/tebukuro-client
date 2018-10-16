@@ -1,6 +1,5 @@
 // @flow
 import React, { Component } from 'react'
-import Router from 'next/router'
 import withQueryString from '../../components/QueryString'
 import { setAuthInfo, getAuthParams } from '../../utils/auth'
 import type { AuthQueryParams } from '../../utils/auth'
@@ -18,7 +17,7 @@ class AuthCallback extends Component<Props> {
   async componentDidMount() {
     const authInfo = getAuthParams(this.props.url.query)
     await setAuthInfo(authInfo)
-    Router.replace('/')
+    window.location.href = '/'
   }
 
   render() {
