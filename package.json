@@ -30,7 +30,7 @@
     "@zeit/next-css": "^1.0.1",
     "axios": "^0.16.2",
     "immutable": "^3.8.2",
-    "lodash": "^4.17.4",
+    "lodash": "^4.17.20",
     "moment": "^2.22.1",
     "moment-timezone": "^0.5.17",
     "next": "^7.0.2",
